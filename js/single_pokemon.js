@@ -398,7 +398,7 @@ const pageRecurses = {
 
             arrow.querySelector('.icon-poke').innerHTML = ''; // limpa antes
             arrow.querySelector('.icon-poke').appendChild(img);
-            arrow.setAttribute('data-index', `/pokemon.html?id=${poke.id}`);
+            arrow.setAttribute('data-index', `/pokemon?id=${poke.id}`);
 
             arrow.addEventListener('click', function () {
                 window.location.href = this.dataset.index;
