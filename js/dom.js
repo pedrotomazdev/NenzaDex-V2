@@ -18,7 +18,7 @@ export const cardElement = {
 
         const card = document.createElement('a');
         card.className = `pokemons-card ${pokemon.type1} pb-3`;
-        card.setAttribute('href', `/pages/pokemon.html?id=${pokemonRaw.id}`);
+        card.setAttribute('href', `/pokemon.html?id=${pokemonRaw.id}`);
         card.style.order = pokemonRaw.id;
 
         card.innerHTML = `
@@ -121,7 +121,7 @@ export const globalFunctions = {
             }
 
 
-            window.location.href = `/pages/pokemon.html?id=${dataPokemon.id}`
+            window.location.href = `/pokemon.html?id=${dataPokemon.id}`
         } catch (error) {
             console.error('Erro ao buscar Pokémon:', error);
             // Aqui você pode adicionar lógica para lidar com erros, se necessário
@@ -180,7 +180,7 @@ export const navigation = {
                 link.appendChild(span);
             }
 
-            link.href = `/pages/catalog.html?${type}=${data.name}`;
+            link.href = `/catalog.html?${type}=${data.name}`;
             li.appendChild(link);
             container.appendChild(li);
         });
