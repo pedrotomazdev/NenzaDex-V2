@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <!DOCTYPE html>
 <html lang="pt-BR">
 
@@ -258,4 +259,266 @@
 
 </body>
 
+=======
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Nenzadex v2.0 - Pokédex moderna feita do zero por Pedro Tomaz" />
+    <title>Nenzadex v2</title>
+
+    <link rel="icon" href="/favicon.ico" type="image/svg+xml">
+    <!--<link rel="preload" href="SASS/CSS/main.css.map" as="style">-->
+    <!--<link rel="stylesheet" href="/SASS/CSS/main.css">-->
+    <link rel="stylesheet" href="/SASS/CSS/single_pokemon.css">
+
+
+
+    <script type="module" src="/js/api.js" defer></script>
+    <script type="module" src="/js/dom.js" defer></script>
+    <!--<script type="module" src="/js/main.js" defer></script>-->
+    <script type="module" src="/js/single_pokemon.js" defer></script>
+</head>
+
+<body>
+    <div id="include-header"></div>
+
+    <main class="site-main">
+
+        <div class="container">
+            <div class="primary-block">
+                <div class="prev-pokemon pokemon-change">
+                    <i class="icon-arrow">
+                        <svg xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink"
+                            width="20" height="20" x="0" y="0" viewBox="0 0 256 256"
+                            style="enable-background:new 0 0 512 512" xml:space="preserve" class="">
+                            <g
+                                transform="matrix(-1,-1.2246467991473532e-16,1.2246467991473532e-16,-1,256.00032806396484,256.0001564025879)">
+                                <path
+                                    d="M228.992 146.827 48.594 250.051c-17.497 9.998-38.04-7.264-31.166-26.206l34.642-95.842L17.428 32.16C10.554 13.178 31.097-4.045 48.594 5.953l180.398 103.224c14.606 8.319 14.568 29.331 0 37.65z"
+                                    fill="#f1f1f1" opacity="1" data-original="#000000" class=""></path>
+                            </g>
+                        </svg>
+                    </i>
+                    <i class="icon-poke"> </i>
+                </div>
+
+                <div class="images-pokemon">
+                    <div class="content-images">
+
+                        <div class="id"> </div>
+
+                        <div class="main-image swiper">
+                            <div class="swiper-wrapper">
+
+                            </div>
+                        </div>
+
+                        <div class="pokemon-thumbs swiper">
+                            <div class="swiper-wrapper">
+
+                            </div>
+                            <div class="swiper-button-next"></div>
+                            <div class="swiper-button-prev"></div>
+                        </div>
+                        <div class="content-chart">
+                            <div class="title">
+                                Stats:
+                            </div>
+                            <div class="pontos">
+                                <div class="item-pontos item-hp">
+                                    <div class="title-pontos">PS</div>
+                                    <div class="content-pontos" style=" min-width: 50px;width:0%">0</div>
+                                </div>
+                                <div class="item-pontos item-attack">
+                                    <div class="title-pontos">Attack</div>
+                                    <div class="content-pontos" style=" min-width: 50px;width:0%">0</div>
+                                </div>
+                                <div class="item-pontos item-defense">
+                                    <div class="title-pontos">Defense</div>
+                                    <div class="content-pontos" style=" min-width: 50px;width:0%">0</div>
+                                </div>
+                                <div class="item-pontos item-special-attack">
+                                    <div class="title-pontos">Special Atack</div>
+                                    <div class="content-pontos" style=" min-width: 50px;width:0%">0</div>
+                                </div>
+                                <div class="item-pontos item-special-defense">
+                                    <div class="title-pontos">Special Defense</div>
+                                    <div class="content-pontos" style=" min-width: 50px;width:0%">0</div>
+                                </div>
+                                <div class="item-pontos item-speed">
+                                    <div class="title-pontos">Speed</div>
+                                    <div class="content-pontos" style=" min-width: 50px;width:0%">0</div>
+                                </div>
+
+                                <div class="item-pontos item-total">
+                                    <div class="title-pontos">Total</div>
+                                    <div class="content-total">0</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="information-pokemon">
+                    <div class="content-information">
+                        <audio controls class="poke-cries" title="Listen pokémon cries">
+                            <source src="" type="audio/ogg">
+                            Your browser does not support the audio element.
+                        </audio>
+                        <div class="poke-icon" title="Listen pokémon cries"> </div>
+
+                        <div class="poke-id">
+                            <div class="name"></div>
+                            <div class="small-description"></div>
+                        </div>
+
+                        <div class="poke-description">
+                            <div class="title">
+                                Description:
+                            </div>
+                            <div class="content">
+                                <p></p>
+                                <hr>
+                                <div class="poke-data">
+                                    <div class="habitat-item item">
+                                        <div class="title">
+                                            Habitat
+                                        </div>
+                                        <div class="habitat item-content">
+
+                                        </div>
+                                    </div>
+                                    <div class="abilities-item item">
+                                        <div class="title">
+                                            Abilities
+                                        </div>
+                                        <div class="ability item-content">
+
+                                        </div>
+                                    </div>
+
+                                    <div class="height-item item">
+                                        <div class="title">
+                                            Height
+                                        </div>
+                                        <div class="height item-content">
+
+                                        </div>
+                                    </div>
+                                    <div class="weight-item item">
+                                        <div class="title">
+                                            Weight
+                                        </div>
+                                        <div class="weight item-content">
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+
+
+
+                        <div class="poke-types">
+                            <div class="title">
+                                Types:
+                            </div>
+                            <div class="content d-flex flex-wrap justify-start align-center">
+                            </div>
+                        </div>
+
+                        <div class="poke-weaknesses">
+                            <div class="title">
+                                Weak against:
+                            </div>
+                            <div class="content d-flex flex-wrap justify-start align-center">
+                            </div>
+                        </div>
+
+                        <div class="poke-resistances">
+                            <div class="title">
+                                Resistant against:
+                            </div>
+                            <div class="content d-flex flex-wrap justify-start align-center">
+                            </div>
+                        </div>
+
+                        <div class="poke-immunity">
+                            <div class="title">
+                                Imunity against:
+                            </div>
+                            <div class="content d-flex flex-wrap justify-start align-center">
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="next-pokemon pokemon-change">
+                    <i class="icon-arrow">
+                        <svg xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink"
+                            width="20" height="20" x="0" y="0" viewBox="0 0 256 256"
+                            style="enable-background:new 0 0 512 512" xml:space="preserve" class="">
+                            <g>
+                                <path
+                                    d="M228.992 146.827 48.594 250.051c-17.497 9.998-38.04-7.264-31.166-26.206l34.642-95.842L17.428 32.16C10.554 13.178 31.097-4.045 48.594 5.953l180.398 103.224c14.606 8.319 14.568 29.331 0 37.65z"
+                                    fill="#f1f1f1" opacity="1" data-original="#000000" class=""></path>
+                            </g>
+                        </svg>
+                    </i>
+                    <i class="icon-poke"> </i>
+                </div>
+
+            </div>
+            <div class="secondary-block">
+                <div class="selections">
+                    <div class="item" data-selector="evolutions">
+                        <span>
+                            Evolutions
+                        </span>
+                    </div>
+
+                    <div class="item" data-selector="forms">
+                        <span>
+                            Forms
+                        </span>
+                    </div>
+                </div>
+                <div class="evolution-chain" data-item="evolutions">
+                    <div class="content-evolutions">
+
+                    </div>
+                </div>
+
+                <div class="forms-chain" data-item="forms">
+                    <div class="content-forms">
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+
+    <div id="include-footer"></div>
+
+
+    <script type="module" src="/js/include.js" defer></script>
+
+
+    <!-- Swiper CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+
+    <!-- Swiper JS -->
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+
+
+</body>
+
+>>>>>>> 19bc759f0aa87b02512c83d52f7dcac3ebaeb348
 </html>
