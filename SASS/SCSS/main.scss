@@ -1,0 +1,16 @@
+// Import base primeiro
+@import 'base/_preload.scss';
+@import 'base/_variables.scss';
+@import 'base/_utilities.scss';
+
+// Layout
+@import 'layout/_global.scss';
+@import 'layout/_home.scss';
+
+
+// Components
+@import 'components/_header.scss';
+@import 'components/_footer.scss';
+@import 'components/_cards.scss';
+@import 'components/_buttons.scss';
+@import 'components/_modals.scss';
