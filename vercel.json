@@ -1,0 +1,7 @@
+{
+  "rewrites": [
+    { "source": "/about-me", "destination": "/pages/about-me.html" },
+    { "source": "/catalog", "destination": "/pages/catalog.html" },
+    { "source": "/pokemon", "destination": "/pages/pokemon.html" }
+  ]
+}
