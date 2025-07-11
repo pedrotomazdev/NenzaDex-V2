@@ -1,0 +1,96 @@
+@import '../base/_variables.scss';
+
+.content-chart {
+    margin: 5px 0;
+    padding: 10px;
+    border-radius: 6px;
+    border: 1px solid rgba(0, 0, 0, .2);
+    background-color: var(--bg-color);
+    border-left: 0;
+
+    .title {
+        font-weight: 600;
+        font-size: 1.5rem;
+        margin-bottom: 8px;
+    }
+
+    .item-pontos {
+        margin-bottom: 10px;
+        display: flex;
+        background: #495057 url(../../assets/images/background/bg-poke.webp);
+        border-radius: 20px;
+        border: 2px 0px 4px rgb(0, 0, 0, .7);
+        overflow: hidden;
+        box-shadow: 1px 1px 2px rgba(0, 0, 0, .2);
+
+        * {
+            user-select: none;
+        }
+
+        .title-pontos {
+            padding: 5px 10px;
+            text-align: center;
+            font-weight: bold;
+            background-color: #2a2a2a;
+            color: #fff;
+            border-top-left-radius: 20px;
+            min-width: 130px;
+            white-space: nowrap;
+            font-size: .9rem;
+            border-bottom-left-radius: 20px;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, .5);
+            border: 1px solid rgba(255, 255, 255, .2);
+
+        }
+
+        .content-pontos {
+            min-width: 45px;
+            width: 0%;
+            text-align: right;
+            padding: 0 12px;
+            color: #fff;
+            font-size: 1.1rem;
+            font-weight: 600;
+            border-top-right-radius: 20px;
+            border-bottom-right-radius: 20px;
+            min-width: 26px;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, .5);
+            box-shadow: 3px 0px 2px rgba(0, 0, 0, 0.5);
+            border: 2px solid rgba(0, 0, 0, .2);
+            border-left: 0;
+            border-right: 0;
+            transition: width 1s ease-in-out;
+
+        }
+
+
+        &.item-total {
+            width: fit-content;
+
+            .content-total {
+                width: 100px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                color: #fff;
+                font-size: 1.1rem;
+                font-weight: 600;
+                text-shadow: 1px 1px 2px rgba(0, 0, 0, .5);
+
+            }
+        }
+
+    }
+
+    @each $type, $color in $typeColors {
+        &.type-#{$type} {
+            .item-pontos {
+
+                .content-pontos,
+                .content-total {
+                    background-image: $color;
+                }
+            }
+        }
+    }
+}
