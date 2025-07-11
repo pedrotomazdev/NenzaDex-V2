@@ -1,16 +1,16 @@
-<<<<<<< HEAD
 {
   "rewrites": [
-    { "source": "/about-me", "destination": "/about-me.html" },
-    { "source": "/catalog", "destination": "/catalog.html" },
-    { "source": "/pokemon", "destination": "/pokemon.html" }
+    {
+      "source": "/about-me",
+      "destination": "/about-me.html"
+    },
+    {
+      "source": "/catalog",
+      "destination": "/catalog.html"
+    },
+    {
+      "source": "/pokemon",
+      "destination": "/pokemon.html"
+    }
   ]
-=======
-{
-  "rewrites": [
-    { "source": "/about-me", "destination": "/about-me.html" },
-    { "source": "/catalog", "destination": "/catalog.html" },
-    { "source": "/pokemon", "destination": "/pokemon.html" }
-  ]
->>>>>>> 19bc759f0aa87b02512c83d52f7dcac3ebaeb348
 }
