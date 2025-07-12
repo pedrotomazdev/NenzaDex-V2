@@ -186,6 +186,10 @@ section {
             border: 1px solid rgba(255, 255, 255, 0.3);
             padding: 20px 15px;
 
+            @media(max-width: 990px) {
+                padding: 20px 5px;
+            }
+
             .grid-pokemon {
                 display: grid;
                 grid-template-columns: repeat(5, 1fr);

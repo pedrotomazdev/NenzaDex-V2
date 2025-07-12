@@ -9,6 +9,7 @@ html {
         --filter: invert(0);
         --filter-dark-image: invert(0);
         --filter-hover: invert(1);
+        --icon-audio : url(../../assets/icons/audio-dark-icon.svg);
     }
 
     &.dark-mode {
@@ -21,6 +22,7 @@ html {
         --filter: invert(0.8);
         --filter-dark-image: invert(1);
         --filter-hover: invert(0);
+        --icon-audio : url(../../assets/icons/audio-white-icon.svg);
 
 
     }

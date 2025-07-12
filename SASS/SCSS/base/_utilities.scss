@@ -212,9 +212,10 @@
     padding-right: 1rem;
 
     @media (max-width: 992px) {
-        max-width: calc(100% - 10px);
+        max-width: 100%;
         padding-left: 5px;
         padding-right: 5px;
+        margin: 0;
     }
 
     @media (min-width: 993px) {

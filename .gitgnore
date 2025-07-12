@@ -1,3 +1,4 @@
 .vscode/
 prepros.json
+.htaccess
 *.log
