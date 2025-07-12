@@ -25,14 +25,14 @@ let noMoreInitialData = false;
 // Região (Geração)
 let currentGenId = null;
 let genOffset = 0;
-const genLimit = 20;
+const genLimit = 10;
 let isLoadingGen = false;
 let noMoreGenData = false;
 
 // Tipo
 let currentTypeId = null;
 let typeOffset = 0;
-const typeLimit = 20;
+const typeLimit = 10;
 let isLoadingType = false;
 let noMoreTypeData = false;
 
