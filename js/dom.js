@@ -148,7 +148,7 @@ export const navigation = {
         const container = document.querySelector(`[data-recebe="${type}"] .content-list`);
         response.forEach(data => {
             const li = document.createElement('li');
-            li.className = 'item-level-2';
+            li.className = `item-level-2 ${data.name}`;
             const link = document.createElement('a');
 
             if (type === 'types') {

@@ -13,56 +13,86 @@ async function includeHTML(selector, file) {
     }
 }
 
-// inclui header e footer automaticamente
-includeHTML('#include-header', '/partials/header.html');
-includeHTML('#include-footer', '/partials/footer.html');
+// Inclui header e footer e depois inicializa scripts
+(async function initSite() {
+    await includeHTML('#include-header', '/partials/header.html');
+    await includeHTML('#include-footer', '/partials/footer.html');
 
-const waitForToggleButton = setInterval(() => {
+    initThemeToggle();
+    initMenuToggle();
+    globalFunctions.initSearch();
+    globalFunctions.initRandom();
+    initHeaderOnScroll();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+})();
+
+// ---- Funções separadas ----
+
+function initThemeToggle() {
     const toggleBtn = document.getElementById('toggle-dark');
-    if (toggleBtn) {
-        // Aplica o tema salvo
-        if (localStorage.getItem('theme') === 'dark') {
-            document.body.classList.add('dark-mode');
-            document.documentElement.classList.add('dark-mode');
-        }
+    const savedTheme = localStorage.getItem('theme');
 
+    if (savedTheme === 'dark') {
+        document.body.classList.add('dark-mode');
+        document.documentElement.classList.add('dark-mode');
+    }
+
+    if (toggleBtn) {
         toggleBtn.addEventListener('click', () => {
             document.body.classList.toggle('dark-mode');
             document.documentElement.classList.toggle('dark-mode');
 
-            if (document.body.classList.contains('dark-mode')) {
-                localStorage.setItem('theme', 'dark');
+            const newTheme = document.body.classList.contains('dark-mode') ? 'dark' : 'light';
+            localStorage.setItem('theme', newTheme);
+        });
+    }
+}
+
+function initMenuToggle() {
+    document.querySelectorAll('.item-menu.has-submenu').forEach(menuItem => {
+        const button = menuItem.querySelector('.content-item-menu');
+        const submenu = menuItem.querySelector('.sub-item');
+
+        if (!button || !submenu) return;
+
+        button.addEventListener('click', () => {
+            const isOpen = submenu.classList.contains('active');
+
+            document.querySelectorAll('.sub-item.active').forEach(el => {
+                el.classList.remove('active');
+                el.previousElementSibling?.setAttribute('aria-expanded', 'false');
+            });
+
+            if (!isOpen) {
+                submenu.classList.add('active');
+                button.setAttribute('aria-expanded', 'true');
             } else {
-                localStorage.setItem('theme', 'light');
+                submenu.classList.remove('active');
+                button.setAttribute('aria-expanded', 'false');
             }
         });
+    });
 
-        globalFunctions.initSearch();
-        globalFunctions.initRandom();
+    document.addEventListener('click', e => {
+        // Fecha submenus só se o clique foi fora de qualquer .item-menu
+        if (!e.target.closest('.item-menu')) {
+            document.querySelectorAll('.sub-item.active').forEach(el => {
+                el.classList.remove('active');
+                el.previousElementSibling?.setAttribute('aria-expanded', 'false');
+            });
+        }
+    });
+}
 
-        clearInterval(waitForToggleButton);
-    }
-}, 100);
+function initHeaderOnScroll() {
+    const header = document.querySelector('header');
+    if (!header) return;
 
-// Aplica o tema salvo quando a página carrega
-document.addEventListener('DOMContentLoaded', () => {
-    setTimeout(() => {
-        window.scrollTo({ top: 0, behavior: 'smooth' }); // ajusta o valor conforme o quanto quer descer
-    }, 500);
-    const savedTheme = localStorage.getItem('theme');
-    if (savedTheme === 'dark') {
-        document.body.classList.add('dark-mode');
-        document.documentElement.classList.add('dark-mode');
-
-    }
     window.addEventListener('scroll', () => {
-        const header = document.querySelector('header');
         if (window.scrollY > 200) {
             header.classList.add('minimized');
         } else {
             header.classList.remove('minimized');
         }
     });
-
-});
-
+}
