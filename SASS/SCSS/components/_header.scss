@@ -1,10 +1,10 @@
 .float-navigation {
     position: fixed;
-    top: -1px;
+    top: 5px;
     left: 50%;
     transform: translateX(-50%);
     z-index: 1000;
-    padding: 15px 5px;
+    padding: 10px 5px;
     transition: padding .2s ease-in-out, top .2s ease-in-out;
 
 
@@ -16,15 +16,22 @@
         backdrop-filter: blur(12px) saturate(160%);
         background-color: rgba(255, 255, 255, 0.15);
         border-radius: 8px;
-        border-top-left-radius: 0;
-        border-top-right-radius: 0;
         box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
         border: 1px solid rgba(255, 255, 255, 0.2);
+        transition: border-radius .2s ease-in-out, box-shadow .2s ease-in-out;
     }
 
 
     &.minimized {
         padding: 5px;
+        top: -1px;
+
+        &:before {
+            border-top-left-radius: 0;
+            border-top-right-radius: 0;
+            box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+
+        }
 
         nav ul.main .item-menu .content-item-menu {
             width: 45px;
@@ -83,10 +90,11 @@
                     width: 56px;
                     height: 56px;
                     border-radius: 50%;
-                    background: var(--bg-glass);
+                    background: var(--shader);
                     backdrop-filter: blur(10px);
                     border: 2px solid var(--bg-color);
-                    box-shadow: inset 0 1px 2px rgba(255, 255, 255, 0.4), 0 4px 10px rgba(0, 0, 0, 0.1);
+                    // box-shadow: inset 0 1px 2px rgba(255, 255, 255, 0.4), 0 4px 10px rgba(0, 0, 0, 0.1);
+                    box-shadow: 1px 1px 2px rgba(0, 0, 0, .2);
                     cursor: pointer;
                     transition: all 0.2s ease;
 
@@ -97,9 +105,12 @@
 
                     img {
                         display: block;
+                        filter: var(--filter-dark-image);
+
+                        &.icon-no-filter {
+                            filter: none;
+                        }
                     }
-
-
                 }
 
                 .sub-item {

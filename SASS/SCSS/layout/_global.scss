@@ -8,9 +8,10 @@ html {
         --bg-glass: rgba(255, 255, 255, 0.2);
         --border-color: #2a2a2a;
         --filter: invert(0);
-        --filter-dark-image: invert(0);
-        --filter-hover: invert(.8);
+        --filter-dark-image: invert(0) brightness(1);
+        --filter-hover: invert(1);
         --icon-audio : url(../../assets/icons/audio-dark-icon.svg);
+        --shader: rgba(255, 255, 255, 0.5);
     }
 
     &.dark-mode {
@@ -21,10 +22,12 @@ html {
         --inverter-mini-card: #000;
         --bg-glass: rgba(0, 0, 0, 0.2);
         --border-color: #f1f1f1;
-        --filter: invert(0.8);
-        --filter-dark-image: invert(1);
+        --filter: invert(1);
+        --filter-dark-image: invert(1) brightness(2);
         --filter-hover: invert(0);
         --icon-audio : url(../../assets/icons/audio-white-icon.svg);
+        --shader: rgba(0, 0, 0, 0.5);
+
     }
 }
 
