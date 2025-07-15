@@ -102,7 +102,6 @@ const pokedexCore = {
             const names = list.results.map(p => p.name);
             const promises = names.map(name => fetchPokemon(name));
             const pokemonsData = await Promise.all(promises);
-            console.log(pokemonsData)
 
             pokemonsData.forEach((data, i) => {
                 if (data) {
@@ -127,6 +126,42 @@ const pokedexCore = {
             isLoadingInitial = false;
             document.getElementById('scroll-sentinel').classList.remove('loading');
         }
+    },
+
+    LoadPokemonOfDay: async function () {
+        const qtde = 10;
+        const min = 1;
+        const max = 1025;
+        const hoje = new Date().toISOString().slice(0, 10); // yyyy-mm-dd
+        const seedBase = [...hoje].reduce((acc, char) => acc + char.charCodeAt(0), 0);
+
+        const numeros = new Set();
+        let i = 0;
+
+        while (numeros.size < qtde) {
+            const hash = (Math.sin(seedBase + i) * 10000) % 1;
+            let num = Math.floor(hash * (max - min + 1)) + min;
+            if (num < 0) {
+                num = (num * -1);
+            }
+            numeros.add(num);
+            i++;
+        }
+
+        const pokemonlist = Array.from(numeros);
+
+
+        pokemonlist.forEach(async (pokemon) => {
+            const data = await fetchPokemon(pokemon);
+            const card = cardElement.createPokemonCard(data);
+            const destination = document.querySelector('.pokemon-of-day .grid-pokemon');
+            cardElement.appendToPokedex(card, destination);
+            requestAnimationFrame(() => {
+                setTimeout(() => {
+                    card.classList.add('show');
+                });
+            });
+        })
     },
 
     // busca os pokemons de uma região
@@ -338,6 +373,7 @@ export const themeFunctions = {
 // Inicializa o carregamento dos pokemons e adiciona o evento de busca
 // quando o DOM estiver completamente carregado
 document.addEventListener('DOMContentLoaded', () => {
+    pokedexCore.LoadPokemonOfDay();
     pokedexCore.loadInitialPokemons();
 
     Object.values(themeFunctions).forEach(initFn => {
@@ -345,21 +381,3 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 });
 
-
-
-function gerarNumerosUnicosHoje(qtde = 6, min = 1, max = 1025) {
-  const hoje = new Date().toISOString().slice(0, 10); // yyyy-mm-dd
-  const seedBase = [...hoje].reduce((acc, char) => acc + char.charCodeAt(0), 0);
-
-  const numeros = new Set();
-  let i = 0;
-
-  while (numeros.size < qtde) {
-    const hash = (Math.sin(seedBase + i) * 10000) % 1;
-    const num = Math.floor(hash * (max - min + 1)) + min;
-    numeros.add(num);
-    i++;
-  }
-
-  return Array.from(numeros);
-}
