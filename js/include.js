@@ -66,6 +66,9 @@ function initMenuToggle() {
             if (!isOpen) {
                 submenu.classList.add('active');
                 button.setAttribute('aria-expanded', 'true');
+                if (button.dataset.menu == 'search') {
+                    document.getElementById('search').focus();
+                }
             } else {
                 submenu.classList.remove('active');
                 button.setAttribute('aria-expanded', 'false');

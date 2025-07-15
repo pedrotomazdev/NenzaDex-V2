@@ -1,4 +1,6 @@
 .vscode/
 prepros.json
 .htaccess
+.package.json
+nodemon.json
 *.log

@@ -1,0 +1,6 @@
+{
+  "scripts": {
+    "prestart": "echo 'Rodando comando antes de iniciar servidor'",
+    "start": "nodemon --ext js,html,css,json,svg js/server/server.js"
+  }
+}
