@@ -1,6 +1,6 @@
 .vscode/
 prepros.json
 .htaccess
-.package.json
+package.json
 nodemon.json
 *.log
