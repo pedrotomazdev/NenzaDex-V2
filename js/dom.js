@@ -136,90 +136,66 @@ export const globalFunctions = {
 
 
 export const navigation = {
-    regionsList: async function (typeGenerete) {
+    regionsList: async function () {
         const regions = await getRegionsList();
         if (!regions) return console.warn('Nenhuma região encontrada');
-        this.generateList(regions.results, 'regions', typeGenerete);
+        this.generateList(regions.results, 'regions');
     },
 
 
 
-    generateList: function (response, type, typeGenerate) {
+    generateList: function (response, type) {
         const container = document.querySelector(`[data-recebe="${type}"] .content-list`);
-        if (!container) return;
-
         response.forEach(data => {
-            let li;
+            const li = document.createElement('li');
+            li.className = `item-level-2 ${data.name}`;
+            const link = document.createElement('a');
 
-            if (typeGenerate === 'label') {
-                li = document.createElement('div');
-                li.className = `item-level-2 ${data.name}`;
-                const label = document.createElement('label');
-                const input = document.createElement('input');
-                input.type = 'checkbox';
-                input.name = type;
-                input.value = data.name;
-
-                // Ícone com imagem
-                const icon = document.createElement('i');
-                if (type === 'regions') icon.className = 'region-icon';
-
+            if (type === 'types') {
                 const img = document.createElement('img');
+                const icon = document.createElement('i');
                 img.src = `../../assets/icons/${data.name}-icon.webp`;
                 img.alt = data.name;
-
                 icon.appendChild(img);
-
-                // Texto
-                const span = document.createElement('span');
-                span.textContent = data.name;
-
-                // Monta o label completo
-                label.appendChild(input);
-                label.appendChild(icon);
-                label.appendChild(span);
-                li.appendChild(label);
-            }
-
-            else if (typeGenerate === 'link') {
-                li = document.createElement('li');
-                li.className = `item-level-2 ${data.name}`;
-                const link = document.createElement('a');
-                link.href = `/catalog?${type}=${data.name}`;
-
-                // Ícone com imagem
-                const icon = document.createElement('i');
-                if (type === 'regions') icon.className = 'region-icon';
-
-                const img = document.createElement('img');
-                img.src = `../../assets/icons/${data.name}-icon.webp`;
-                img.alt = data.name;
-
-                icon.appendChild(img);
-
-                // Texto
-                const span = document.createElement('span');
-                span.textContent = data.name;
-
                 link.appendChild(icon);
+
+                const span = document.createElement('span');
+                span.textContent = data.name;
                 link.appendChild(span);
-                li.appendChild(link);
+            } else if (type === 'regions') {
+                const img = document.createElement('img');
+                const icon = document.createElement('i');
+                icon.className = 'region-icon';
+                img.src = `../../assets/icons/${data.name}-icon.webp`;
+                img.alt = data.name;
+                icon.appendChild(img);
+                link.appendChild(icon);
+
+                const span = document.createElement('span');
+                span.textContent = data.name;
+                link.appendChild(span);
+            } else {
+                const span = document.createElement('span');
+                span.textContent = data.name;
+                link.appendChild(span);
             }
 
+            link.href = `/catalog?${type}=${data.name}`;
+            li.appendChild(link);
             container.appendChild(li);
         });
     },
-    typesList: async function (typeGenerete) {
+    typesList: async function () {
         const types = await getTypesList();
         if (!types) return console.warn('Nenhuma região encontrada');
-        this.generateList(types.results, 'types', typeGenerete);
+        this.generateList(types.results, 'types');
     }
 }
 
 
 setTimeout(() => {
-    navigation.regionsList('link');
-    navigation.typesList('link');
+    navigation.regionsList();
+    navigation.typesList();
 
 }, 500)
 

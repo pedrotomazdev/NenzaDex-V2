@@ -100,23 +100,50 @@
                 border: 3px solid var(--border-color);
                 box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
                 border-radius: 6px;
-                padding: 5px 10px;
                 padding-right: 4px;
+                padding-bottom: 10px;
 
-                .title-filter {
-                    padding: 10px 5px;
+                .head-filter {
+                    padding: 5px 10px;
+                    padding-right: 8px;
+                    padding-bottom: 5px;
+                    border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+                    margin-bottom: 5px;
 
-                    span {
-                        color: var(--text-color);
-                        font-weight: 600;
+                    .title-filter {
+                        padding: 10px 5px;
+
+                        span {
+                            color: var(--text-color);
+                            font-weight: 600;
+                        }
+                    }
+
+                    .filter-input {
+                        padding: 0.5rem 0.75rem;
+                        border: 1px solid rgba(0, 0, 0, 0.2);
+                        border-radius: 6px;
+                        font-size: 0.875rem;
+                        background: #fff;
+                        outline: none;
+                        width: 100%;
+                        color: #333;
+                        box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.075);
                     }
                 }
+
+
             }
 
             .content-list {
                 max-height: 200px;
                 overflow: auto;
+                padding: 5px 10px;
                 padding-right: 3px !important;
+                display: grid;
+                grid-template-columns: repeat(1, 1fr);
+                grid-template-rows: auto;
+                gap: 5px;
 
                 &::-webkit-scrollbar-track {
                     background: var(--bg-color);
@@ -131,142 +158,18 @@
                 &::-webkit-scrollbar {
                     width: 5px;
                 }
-            }
 
-            [data-recebe="types"] {
-                .content-list {
-                    display: grid;
-                    grid-template-columns: repeat(1, 1fr);
-                    gap: 5px;
-                    grid-column: auto;
-                    padding: 10px 0;
-                }
-
-
-                .item-level-2 {
-                    border-radius: 6px;
-                    overflow: hidden;
-                    box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
-                    border: 2px solid rgba(0, 0, 0, 0.2);
-                    padding: 5px 3px;
-
-                    label {
-                        display: flex;
-                        position: relative;
-                        align-items: center;
-
-                        i {
-                            display: flex;
-                            align-items: center;
-                            justify-content: center;
-                            border-radius: 50%;
-                            border: 1px solid rgba(0, 0, 0, 0.2);
-                            margin-right: 15px;
-
-                            img {
-                                width: 30px;
-                                height: 30px
-                            }
-
-                        }
-
-                        span {
-                            text-transform: capitalize;
-                            font-size: 1rem;
-                            font-weight: 600;
-                        }
-
-                        input {
-                            opacity: 0;
-                            z-index: -1;
-                            position: absolute;
-                        }
-
-                    }
-                }
-
-                @each $type, $color in $mainColorTypes {
-                    .#{$type} {
-                        background-color: $color;
-                        color: #fff;
-                    }
-                }
-            }
-
-            [data-recebe="regions"] {
-                .content-list {
-                    display: grid;
-                    grid-template-columns: repeat(1, 1fr);
-                    grid-column: auto;
-                    gap: 5px;
-                    padding: 10px 0;
-
-                }
-
-                .item-level-2 {
-                    border-radius: 6px;
-                    overflow: hidden;
-                    background-color: var(--border-color);
-                    color: var(--text-invert-color);
-                    box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
-                    border: 2px solid rgba(0, 0, 0, 0.2);
-                    padding: 5px 3px;
-
-                    label {
-                        display: flex;
-                        position: relative;
-                        align-items: center;
-
-                        i {
-                            display: flex;
-                            justify-content: center;
-                            align-items: center;
-                            margin-right: 15px;
-                            border-radius: 50%;
-                            border: 1px solid rgba(0, 0, 0, 0.2);
-                        }
-
-                        img {
-                            width: 30px;
-                            height: 30px;
-                            filter: var(--filter-hover);
-                        }
-
-                        span {
-                            text-transform: capitalize;
-                            font-size: 1rem;
-                            font-weight: 600;
-                        }
-
-                        input {
-                            opacity: 0;
-                            z-index: -1;
-                            position: absolute;
-                        }
-
-                    }
-                }
-            }
-
-            [data-recebe="abilities"] {
-
-                .content-list {
-                    padding: 10px 0;
-
-                    .ability-select {
-                        display: grid;
-                        grid-template-columns: repeat(1, 1fr);
-                        grid-template-rows: auto;
-                        gap: 5px;
-                    }
-
-                    .ability-select input[type="checkbox"] {
+                .item-option {
+                    input[type="checkbox"] {
                         display: none;
                     }
 
-                    .ability-select label {
+                    label {
                         padding: 8px 12px;
-                        display: block;
+                        display: flex;
+                        flex-direction: row-reverse;
+                        align-items: center;
+                        justify-content: flex-end;
                         background-color: var(--border-color);
                         color: var(--text-invert-color);
                         border-radius: 6px;
@@ -276,15 +179,65 @@
                         transition: all 0.2s ease;
                         font-weight: 600;
                         text-transform: capitalize;
+                        height: 50px;
+
+                        @each $type, $color in $mainColorTypes {
+                            &.#{$type} {
+                                background-color: $color;
+                                color: #fff;
+                            }
+                        }
+
+                        i {
+                            display: flex;
+                            align-items: center;
+                            margin-right: 15px;
+                            border-radius: 50%;
+                            border: 1px solid rgba(0, 0, 0, 0.2);
+                            width: 30px;
+                            height: 30px;
+
+                            img {
+                                width: 100%;
+                                height: auto;
+                            }
+                        }
+
+                        img {
+                            margin-right: 15px;
+                            width: 30px;
+                        }
                     }
 
-                    .ability-select input[type="checkbox"]:checked+label {
+                    input[type="checkbox"]:checked+label {
                         background-color: #4c1d95;
                         color: white;
                         font-weight: bold;
                     }
                 }
             }
+
+
+            button[type="submit"] {
+                background-color: var(--bg-color);
+                color: var(--text-color);
+                border: 2px solid var(--border-color);
+                font-size: 1rem;
+                font-weight: 600;
+                width: 100%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                padding: 0.5rem 0.75rem;
+                border-radius: 6px;
+                cursor: pointer;
+                transition: all 0.2s ease;
+
+                i {
+                    margin-left: 15px;
+                }
+            }
+
         }
 
         .grid-pokemon {

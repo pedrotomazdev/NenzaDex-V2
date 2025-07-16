@@ -31,20 +31,27 @@
                     <h2>Find in Nenzadex</h2>
                 </div>
                 <div class="catalog-body">
-                    <form class="filter">
-                        <h2>Filters</h2>
+                    <form class="filter" id="filterForm">
                         <div class="content-filters">
                             <div class="item-filter" data-recebe="types">
-                                <div class="title-filter">
-                                    <span>Types</span>
+                                <div class="head-filter">
+                                    <div class="title-filter">
+                                        <span>Types</span>
+                                    </div>
+                                    <input type="text" class="filter-input" id="typesSearchInput"
+                                        placeholder="Find types..." />
                                 </div>
                                 <div class="content-list">
 
                                 </div>
                             </div>
                             <div class="item-filter" data-recebe="regions">
-                                <div class="title-filter">
-                                    <span>Regions</span>
+                                <div class="head-filter">
+                                    <div class="title-filter">
+                                        <span>Regions</span>
+                                    </div>
+                                    <input type="text" class="filter-input" id="regionsSearchInput"
+                                        placeholder="Find regions..." />
                                 </div>
                                 <div class="content-list">
 
@@ -52,17 +59,40 @@
                             </div>
 
                             <div class="item-filter" data-recebe="abilities">
-                                <div class="title-filter">
-                                    <span>abilities</span>
-                                </div>
-                                <input type="text" id="abilitySearchInput" placeholder="Find ability..." />
-                                <div class="content-list">
-                                    <div id="abilityRadioGroup" class="ability-select">
-                                        <!-- radios serão injetados aqui -->
+                                <div class="head-filter">
+                                    <div class="title-filter">
+                                        <span>Abilities</span>
                                     </div>
+                                    <input type="text" id="abilitySearchInput" class="filter-input"
+                                        placeholder="Find ability..." />
+                                </div>
+
+                                <div id="abilityRadioGroup" class="ability-select content-list">
+                                    <!-- radios serão injetados aqui -->
+                                </div>
+                            </div>
+
+                            <div class="item-filter" data-recebe="habitats">
+                                <div class="head-filter">
+                                    <div class="title-filter">
+                                        <span>Habitats</span>
+                                    </div>
+                                    <input type="text" class="filter-input" id="habitatSearchInput"
+                                        placeholder="Find habitats..." />
+                                </div>
+
+                                <div id="habitatRadioGroup" class="habitat-select content-list">
+                                    <!-- radios serão injetados aqui -->
                                 </div>
                             </div>
                         </div>
+
+                        <button type="submit">
+                            <span>Go!</span>
+                            <i>
+                                <img src="../assets/icons/pokeball-icon.webp" width="30" height="30" alt="Go!">
+                            </i>
+                        </button>
                     </form>
                     <div class="grid-pokemon">
                         <!-- Cards serão inseridos via JS aqui -->

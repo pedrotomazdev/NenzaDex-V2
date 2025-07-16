@@ -1674,20 +1674,51 @@ footer p {
   -webkit-box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
           box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
   border-radius: 6px;
-  padding: 5px 10px;
   padding-right: 4px;
+  padding-bottom: 10px;
 }
-.content-catalog .catalog-body .filter .item-filter .title-filter {
+.content-catalog .catalog-body .filter .item-filter .head-filter {
+  padding: 5px 10px;
+  padding-right: 8px;
+  padding-bottom: 5px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+  margin-bottom: 5px;
+}
+.content-catalog .catalog-body .filter .item-filter .head-filter .title-filter {
   padding: 10px 5px;
 }
-.content-catalog .catalog-body .filter .item-filter .title-filter span {
+.content-catalog .catalog-body .filter .item-filter .head-filter .title-filter span {
   color: var(--text-color);
   font-weight: 600;
+}
+.content-catalog .catalog-body .filter .item-filter .head-filter .filter-input {
+  padding: 0.5rem 0.75rem;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  border-radius: 6px;
+  font-size: 0.875rem;
+  background: #fff;
+  outline: none;
+  width: 100%;
+  color: #333;
+  -webkit-box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.075);
+          box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.075);
 }
 .content-catalog .catalog-body .filter .content-list {
   max-height: 200px;
   overflow: auto;
+  padding: 5px 10px;
   padding-right: 3px !important;
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: 1fr;
+  grid-template-columns: repeat(1, 1fr);
+  -ms-grid-rows: auto;
+  grid-template-rows: auto;
+  gap: 5px;
+}
+.content-catalog .catalog-body .filter .content-list > *:nth-child(1) {
+  -ms-grid-row: 1;
+  -ms-grid-column: 1;
 }
 .content-catalog .catalog-body .filter .content-list::-webkit-scrollbar-track {
   background: var(--bg-color);
@@ -1700,220 +1731,24 @@ footer p {
 .content-catalog .catalog-body .filter .content-list::-webkit-scrollbar {
   width: 5px;
 }
-.content-catalog .catalog-body .filter [data-recebe=types] .content-list {
-  display: -ms-grid;
-  display: grid;
-  -ms-grid-columns: 1fr;
-  grid-template-columns: repeat(1, 1fr);
-  gap: 5px;
-  grid-column: auto;
-  padding: 10px 0;
-}
-.content-catalog .catalog-body .filter [data-recebe=types] .item-level-2 {
-  border-radius: 6px;
-  overflow: hidden;
-  -webkit-box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
-          box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
-  border: 2px solid rgba(0, 0, 0, 0.2);
-  padding: 5px 3px;
-}
-.content-catalog .catalog-body .filter [data-recebe=types] .item-level-2 label {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  position: relative;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-}
-.content-catalog .catalog-body .filter [data-recebe=types] .item-level-2 label i {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-  border-radius: 50%;
-  border: 1px solid rgba(0, 0, 0, 0.2);
-  margin-right: 15px;
-}
-.content-catalog .catalog-body .filter [data-recebe=types] .item-level-2 label i img {
-  width: 30px;
-  height: 30px;
-}
-.content-catalog .catalog-body .filter [data-recebe=types] .item-level-2 label span {
-  text-transform: capitalize;
-  font-size: 1rem;
-  font-weight: 600;
-}
-.content-catalog .catalog-body .filter [data-recebe=types] .item-level-2 label input {
-  opacity: 0;
-  z-index: -1;
-  position: absolute;
-}
-.content-catalog .catalog-body .filter [data-recebe=types] .grass {
-  background-color: #7ec850;
-  color: #fff;
-}
-.content-catalog .catalog-body .filter [data-recebe=types] .fire {
-  background-color: #ff7043;
-  color: #fff;
-}
-.content-catalog .catalog-body .filter [data-recebe=types] .water {
-  background-color: #42a5f5;
-  color: #fff;
-}
-.content-catalog .catalog-body .filter [data-recebe=types] .bug {
-  background-color: #a2bf4c;
-  color: #fff;
-}
-.content-catalog .catalog-body .filter [data-recebe=types] .normal {
-  background-color: #b0bec5;
-  color: #fff;
-}
-.content-catalog .catalog-body .filter [data-recebe=types] .steel {
-  background-color: #90a4ae;
-  color: #fff;
-}
-.content-catalog .catalog-body .filter [data-recebe=types] .poison {
-  background-color: #ab47bc;
-  color: #fff;
-}
-.content-catalog .catalog-body .filter [data-recebe=types] .ground {
-  background-color: #bc8f63;
-  color: #fff;
-}
-.content-catalog .catalog-body .filter [data-recebe=types] .fighting {
-  background-color: #e53935;
-  color: #fff;
-}
-.content-catalog .catalog-body .filter [data-recebe=types] .rock {
-  background-color: #bfa755;
-  color: #fff;
-}
-.content-catalog .catalog-body .filter [data-recebe=types] .electric {
-  background-color: #ffd600;
-  color: #fff;
-}
-.content-catalog .catalog-body .filter [data-recebe=types] .ghost {
-  background-color: #7e57c2;
-  color: #fff;
-}
-.content-catalog .catalog-body .filter [data-recebe=types] .psychic {
-  background-color: #ec407a;
-  color: #fff;
-}
-.content-catalog .catalog-body .filter [data-recebe=types] .ice {
-  background-color: #4dd0e1;
-  color: #fff;
-}
-.content-catalog .catalog-body .filter [data-recebe=types] .dragon {
-  background-color: #5c6bc0;
-  color: #fff;
-}
-.content-catalog .catalog-body .filter [data-recebe=types] .fairy {
-  background-color: #f48fb1;
-  color: #fff;
-}
-.content-catalog .catalog-body .filter [data-recebe=types] .dark {
-  background-color: #37474f;
-  color: #fff;
-}
-.content-catalog .catalog-body .filter [data-recebe=types] .flying {
-  background-color: #81d4fa;
-  color: #fff;
-}
-.content-catalog .catalog-body .filter [data-recebe=types] .stellar {
-  background-color: #ccc;
-  color: #fff;
-}
-.content-catalog .catalog-body .filter [data-recebe=types] .unknown {
-  background-color: #2a2a2a;
-  color: #fff;
-}
-.content-catalog .catalog-body .filter [data-recebe=regions] .content-list {
-  display: -ms-grid;
-  display: grid;
-  -ms-grid-columns: 1fr;
-  grid-template-columns: repeat(1, 1fr);
-  grid-column: auto;
-  gap: 5px;
-  padding: 10px 0;
-}
-.content-catalog .catalog-body .filter [data-recebe=regions] .item-level-2 {
-  border-radius: 6px;
-  overflow: hidden;
-  background-color: var(--border-color);
-  color: var(--text-invert-color);
-  -webkit-box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
-          box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
-  border: 2px solid rgba(0, 0, 0, 0.2);
-  padding: 5px 3px;
-}
-.content-catalog .catalog-body .filter [data-recebe=regions] .item-level-2 label {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  position: relative;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-}
-.content-catalog .catalog-body .filter [data-recebe=regions] .item-level-2 label i {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  margin-right: 15px;
-  border-radius: 50%;
-  border: 1px solid rgba(0, 0, 0, 0.2);
-}
-.content-catalog .catalog-body .filter [data-recebe=regions] .item-level-2 label img {
-  width: 30px;
-  height: 30px;
-  -webkit-filter: var(--filter-hover);
-          filter: var(--filter-hover);
-}
-.content-catalog .catalog-body .filter [data-recebe=regions] .item-level-2 label span {
-  text-transform: capitalize;
-  font-size: 1rem;
-  font-weight: 600;
-}
-.content-catalog .catalog-body .filter [data-recebe=regions] .item-level-2 label input {
-  opacity: 0;
-  z-index: -1;
-  position: absolute;
-}
-.content-catalog .catalog-body .filter [data-recebe=abilities] .content-list {
-  padding: 10px 0;
-}
-.content-catalog .catalog-body .filter [data-recebe=abilities] .content-list .ability-select {
-  display: -ms-grid;
-  display: grid;
-  -ms-grid-columns: 1fr;
-  grid-template-columns: repeat(1, 1fr);
-  -ms-grid-rows: auto;
-  grid-template-rows: auto;
-  gap: 5px;
-}
-.content-catalog .catalog-body .filter [data-recebe=abilities] .content-list .ability-select > *:nth-child(1) {
-  -ms-grid-row: 1;
-  -ms-grid-column: 1;
-}
-.content-catalog .catalog-body .filter [data-recebe=abilities] .content-list .ability-select input[type=checkbox] {
+.content-catalog .catalog-body .filter .content-list .item-option input[type=checkbox] {
   display: none;
 }
-.content-catalog .catalog-body .filter [data-recebe=abilities] .content-list .ability-select label {
+.content-catalog .catalog-body .filter .content-list .item-option label {
   padding: 8px 12px;
-  display: block;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: reverse;
+      -ms-flex-direction: row-reverse;
+          flex-direction: row-reverse;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: end;
+      -ms-flex-pack: end;
+          justify-content: flex-end;
   background-color: var(--border-color);
   color: var(--text-invert-color);
   border-radius: 6px;
@@ -1927,11 +1762,138 @@ footer p {
   transition: all 0.2s ease;
   font-weight: 600;
   text-transform: capitalize;
+  height: 50px;
 }
-.content-catalog .catalog-body .filter [data-recebe=abilities] .content-list .ability-select input[type=checkbox]:checked + label {
+.content-catalog .catalog-body .filter .content-list .item-option label.grass {
+  background-color: #7ec850;
+  color: #fff;
+}
+.content-catalog .catalog-body .filter .content-list .item-option label.fire {
+  background-color: #ff7043;
+  color: #fff;
+}
+.content-catalog .catalog-body .filter .content-list .item-option label.water {
+  background-color: #42a5f5;
+  color: #fff;
+}
+.content-catalog .catalog-body .filter .content-list .item-option label.bug {
+  background-color: #a2bf4c;
+  color: #fff;
+}
+.content-catalog .catalog-body .filter .content-list .item-option label.normal {
+  background-color: #b0bec5;
+  color: #fff;
+}
+.content-catalog .catalog-body .filter .content-list .item-option label.steel {
+  background-color: #90a4ae;
+  color: #fff;
+}
+.content-catalog .catalog-body .filter .content-list .item-option label.poison {
+  background-color: #ab47bc;
+  color: #fff;
+}
+.content-catalog .catalog-body .filter .content-list .item-option label.ground {
+  background-color: #bc8f63;
+  color: #fff;
+}
+.content-catalog .catalog-body .filter .content-list .item-option label.fighting {
+  background-color: #e53935;
+  color: #fff;
+}
+.content-catalog .catalog-body .filter .content-list .item-option label.rock {
+  background-color: #bfa755;
+  color: #fff;
+}
+.content-catalog .catalog-body .filter .content-list .item-option label.electric {
+  background-color: #ffd600;
+  color: #fff;
+}
+.content-catalog .catalog-body .filter .content-list .item-option label.ghost {
+  background-color: #7e57c2;
+  color: #fff;
+}
+.content-catalog .catalog-body .filter .content-list .item-option label.psychic {
+  background-color: #ec407a;
+  color: #fff;
+}
+.content-catalog .catalog-body .filter .content-list .item-option label.ice {
+  background-color: #4dd0e1;
+  color: #fff;
+}
+.content-catalog .catalog-body .filter .content-list .item-option label.dragon {
+  background-color: #5c6bc0;
+  color: #fff;
+}
+.content-catalog .catalog-body .filter .content-list .item-option label.fairy {
+  background-color: #f48fb1;
+  color: #fff;
+}
+.content-catalog .catalog-body .filter .content-list .item-option label.dark {
+  background-color: #37474f;
+  color: #fff;
+}
+.content-catalog .catalog-body .filter .content-list .item-option label.flying {
+  background-color: #81d4fa;
+  color: #fff;
+}
+.content-catalog .catalog-body .filter .content-list .item-option label.stellar {
+  background-color: #ccc;
+  color: #fff;
+}
+.content-catalog .catalog-body .filter .content-list .item-option label.unknown {
+  background-color: #2a2a2a;
+  color: #fff;
+}
+.content-catalog .catalog-body .filter .content-list .item-option label i {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  margin-right: 15px;
+  border-radius: 50%;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  width: 30px;
+  height: 30px;
+}
+.content-catalog .catalog-body .filter .content-list .item-option label i img {
+  width: 100%;
+  height: auto;
+}
+.content-catalog .catalog-body .filter .content-list .item-option label img {
+  margin-right: 15px;
+  width: 30px;
+}
+.content-catalog .catalog-body .filter .content-list .item-option input[type=checkbox]:checked + label {
   background-color: #4c1d95;
   color: white;
   font-weight: bold;
+}
+.content-catalog .catalog-body .filter button[type=submit] {
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  border: 2px solid var(--border-color);
+  font-size: 1rem;
+  font-weight: 600;
+  width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  padding: 0.5rem 0.75rem;
+  border-radius: 6px;
+  cursor: pointer;
+  -webkit-transition: all 0.2s ease;
+  transition: all 0.2s ease;
+}
+.content-catalog .catalog-body .filter button[type=submit] i {
+  margin-left: 15px;
 }
 .content-catalog .catalog-body .grid-pokemon {
   display: -ms-grid;
