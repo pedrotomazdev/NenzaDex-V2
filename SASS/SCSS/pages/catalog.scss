@@ -1,0 +1,336 @@
+// Import base primeiro
+@import '../base/_preload.scss';
+@import '../base/_variables.scss';
+@import '../base/_utilities.scss';
+
+// Layout
+@import '../layout/_global.scss';
+
+
+// Components
+@import '../components/_header.scss';
+@import '../components/_footer.scss';
+@import '../components/_cards.scss';
+@import '../components/_buttons.scss';
+
+
+
+.site-main {
+    padding: 128px 0;
+
+    @media(max-width: 768px) {
+        padding: 105px 0;
+    }
+
+}
+
+.content-catalog {
+
+    .catalog-header {
+        position: relative;
+        padding: 5px;
+        margin-bottom: 10px;
+
+        @media(max-width: 768px) {
+            padding-top: 50px;
+        }
+
+        &::before {
+            content: '';
+            border-radius: 6px;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+            // backdrop-filter: blur(3px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            box-shadow: 4px 6px 10px rgba(0, 0, 0, 0.4);
+            position: absolute;
+            top: -1px;
+            left: -1px;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background-color: var(--bg-glass);
+
+        }
+
+        h2 {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem
+        }
+    }
+
+
+    .catalog-body {
+        display: flex;
+        gap: 10px;
+        margin-bottom: 10px;
+        position: relative;
+
+        .filter,
+        .grid-pokemon {
+            position: relative;
+            padding: 5px;
+
+            &::before {
+                content: '';
+                border-radius: 6px;
+                box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+                // backdrop-filter: blur(3px);
+                border: 1px solid rgba(255, 255, 255, 0.3);
+                box-shadow: 4px 6px 10px rgba(0, 0, 0, 0.4);
+                position: absolute;
+                top: -1px;
+                left: -1px;
+                width: 100%;
+                height: 100%;
+                z-index: -1;
+                background-color: var(--bg-glass);
+
+            }
+        }
+
+        .filter {
+            width: 300px;
+            padding: 5px;
+            height: fit-content;
+
+            .item-filter {
+                margin-bottom: 10px;
+                background-color: var(--bg-color);
+                border: 3px solid var(--border-color);
+                box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+                border-radius: 6px;
+                padding: 5px 10px;
+                padding-right: 4px;
+
+                .title-filter {
+                    padding: 10px 5px;
+
+                    span {
+                        color: var(--text-color);
+                        font-weight: 600;
+                    }
+                }
+            }
+
+            .content-list {
+                max-height: 200px;
+                overflow: auto;
+                padding-right: 3px !important;
+
+                &::-webkit-scrollbar-track {
+                    background: var(--bg-color);
+                    border-radius: 3px;
+                }
+
+                &::-webkit-scrollbar-thumb {
+                    background: var(--border-color);
+                    border-radius: 3px;
+                }
+
+                &::-webkit-scrollbar {
+                    width: 5px;
+                }
+            }
+
+            [data-recebe="types"] {
+                .content-list {
+                    display: grid;
+                    grid-template-columns: repeat(1, 1fr);
+                    gap: 5px;
+                    grid-column: auto;
+                    padding: 10px 0;
+                }
+
+
+                .item-level-2 {
+                    border-radius: 6px;
+                    overflow: hidden;
+                    box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+                    border: 2px solid rgba(0, 0, 0, 0.2);
+                    padding: 5px 3px;
+
+                    label {
+                        display: flex;
+                        position: relative;
+                        align-items: center;
+
+                        i {
+                            display: flex;
+                            align-items: center;
+                            justify-content: center;
+                            border-radius: 50%;
+                            border: 1px solid rgba(0, 0, 0, 0.2);
+                            margin-right: 15px;
+
+                            img {
+                                width: 30px;
+                                height: 30px
+                            }
+
+                        }
+
+                        span {
+                            text-transform: capitalize;
+                            font-size: 1rem;
+                            font-weight: 600;
+                        }
+
+                        input {
+                            opacity: 0;
+                            z-index: -1;
+                            position: absolute;
+                        }
+
+                    }
+                }
+
+                @each $type, $color in $mainColorTypes {
+                    .#{$type} {
+                        background-color: $color;
+                        color: #fff;
+                    }
+                }
+            }
+
+            [data-recebe="regions"] {
+                .content-list {
+                    display: grid;
+                    grid-template-columns: repeat(1, 1fr);
+                    grid-column: auto;
+                    gap: 5px;
+                    padding: 10px 0;
+
+                }
+
+                .item-level-2 {
+                    border-radius: 6px;
+                    overflow: hidden;
+                    background-color: var(--border-color);
+                    color: var(--text-invert-color);
+                    box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+                    border: 2px solid rgba(0, 0, 0, 0.2);
+                    padding: 5px 3px;
+
+                    label {
+                        display: flex;
+                        position: relative;
+                        align-items: center;
+
+                        i {
+                            display: flex;
+                            justify-content: center;
+                            align-items: center;
+                            margin-right: 15px;
+                            border-radius: 50%;
+                            border: 1px solid rgba(0, 0, 0, 0.2);
+                        }
+
+                        img {
+                            width: 30px;
+                            height: 30px;
+                            filter: var(--filter-hover);
+                        }
+
+                        span {
+                            text-transform: capitalize;
+                            font-size: 1rem;
+                            font-weight: 600;
+                        }
+
+                        input {
+                            opacity: 0;
+                            z-index: -1;
+                            position: absolute;
+                        }
+
+                    }
+                }
+            }
+
+            [data-recebe="abilities"] {
+
+                .content-list {
+                    padding: 10px 0;
+
+                    .ability-select {
+                        display: grid;
+                        grid-template-columns: repeat(1, 1fr);
+                        grid-template-rows: auto;
+                        gap: 5px;
+                    }
+
+                    .ability-select input[type="checkbox"] {
+                        display: none;
+                    }
+
+                    .ability-select label {
+                        padding: 8px 12px;
+                        display: block;
+                        background-color: var(--border-color);
+                        color: var(--text-invert-color);
+                        border-radius: 6px;
+                        border: 1px solid rgba(0, 0, 0, 0.2);
+                        cursor: pointer;
+                        user-select: none;
+                        transition: all 0.2s ease;
+                        font-weight: 600;
+                        text-transform: capitalize;
+                    }
+
+                    .ability-select input[type="checkbox"]:checked+label {
+                        background-color: #4c1d95;
+                        color: white;
+                        font-weight: bold;
+                    }
+                }
+            }
+        }
+
+        .grid-pokemon {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            grid-template-rows: auto;
+            gap: 10px;
+            width: 100%;
+
+            .pokemons-card {
+                padding: 5px 0;
+
+                .content-card {
+                    .poke-icon {
+                        overflow: hidden;
+
+                        img {
+                            top: calc(50% - 5px);
+                            width: 100%;
+                            height: 100%;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    .catalog-footer {
+        position: relative;
+        padding: 5px;
+
+        &::before {
+            content: '';
+            border-radius: 6px;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+            // backdrop-filter: blur(3px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            box-shadow: 4px 6px 10px rgba(0, 0, 0, 0.4);
+            position: absolute;
+            top: -1px;
+            left: -1px;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background-color: var(--bg-glass);
+
+        }
+    }
+}

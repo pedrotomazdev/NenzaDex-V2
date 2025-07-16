@@ -161,7 +161,7 @@ const pokedexCore = {
                     card.classList.add('show');
                 });
             });
-        })
+        });
     },
 
     // busca os pokemons de uma região

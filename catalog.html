@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Nenzadex v2.0 - Pokédex moderna feita do zero por Pedro Tomaz" />
+    <title>Nenzadex v2</title>
+
+    <link rel="icon" href="/favicon.ico" type="image/svg+xml">
+    <!--<link rel="preload" href="SASS/CSS/main.css.map" as="style">-->
+    <!--<link rel="stylesheet" href="/SASS/CSS/main.css">-->
+    <link rel="stylesheet" href="/SASS/CSS/catalog.css">
+
+
+
+    <script type="module" src="/js/api.js" defer></script>
+    <script type="module" src="/js/dom.js" defer></script>
+    <!--<script type="module" src="/js/main.js" defer></script>-->
+    <script type="module" src="/js/catalog.js" defer></script>
+</head>
+
+<body>
+    <div id="include-header"></div>
+
+    <main class="site-main">
+
+        <div class="container">
+            <div class="content-catalog">
+                <div class="catalog-header">
+                    <h2>Find in Nenzadex</h2>
+                </div>
+                <div class="catalog-body">
+                    <form class="filter">
+                        <h2>Filters</h2>
+                        <div class="content-filters">
+                            <div class="item-filter" data-recebe="types">
+                                <div class="title-filter">
+                                    <span>Types</span>
+                                </div>
+                                <div class="content-list">
+
+                                </div>
+                            </div>
+                            <div class="item-filter" data-recebe="regions">
+                                <div class="title-filter">
+                                    <span>Regions</span>
+                                </div>
+                                <div class="content-list">
+
+                                </div>
+                            </div>
+
+                            <div class="item-filter" data-recebe="abilities">
+                                <div class="title-filter">
+                                    <span>abilities</span>
+                                </div>
+                                <input type="text" id="abilitySearchInput" placeholder="Find ability..." />
+                                <div class="content-list">
+                                    <div id="abilityRadioGroup" class="ability-select">
+                                        <!-- radios serão injetados aqui -->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                    <div class="grid-pokemon">
+                        <!-- Cards serão inseridos via JS aqui -->
+                    </div>
+                </div>
+                <div class="catalog-footer">
+                    <h2>footer</h2>
+                </div>
+            </div>
+        </div>
+    </main>
+
+
+    <div id="include-footer"></div>
+
+
+    <script type="module" src="/js/include.js" defer></script>
+
+
+    <!-- Swiper CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+
+    <!-- Swiper JS -->
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+
+
+</body>
+
+</html>
