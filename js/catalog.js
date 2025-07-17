@@ -11,10 +11,37 @@ let isInitialized = false;
 
 let fullPokedex = [];
 
+const regionIdToName = {
+    1: "kanto",
+    2: "johto",
+    3: "hoenn",
+    4: "sinnoh",
+    5: "unova",
+    6: "kalos",
+    7: "alola",
+    8: "galar",
+    9: "hisui",
+    10: "paldea"
+};
+
+const regionNameToId = {
+    kanto: "1",
+    johto: "2",
+    hoenn: "3",
+    sinnoh: "4",
+    unova: "5",
+    kalos: "6",
+    alola: "7",
+    galar: "8",
+    hisui: "9",
+    paldea: "10"
+};
+
 const populeCatalog = {
     getValuesUrl: function () {
         const params = new URLSearchParams(window.location.search);
         const types = params.getAll('types');
+
         const regions = params.getAll('regions');
         const habitats = params.getAll('habitats');
         const abilities = params.getAll('abilities');
@@ -35,9 +62,11 @@ const populeCatalog = {
         if (types.length > 0) {
             results = results.filter(p => types.every(t => p.types.includes(t)));
         }
-
         if (regions.length > 0) {
-            results = results.filter(p => regions.includes(p.region));
+            results = results.filter(p => {
+                const regionId = regionNameToId[p.region];
+                return regions.includes(regionId);
+            });
         }
 
         if (habitats.length > 0) {
@@ -56,7 +85,6 @@ const populeCatalog = {
 
     renderResults: async function (pokemons) {
         const destination = document.querySelector('.catalog-body .grid-pokemon');
-        destination.innerHTML = '';
 
         if (!pokemons.length) {
             document.querySelector('.alert-error').classList.add('show');
@@ -121,13 +149,79 @@ const populeCatalog = {
 
     init: async function () {
         const filters = this.getValuesUrl();
-        console.log('filters', filters);
         const results = await this.getPokemonsFiltered(filters);
         this.cachedResults = results;
         await this.renderResults(this.cachedResults.slice(currentOffset, currentOffset + limit));
         currentOffset += limit;
         isInitialized = true;
     },
+
+    update: async function () {
+        // Reseta offset para scroll infinito
+        currentOffset = 0;
+        isInitialized = false;
+
+        // Mostra loading ou spinner, se tiver
+        const listContainer = document.querySelector('.grid-pokemon');
+        document.getElementById('scroll-sentinel').classList.add('loading');
+
+        // Pega os filtros atuais da URL
+        const filters = this.getValuesUrl();
+
+        // Aplica o mapeamento de nomes de região para ID (se necessário)
+        if (filters.regions && filters.regions.length > 0) {
+            filters.regions = filters.regions.map(r => regionNameToId[r] || r);
+        }
+
+        // Busca todos os resultados com os filtros aplicados
+        const results = await this.getPokemonsFiltered(filters, 0, limit);
+
+        // Cacheia os resultados para o scroll infinito
+        this.cachedResults = results;
+
+        // Limpa e renderiza a primeira página
+        listContainer.innerHTML = '';
+        document.getElementById('scroll-sentinel').classList.remove('loading');
+
+        const firstPage = results.slice(0, limit);
+        await this.renderResults(firstPage);
+
+        // Atualiza offset e ativa scroll
+        currentOffset = limit;
+        isInitialized = true;
+
+        // Reconecta o observer
+        const sentinel = document.getElementById('scroll-sentinel');
+        if (sentinel) observer.observe(sentinel);
+    },
+
+    removeFilterFromUrl: function (type, value) {
+
+        console.log(type, value);
+        const url = new URL(window.location);
+        const params = url.searchParams;
+
+        // Remove o valor específico da chave
+        const currentValues = params.getAll(type).filter(v => v !== value);
+
+        // Apaga tudo da chave
+        params.delete(type);
+
+        // Reinsere só os que restaram
+        currentValues.forEach(v => params.append(type, v));
+
+        // Atualiza a URL sem recarregar
+        window.history.replaceState({}, '', `${window.location.pathname}?${params}`);
+
+        const newUrl = `${window.location.pathname}?${params.toString()}`;
+        console.log(newUrl)
+        // Atualiza a URL no navegador sem recarregar
+        history.replaceState(null, '', newUrl);
+        // Atualiza os filtros visuais
+        this.update();
+        filters.renderActiveFilters();
+    },
+
 
 };
 
@@ -175,8 +269,12 @@ const filters = {
     renderRegions: async function () {
         const regions = await getRegionsList();
         if (!regions) return console.warn('Nenhuma região encontrada');
-
-        const regionsList = regions.results.map(a => a.name).sort();
+        const regionsList = regions.results
+            .map(a => ({
+                name: a.name,
+                id: a.url.split('/').filter(Boolean).pop()
+            }))
+            .sort((a, b) => a.name.localeCompare(b.name));
         const container = document.querySelector('[ data-item="regions"] .content-list');
         const searchInput = document.getElementById('regionsSearchInput');
         container.innerHTML = '';
@@ -206,40 +304,49 @@ const filters = {
 
     renderLists: function (data, type, container, selectedQueue, wrappers, searchInput) {
         const filterApplied = populeCatalog.getValuesUrl()[type];
-        data.forEach((name, index) => {
-            const id = `${type}-${index}`;
+
+        data.forEach((item, index) => {
+            // Lógica especial pra 'regions'
+            const isRegion = type === 'regions';
+            const name = isRegion ? item.name : item;
+            const value = isRegion ? item.id : item;
+            const id = `${type}-${value}`;
 
             const wrapper = document.createElement('div');
-            if (filterApplied && filterApplied.includes(name)) {
-                wrapper.classList.add('item-option', 'selected');
-
-            } else {
-                wrapper.classList.add('item-option');
-
-            }
+            wrapper.classList.add('item-option');
+            if (filterApplied?.includes(value)) wrapper.classList.add('selected');
 
             const input = document.createElement('input');
             input.type = 'checkbox';
             input.name = type;
             input.id = id;
-            input.value = name;
-            if (filterApplied && filterApplied.includes(name)) input.checked = true;
+            input.value = value;
+            if (filterApplied?.includes(value)) input.checked = true;
 
             const label = document.createElement('label');
             label.setAttribute('for', id);
             label.textContent = name;
 
-            if (type == 'types') {
+            // Se for tipo, adiciona classe e ícone
+            if (type === 'types') {
                 label.className = name;
-            }
 
-            if (type == 'types' || type == 'regions') {
                 const img = document.createElement('img');
                 img.src = `./assets/icons/${name}-icon.webp`;
                 img.alt = name;
-                const contentImg = document.createElement('i');
-                contentImg.appendChild(img);
-                label.appendChild(contentImg);
+                const iconWrapper = document.createElement('i');
+                iconWrapper.appendChild(img);
+                label.appendChild(iconWrapper);
+            }
+
+            // Se for região, adiciona ícone
+            if (isRegion) {
+                const img = document.createElement('img');
+                img.src = `./assets/icons/${name}-icon.webp`;
+                img.alt = name;
+                const iconWrapper = document.createElement('i');
+                iconWrapper.appendChild(img);
+                label.appendChild(iconWrapper);
             }
 
             input.addEventListener('change', () => {
@@ -262,7 +369,6 @@ const filters = {
         });
 
         this.refineFilters(searchInput, container, wrappers);
-
         this.renderActiveFilters();
     },
 
@@ -271,7 +377,6 @@ const filters = {
         const filtersContainer = container.querySelector('.active-filters');
         filtersContainer.innerHTML = '';
         const filters = populeCatalog.getValuesUrl(); // Ex: { types: [], regions: [] }
-
         const isEmpty = Object.values(filters).every(arr => arr.length === 0);
 
         if (isEmpty) {
@@ -280,6 +385,7 @@ const filters = {
         }
 
         container.style.display = 'block';
+
 
         for (const type in filters) {
             if (filters[type].length === 0) continue;
@@ -294,6 +400,8 @@ const filters = {
             groupWrapper.appendChild(title);
 
             filters[type].forEach(value => {
+                const valueId = value;
+                if (type == 'regions') value = regionIdToName[value];
                 const tag = document.createElement('div');
                 tag.className = 'active-filter';
                 tag.textContent = value;
@@ -301,7 +409,7 @@ const filters = {
                 tag.dataset.value = value;
 
                 tag.addEventListener('click', () => {
-                    populeCatalog.removeFilterFromUrl(type, value);
+                    populeCatalog.removeFilterFromUrl(type, valueId);
                     populeCatalog.update();
                 });
 
@@ -346,11 +454,21 @@ const filters = {
             e.preventDefault();
             const formData = new FormData(this);
             const params = new URLSearchParams();
+
             for (const [key, value] of formData.entries()) {
                 params.append(key, value);
             }
+
             const url = `${window.location.pathname}?${params.toString()}`;
-            window.location.href = url; // força reload — isso já reinicia o estado
+
+            // Atualiza a URL no navegador sem recarregar
+            history.replaceState(null, '', url);
+
+
+            populeCatalog.update();
+
+            filters.renderActiveFilters();
+
         });
     },
 
