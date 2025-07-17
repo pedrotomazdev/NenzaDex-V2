@@ -8,15 +8,12 @@
     <title>Nenzadex v2</title>
 
     <link rel="icon" href="/favicon.ico" type="image/svg+xml">
-    <!--<link rel="preload" href="SASS/CSS/main.css.map" as="style">-->
-    <!--<link rel="stylesheet" href="/SASS/CSS/main.css">-->
     <link rel="stylesheet" href="/SASS/CSS/catalog.css">
 
 
 
     <script type="module" src="/js/api.js" defer></script>
     <script type="module" src="/js/dom.js" defer></script>
-    <!--<script type="module" src="/js/main.js" defer></script>-->
     <script type="module" src="/js/catalog.js" defer></script>
 </head>
 
@@ -33,7 +30,7 @@
                 <div class="catalog-body">
                     <form class="filter" id="filterForm">
                         <div class="content-filters">
-                            <div class="item-filter" data-recebe="types">
+                            <div class="item-filter" data-item="types">
                                 <div class="head-filter">
                                     <div class="title-filter">
                                         <span>Types</span>
@@ -45,7 +42,7 @@
 
                                 </div>
                             </div>
-                            <div class="item-filter" data-recebe="regions">
+                            <div class="item-filter" data-item="regions">
                                 <div class="head-filter">
                                     <div class="title-filter">
                                         <span>Regions</span>
@@ -58,7 +55,7 @@
                                 </div>
                             </div>
 
-                            <div class="item-filter" data-recebe="abilities">
+                            <div class="item-filter" data-item="abilities">
                                 <div class="head-filter">
                                     <div class="title-filter">
                                         <span>Abilities</span>
@@ -72,7 +69,7 @@
                                 </div>
                             </div>
 
-                            <div class="item-filter" data-recebe="habitats">
+                            <div class="item-filter" data-item="habitats">
                                 <div class="head-filter">
                                     <div class="title-filter">
                                         <span>Habitats</span>
@@ -94,9 +91,15 @@
                             </i>
                         </button>
                     </form>
-                    <div class="grid-pokemon">
-                        <!-- Cards serão inseridos via JS aqui -->
+                    <div class="content-grid">
+                        <div class="grid-pokemon">
+                            <!-- Cards serão inseridos via JS aqui -->
+                        </div>
+                        <div id="scroll-sentinel" class="d-flex justify-center align-center">
+                            <img src="/assets/icons/load.svg" alt="Carregando..." width="150" height="150" />
+                        </div>
                     </div>
+
                 </div>
                 <div class="catalog-footer">
                     <h2>footer</h2>
@@ -110,14 +113,6 @@
 
 
     <script type="module" src="/js/include.js" defer></script>
-
-
-    <!-- Swiper CSS -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
-
-    <!-- Swiper JS -->
-    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
-
 
 </body>
 

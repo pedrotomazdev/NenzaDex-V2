@@ -3,17 +3,12 @@ import {
     fetchPokemonList,
     getPokemonRegion,
     getPokemonByTypes,
-    fetchPokemonSpecies,
-    getEvolution,
-    getForms,
 } from "./api.js";
 
 import {
     cardElement,
     clearPokedex,
 } from "./dom.js";
-
-import { groupDataPokemon } from './utils/pokemon.js';
 
 
 // primeiro carregamento dos pokemons

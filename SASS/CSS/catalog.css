@@ -1639,12 +1639,12 @@ footer p {
   position: relative;
 }
 .content-catalog .catalog-body .filter,
-.content-catalog .catalog-body .grid-pokemon {
+.content-catalog .catalog-body .content-grid {
   position: relative;
   padding: 5px;
 }
 .content-catalog .catalog-body .filter::before,
-.content-catalog .catalog-body .grid-pokemon::before {
+.content-catalog .catalog-body .content-grid::before {
   content: "";
   border-radius: 6px;
   -webkit-box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
@@ -1895,7 +1895,10 @@ footer p {
 .content-catalog .catalog-body .filter button[type=submit] i {
   margin-left: 15px;
 }
-.content-catalog .catalog-body .grid-pokemon {
+.content-catalog .catalog-body .content-grid {
+  width: 100%;
+}
+.content-catalog .catalog-body .content-grid .grid-pokemon {
   display: -ms-grid;
   display: grid;
   -ms-grid-columns: 1fr 10px 1fr 10px 1fr 10px 1fr;
@@ -1905,29 +1908,29 @@ footer p {
   gap: 10px;
   width: 100%;
 }
-.content-catalog .catalog-body .grid-pokemon > *:nth-child(1) {
+.content-catalog .catalog-body .content-grid .grid-pokemon > *:nth-child(1) {
   -ms-grid-row: 1;
   -ms-grid-column: 1;
 }
-.content-catalog .catalog-body .grid-pokemon > *:nth-child(2) {
+.content-catalog .catalog-body .content-grid .grid-pokemon > *:nth-child(2) {
   -ms-grid-row: 1;
   -ms-grid-column: 3;
 }
-.content-catalog .catalog-body .grid-pokemon > *:nth-child(3) {
+.content-catalog .catalog-body .content-grid .grid-pokemon > *:nth-child(3) {
   -ms-grid-row: 1;
   -ms-grid-column: 5;
 }
-.content-catalog .catalog-body .grid-pokemon > *:nth-child(4) {
+.content-catalog .catalog-body .content-grid .grid-pokemon > *:nth-child(4) {
   -ms-grid-row: 1;
   -ms-grid-column: 7;
 }
-.content-catalog .catalog-body .grid-pokemon .pokemons-card {
+.content-catalog .catalog-body .content-grid .grid-pokemon .pokemons-card {
   padding: 5px 0;
 }
-.content-catalog .catalog-body .grid-pokemon .pokemons-card .content-card .poke-icon {
+.content-catalog .catalog-body .content-grid .grid-pokemon .pokemons-card .content-card .poke-icon {
   overflow: hidden;
 }
-.content-catalog .catalog-body .grid-pokemon .pokemons-card .content-card .poke-icon img {
+.content-catalog .catalog-body .content-grid .grid-pokemon .pokemons-card .content-card .poke-icon img {
   top: calc(50% - 5px);
   width: 100%;
   height: 100%;

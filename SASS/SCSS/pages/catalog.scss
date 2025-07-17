@@ -67,7 +67,7 @@
         position: relative;
 
         .filter,
-        .grid-pokemon {
+        .content-grid {
             position: relative;
             padding: 5px;
 
@@ -240,29 +240,34 @@
 
         }
 
-        .grid-pokemon {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            grid-template-rows: auto;
-            gap: 10px;
+        .content-grid {
             width: 100%;
 
-            .pokemons-card {
-                padding: 5px 0;
+            .grid-pokemon {
+                display: grid;
+                grid-template-columns: repeat(4, 1fr);
+                grid-template-rows: auto;
+                gap: 10px;
+                width: 100%;
 
-                .content-card {
-                    .poke-icon {
-                        overflow: hidden;
+                .pokemons-card {
+                    padding: 5px 0;
 
-                        img {
-                            top: calc(50% - 5px);
-                            width: 100%;
-                            height: 100%;
+                    .content-card {
+                        .poke-icon {
+                            overflow: hidden;
+
+                            img {
+                                top: calc(50% - 5px);
+                                width: 100%;
+                                height: 100%;
+                            }
                         }
                     }
                 }
             }
         }
+
     }
 
     .catalog-footer {

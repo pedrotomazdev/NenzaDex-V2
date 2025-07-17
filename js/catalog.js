@@ -1,138 +1,124 @@
+// Importações mantidas, mas fetchPokemon não é mais usado diretamente
 import {
-    fetchPokemon,
     getRegionsList,
     getTypesList,
 } from "./api.js";
-import {
-    cardElement,
-} from "./dom.js";
+
+let currentOffset = 0;
+let isLoading = false;
+const limit = 20;
+let isInitialized = false;
+
+let fullPokedex = [];
 
 const populeCatalog = {
-    // Pega os parâmetros da URL e transforma vírgulas em array
     getValuesUrl: function () {
-
         const params = new URLSearchParams(window.location.search);
         const types = params.getAll('types');
         const regions = params.getAll('regions');
         const habitats = params.getAll('habitat');
         const abilities = params.getAll('ability');
-
-        const listValues = {
-            types,
-            regions,
-            habitats,
-            abilities
-
-        }
-
-        return listValues;
+        return { types, regions, habitats, abilities };
     },
 
-    // Faz a lógica de filtro cruzado entre tipo e região
-    getPokemonsFiltered: async function (filters) {
+    getPokemonsFiltered: async function (filters, offset, limit) {
         const { types = [], regions = [], habitats = [], abilities = [] } = filters;
 
-        // 1. Filtra base por tipo/região como antes
-        const typePromises = types.map(type =>
-            fetch(`https://pokeapi.co/api/v2/type/${type}`).then(res => res.json())
-        );
-        const regionPromises = regions.map(region =>
-            fetch(`https://pokeapi.co/api/v2/region/${region}`).then(res => res.json())
-        );
-
-        const typeResults = await Promise.all(typePromises);
-        const regionResults = await Promise.all(regionPromises);
-
-        const pokemonsByType = typeResults.flatMap(typeData =>
-            typeData.pokemon.map(p => p.pokemon.name)
-        );
-
-        const pokedexUrls = regionResults.flatMap(region =>
-            region.pokedexes.map(p => p.url)
-        );
-
-        const pokedexData = await Promise.all(
-            pokedexUrls.map(url => fetch(url).then(res => res.json()))
-        );
-
-        const pokemonsByRegion = pokedexData.flatMap(pokedex =>
-            pokedex.pokemon_entries.map(entry => entry.pokemon_species.name)
-        );
-
-        let baseList = [];
-
-        if (regions.length) {
-            baseList = pokemonsByRegion;
-        } else if (types.length) {
-            baseList = pokemonsByType;
-        } else {
-            baseList = pokemonsByRegion.length > 0 ? pokemonsByRegion : pokemonsByType;
+        // Se não carregou ainda, busca o JSON
+        if (!fullPokedex.length) {
+            const res = await fetch('../full-nenzadex.json');
+            fullPokedex = await res.json();
         }
 
-        if (regions.length && types.length) {
-            baseList = baseList.filter(name => pokemonsByType.includes(name));
+        let results = [...fullPokedex];
+
+        if (types.length > 0) {
+            results = results.filter(p => types.every(t => p.types.includes(t)));
         }
 
-        // 2. Agora filtra por ability/habitat pegando o Pokémon completo
-        const finalFiltered = [];
-
-        for (const name of baseList) {
-            const data = await fetchPokemon(name);
-
-            if (!data) continue;
-
-            // 💡 Filtrar por abilities
-            const abilityNames = data.abilities?.map(a => a.ability.name) || [];
-            const hasAbility = abilities.length === 0 || abilities.some(ab => abilityNames.includes(ab));
-
-            // 💡 Filtrar por habitat (requer fetch extra)
-            let hasHabitat = true;
-            if (habitats.length) {
-                const res = await fetch(data.species.url);
-                const speciesData = await res.json();
-                const pokemonHabitat = speciesData.habitat?.name;
-                hasHabitat = habitats.includes(pokemonHabitat);
-            }
-
-            // 💡 Tipagem dupla (AND entre types)
-            const pokemonTypes = data.types?.map(t => t.type.name) || [];
-            const hasTypes = types.every(t => pokemonTypes.includes(t));
-
-            if (hasAbility && hasHabitat && hasTypes) {
-                finalFiltered.push(name);
-            }
+        if (regions.length > 0) {
+            results = results.filter(p => regions.includes(p.region));
         }
 
-        return [...new Set(finalFiltered)];
+        if (habitats.length > 0) {
+            results = results.filter(p => habitats.includes(p.habitat));
+        }
+
+        if (abilities.length > 0) {
+            results = results.filter(p => abilities.every(a => p.abilities.includes(a)));
+        }
+
+        // Ordena por ID (ou como quiser)
+        results.sort((a, b) => a.id - b.id);
+
+        return results;
     },
 
+    renderResults: async function (pokemons) {
+        console.log(pokemons)
+        for (const data of pokemons) {
+            const card = this.createPokemonCard(data);
+            const destination = document.querySelector('.catalog-body .grid-pokemon');
+            this.appendToPokedex(card, destination);
+            requestAnimationFrame(() => {
+                setTimeout(() => {
+                    card.classList.add('show');
+                });
+            });
+        }
+    },
+    createPokemonCard: function (pokemonRaw) {
+        const pokemon = pokemonRaw;
 
-    // Responsável por buscar e renderizar tudo
+
+        const card = document.createElement('a');
+        card.className = `pokemons-card ${pokemon.types[0]} pb-3`;
+        card.setAttribute('href', `/pokemon?id=${pokemonRaw.id}`);
+        card.style.order = pokemonRaw.id;
+
+        card.innerHTML = `
+            <div class="content-card p-relative">
+                <div class="poke-type d-flex p-absolute">
+                    <i class="energy d-flex justify-center align-center icon-${pokemon.types[0]}">
+                    <img src="/assets/icons/${pokemon.types[0]}-icon.webp" alt="${pokemon.types[0]}">
+                    </i>
+                    ${pokemon.types[1] ? `
+                    <i class="energy d-flex justify-center align-center icon-${pokemon.types[1]}">
+                    <img src="/assets/icons/${pokemon.types[1]}-icon.webp" alt="${pokemon.types[1]}">
+                    </i>` : ''}
+                </div>
+                <div class="poke-icon d-flex justify-center align-center p-absolute">
+                    <img src="${pokemon.sprites.icon}" width="68" height="56" class="p-absolute" alt="${pokemon.name}">
+                </div>
+                <div class="poke-img d-flex justify-center align-center ${pokemon.types[0]}">
+                    <div class="content-pokemon-image">
+                        <img width="200" height="200" src="${pokemon.sprites.oficial}" class="primaria" alt="${pokemon.name}">
+                    </div>
+                </div>
+                <div class="body-card">
+                    <div class="poke-id"><span># ${pokemon.id}</span></div>
+                    <div class="poke-name"><span>${pokemon.name}</span></div>
+                </div>
+            </div>
+        `;
+
+        return card;
+    },
+
+    appendToPokedex: function (cardElement, destination) {
+        if (!destination) return;
+        destination.appendChild(cardElement);
+    },
+
     init: async function () {
         const filters = this.getValuesUrl();
         const results = await this.getPokemonsFiltered(filters);
-        this.renderResults(results);
-    },
-
-    // Renderiza os resultados no console (ou no DOM se quiser)
-    renderResults: function (pokemons) {
-        pokemons.forEach(async (pokemon) => {
-            const data = await fetchPokemon(pokemon);
-            if (data && typeof data === 'object') {
-                const card = cardElement.createPokemonCard(data);
-                const destination = document.querySelector('.catalog-body .grid-pokemon');
-                cardElement.appendToPokedex(card, destination);
-                requestAnimationFrame(() => {
-                    setTimeout(() => {
-                        card.classList.add('show');
-                    });
-                });
-            }
-        });
-    },
-
+        this.cachedResults = results;
+        await this.renderResults(this.cachedResults.slice(currentOffset, currentOffset + limit));
+        currentOffset += limit;
+        isInitialized = true;
+    }
 };
-
 
 const filters = {
     init: function () {
@@ -165,13 +151,12 @@ const filters = {
         if (!types) return console.warn('Nenhuma região encontrada');
 
         const typesList = types.results.map(a => a.name).sort();
-        const container = document.querySelector('[ data-recebe="types"] .content-list');
+        const container = document.querySelector('[ data-item="types"] .content-list');
         const searchInput = document.getElementById('typesSearchInput');
         container.innerHTML = '';
 
         const selectedQueue = [];
         const wrappers = []; // referência pra todos os elementos
-
         this.renderLists(typesList, 'types', container, selectedQueue, wrappers, searchInput);
     },
 
@@ -180,13 +165,12 @@ const filters = {
         if (!regions) return console.warn('Nenhuma região encontrada');
 
         const regionsList = regions.results.map(a => a.name).sort();
-        const container = document.querySelector('[ data-recebe="regions"] .content-list');
+        const container = document.querySelector('[ data-item="regions"] .content-list');
         const searchInput = document.getElementById('regionsSearchInput');
         container.innerHTML = '';
 
         const selectedQueue = [];
         const wrappers = []; // referência pra todos os elementos
-
         this.renderLists(regionsList, 'regions', container, selectedQueue, wrappers, searchInput);
     },
 
@@ -201,6 +185,7 @@ const filters = {
 
         const selectedQueue = [];
         const wrappers = []; // referência pra todos os elementos
+
         this.renderLists(habitats, 'habitat', container, selectedQueue, wrappers, searchInput);
 
 
@@ -208,7 +193,6 @@ const filters = {
     },
 
     renderLists: function (data, type, container, selectedQueue, wrappers, searchInput) {
-
         data.forEach((name, index) => {
             const id = `${type}-${index}`;
 
@@ -290,21 +274,14 @@ const filters = {
 
     submit: function () {
         document.getElementById('filterForm').addEventListener('submit', function (e) {
-            e.preventDefault(); // impede o reload
-
+            e.preventDefault();
             const formData = new FormData(this);
             const params = new URLSearchParams();
-
             for (const [key, value] of formData.entries()) {
                 params.append(key, value);
             }
-
             const url = `${window.location.pathname}?${params.toString()}`;
-            window.history.pushState({}, '', url);
-
-            // Aqui você pode chamar sua função de renderização ou fetch usando os filtros
-            console.log('Nova URL:', url);
-            window, location.href = url;
+            window.location.href = url; // força reload — isso já reinicia o estado
         });
     }
 
@@ -312,8 +289,39 @@ const filters = {
 
 };
 
+const observer = new IntersectionObserver(async (entries) => {
+    const entry = entries[0];
+
+    if (entry.isIntersecting && !isLoading && isInitialized) {
+        isLoading = true;
+
+        const results = populeCatalog.cachedResults;
+
+        if (!results || currentOffset >= results.length) {
+            observer.disconnect(); // Para de observar se não há mais nada
+            return;
+        }
+
+        const nextPage = results.slice(currentOffset, currentOffset + limit);
+        console.log(`[observer] Carregando de ${currentOffset} até ${currentOffset + limit}`);
+
+        await populeCatalog.renderResults(nextPage);
+        currentOffset += limit;
+
+        isLoading = false;
+    } 
+}, {
+    rootMargin: '200px',
+});
+
+observer.observe(document.getElementById('scroll-sentinel'));
+
+
+
+
 
 document.addEventListener('DOMContentLoaded', () => {
     filters.init();
     populeCatalog.init();
 });
+
