@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="en">
 
 <head>
     <meta charset="UTF-8" />
@@ -63,6 +63,14 @@
                         </i>
                     </h3>
                 </div>
+                <div class="show-hidden-filters-float">
+                    <i id="openFilters">
+                        <img src="/assets/icons/filter-icon.svg" width="24" height="24" alt="Open filters">
+                    </i>
+                    <i id="backToTop">
+                        <img src="/assets/icons/arrow-top-icon.svg" width="24" height="24" alt="Back to top">
+                    </i>
+                </div>
                 <div class="catalog-body">
                     <form class="filter" id="filterForm">
                         <div class="close-filter">
@@ -94,16 +102,16 @@
                                 </div>
                             </div>
 
-                            <div class="item-filter" data-item="abilities">
+                            <div class="item-filter" data-item="colors">
                                 <div class="head-filter">
                                     <div class="title-filter">
-                                        <span>Abilities</span>
+                                        <span>Colors</span>
                                     </div>
-                                    <input type="text" id="abilitySearchInput" class="filter-input"
-                                        placeholder="Find ability..." />
+                                    <input type="text" class="filter-input" id="colorsSearchInput"
+                                        placeholder="Find habitats..." />
                                 </div>
 
-                                <div id="abilityRadioGroup" class="ability-select content-list">
+                                <div id="colorsRadioGroup" class="habitat-select content-list">
                                     <!-- radios serão injetados aqui -->
                                 </div>
                             </div>
@@ -121,6 +129,22 @@
                                     <!-- radios serão injetados aqui -->
                                 </div>
                             </div>
+
+                            <div class="item-filter" data-item="abilities">
+                                <div class="head-filter">
+                                    <div class="title-filter">
+                                        <span>Abilities</span>
+                                    </div>
+                                    <input type="text" id="abilitySearchInput" class="filter-input"
+                                        placeholder="Find ability..." />
+                                </div>
+
+                                <div id="abilityRadioGroup" class="ability-select content-list">
+                                    <!-- radios serão injetados aqui -->
+                                </div>
+                            </div>
+
+
                         </div>
 
                         <button type="submit">

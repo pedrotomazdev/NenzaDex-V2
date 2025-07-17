@@ -161,32 +161,6 @@ export async function getForms(formsChain) {
     }
 }
 
-// Aguardando API de tradução em tempo real
-// const traducaoCache = new Map();
-// export async function traduzirDescricao(texto) {
-//     if (traducaoCache.has(texto)) return traducaoCache.get(texto);
-
-//     try {
-//         const res = await fetch('http://localhost:3000/traduzir', {
-//             method: 'POST',
-//             headers: { 'Content-Type': 'application/json' },
-//             body: JSON.stringify({
-//                 q: texto,
-//                 source: 'en',
-//                 target: 'pt',
-//                 format: 'text'
-//             })
-//         });
-
-//         const data = await res.json();
-//         const traduzido = data.translatedText;
-//         traducaoCache.set(texto, traduzido);
-//         return traduzido;
-//     } catch (e) {
-//         console.warn('Erro ao traduzir, fallback para EN:', e);
-//         return texto;
-//     }
-// }
 
 
 export async function getTypeEffectiveness(types) {
@@ -233,47 +207,3 @@ export async function getTypeEffectiveness(types) {
     };
 }
 
-// export async function getFilteredPokemonGames() {
-//     const nonMainlineGames = [
-//         "green", "stadium", "stadium-2", "colosseum", "xd", "tcg", "snap",
-//         "rumble", "ranger", "puzzle-challenge", "trozei", "battle-revolution",
-//         "mystery-dungeon", "pokepark", "pokepark-2", "quest", "cafe", "masters",
-//         "unite", "conquest", "home", "bank", "go", "sleep", "smile", "shuffle",
-//         "red-japan", "blue-japan", "yellow-japan", "gold-japan", "silver-japan",
-//         "crystal-japan", "ruby-japan", "sapphire-japan", "emerald-japan",
-//         "firered-japan", "leafgreen-japan", "diamond-japan", "pearl-japan",
-//         "platinum-japan", "heartgold-japan", "black-japan", "white-japan",
-//         "black-2-japan", "white-2-japan","the-teal-mask","the-crown-tundra",
-//         "the-isle-of-armor",
-//     ];
-
-//     function isMainlineVersion(name) {
-//         return !nonMainlineGames.some(bad => name.includes(bad));
-//     }
-
-//     const res = await fetch('https://pokeapi.co/api/v2/version-group?limit=100');
-//     const data = await res.json();
-
-//     const versionGroups = await Promise.all(
-//         data.results.map(async (group) => {
-//             const resGroup = await fetch(group.url);
-//             const groupData = await resGroup.json();
-
-//             // Filtra apenas as versões principais do grupo
-//             const mainVersions = groupData.versions.filter(v => isMainlineVersion(v.name));
-//             const mainVersion = mainVersions[0]; // pega só o primeiro principal
-
-//             if (!mainVersion) return null; // ignora grupos sem versões válidas
-
-//             return {
-//                 generation: groupData.generation.name,
-//                 version: mainVersion.name,
-//                 versionGroup: group.name,
-//                 allMainVersions: mainVersions.map(v => v.name)
-//             };
-//         })
-//     );
-
-//     // Remove entradas nulas (grupos que foram pulados)
-//     return versionGroups.filter(Boolean);
-// }

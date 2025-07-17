@@ -45,11 +45,13 @@ const populeCatalog = {
         const regions = params.getAll('regions');
         const habitats = params.getAll('habitats');
         const abilities = params.getAll('abilities');
-        return { types, regions, habitats, abilities };
+        const colors = params.getAll('colors');
+
+        return { types, regions, habitats, abilities, colors };
     },
 
     getPokemonsFiltered: async function (filters, offset, limit) {
-        const { types = [], regions = [], habitats = [], abilities = [] } = filters;
+        const { types = [], regions = [], habitats = [], abilities = [], colors = [] } = filters;
 
         // Se não carregou ainda, busca o JSON
         if (!fullPokedex.length) {
@@ -76,6 +78,13 @@ const populeCatalog = {
         if (abilities.length > 0) {
             results = results.filter(p => abilities.every(a => p.abilities.includes(a)));
         }
+
+        if (colors.length > 0) {
+            console.log(colors);
+            results = results.filter(p => colors.includes(p.species.color));
+            console.log(results);
+        }
+
 
         // Ordena por ID (ou como quiser)
         results.sort((a, b) => a.id - b.id);
@@ -125,11 +134,13 @@ const populeCatalog = {
                     </i>` : ''}
                 </div>
                 <div class="poke-icon d-flex justify-center align-center p-absolute">
-                    <img src="${pokemon.sprites.icon}" width="68" height="56" class="p-absolute" alt="${pokemon.name}">
+                    ${pokemon.sprites.icon !== null ? `
+                    <img src="${pokemon.sprites.icon}" width="68" height="56"  onerror="this.style.display='none'"  class="p-absolute" alt="${pokemon.name}">
+                    `: ''}
                 </div>
                 <div class="poke-img d-flex justify-center align-center ${pokemon.types[0]}">
                     <div class="content-pokemon-image">
-                        <img width="200" height="200" src="${pokemon.sprites.oficial}" class="primaria" alt="${pokemon.name}">
+                        <img width="200" height="200" src="${pokemon.sprites.oficial !== null ? pokemon.sprites.oficial : '../assets/icons/pokeball-icon.webp'}" class="primaria" alt="${pokemon.name}">
                     </div>
                 </div>
                 <div class="body-card">
@@ -233,8 +244,9 @@ const filters = {
         this.renderHabitats();
         this.renderTypes();
         this.renderRegions();
+        this.renderColors();
         this.submit();
-        this.openMobileFilters();
+        this.MobileFilters();
     },
 
     renderAbilities: async function () {
@@ -306,6 +318,22 @@ const filters = {
 
     },
 
+    renderColors: async function () {
+        const res = await fetch('https://pokeapi.co/api/v2/pokemon-color?limit=100000');
+        const data = await res.json();
+        const colors = data.results.map(a => a.name).sort();
+        console.log(colors);
+        const container = document.getElementById('colorsRadioGroup');
+        const searchInput = document.getElementById('colorsSearchInput');
+        container.innerHTML = '';
+
+        const selectedQueue = [];
+        const wrappers = []; // referência pra todos os elementos
+
+        this.renderLists(colors, 'colors', container, selectedQueue, wrappers, searchInput);
+
+    },
+
     renderLists: function (data, type, container, selectedQueue, wrappers, searchInput) {
         const filterApplied = populeCatalog.getValuesUrl()[type];
 
@@ -341,6 +369,10 @@ const filters = {
                 const iconWrapper = document.createElement('i');
                 iconWrapper.appendChild(img);
                 label.appendChild(iconWrapper);
+            }
+
+            if(type === 'colors') {
+                label.className = name;
             }
 
             // Se for região, adiciona ícone
@@ -472,15 +504,34 @@ const filters = {
             populeCatalog.update();
 
             filters.renderActiveFilters();
-
+            document.getElementById('filterForm').classList.remove('show');
+            document.getElementById('shadowManeira').classList.remove('show');
         });
     },
 
-    openMobileFilters: function () {
+    MobileFilters: function () {
+        // botao acima da lista de pokemon
         document.querySelector('.show-hidden-filters h3').addEventListener('click', () => {
-            document.getElementById('filterForm').classList.toggle('show');
-            document.getElementById('shadowManeira').classList.toggle('show');
+            document.getElementById('filterForm').classList.add('show');
+            document.getElementById('shadowManeira').classList.add('show');
 
+        });
+
+        // botao flutuante que abre o filtro
+        document.getElementById('openFilters').addEventListener('click', () => {
+            document.getElementById('filterForm').classList.add('show');
+            document.getElementById('shadowManeira').classList.add('show');
+        });
+
+        // botao flutuante que volta para o topo
+        document.getElementById('backToTop').addEventListener('click', () => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+
+        // fecha o filtro flutuante
+        document.querySelector('.close-filter').addEventListener('click', () => {
+            document.getElementById('filterForm').classList.remove('show');
+            document.getElementById('shadowManeira').classList.remove('show');
         });
     },
 
@@ -517,6 +568,24 @@ const observer = new IntersectionObserver(async (entries) => {
 }, {
     rootMargin: '200px',
 });
+
+const exitObserver = new IntersectionObserver((entries) => {
+    const entry = entries[0];
+
+    if (entry.isIntersecting) {
+        // Lógica para quando o elemento reaparece
+        document.querySelector('.show-hidden-filters-float').classList.remove('show');
+
+    } else {
+        // Lógica para quando o elemento some
+        document.querySelector('.show-hidden-filters-float').classList.add('show');
+
+    }
+}, {
+    threshold: 0,
+});
+
+exitObserver.observe(document.querySelector('.show-hidden-filters'));
 
 observer.observe(document.getElementById('scroll-sentinel'));
 
