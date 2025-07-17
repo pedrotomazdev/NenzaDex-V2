@@ -16,8 +16,8 @@ const populeCatalog = {
         const params = new URLSearchParams(window.location.search);
         const types = params.getAll('types');
         const regions = params.getAll('regions');
-        const habitats = params.getAll('habitat');
-        const abilities = params.getAll('ability');
+        const habitats = params.getAll('habitats');
+        const abilities = params.getAll('abilities');
         return { types, regions, habitats, abilities };
     },
 
@@ -55,10 +55,18 @@ const populeCatalog = {
     },
 
     renderResults: async function (pokemons) {
-        console.log(pokemons)
+        const destination = document.querySelector('.catalog-body .grid-pokemon');
+        destination.innerHTML = '';
+
+        if (!pokemons.length) {
+            document.querySelector('.alert-error').classList.add('show');
+            return;
+        } else {
+            document.querySelector('.alert-error').classList.remove('show');
+        }
+
         for (const data of pokemons) {
             const card = this.createPokemonCard(data);
-            const destination = document.querySelector('.catalog-body .grid-pokemon');
             this.appendToPokedex(card, destination);
             requestAnimationFrame(() => {
                 setTimeout(() => {
@@ -75,6 +83,7 @@ const populeCatalog = {
         card.className = `pokemons-card ${pokemon.types[0]} pb-3`;
         card.setAttribute('href', `/pokemon?id=${pokemonRaw.id}`);
         card.style.order = pokemonRaw.id;
+        const PokeNumber = pokemon.id.toString().padStart(3, '0');
 
         card.innerHTML = `
             <div class="content-card p-relative">
@@ -96,7 +105,7 @@ const populeCatalog = {
                     </div>
                 </div>
                 <div class="body-card">
-                    <div class="poke-id"><span># ${pokemon.id}</span></div>
+                    <div class="poke-id"><span># ${PokeNumber}</span></div>
                     <div class="poke-name"><span>${pokemon.name}</span></div>
                 </div>
             </div>
@@ -112,12 +121,14 @@ const populeCatalog = {
 
     init: async function () {
         const filters = this.getValuesUrl();
+        console.log('filters', filters);
         const results = await this.getPokemonsFiltered(filters);
         this.cachedResults = results;
         await this.renderResults(this.cachedResults.slice(currentOffset, currentOffset + limit));
         currentOffset += limit;
         isInitialized = true;
-    }
+    },
+
 };
 
 const filters = {
@@ -127,6 +138,7 @@ const filters = {
         this.renderTypes();
         this.renderRegions();
         this.submit();
+        this.openMobileFilters();
     },
 
     renderAbilities: async function () {
@@ -141,7 +153,7 @@ const filters = {
         const selectedQueue = [];
         const wrappers = []; // referência pra todos os elementos
 
-        this.renderLists(abilities, 'ability', container, selectedQueue, wrappers, searchInput);
+        this.renderLists(abilities, 'abilities', container, selectedQueue, wrappers, searchInput);
 
 
     },
@@ -186,24 +198,32 @@ const filters = {
         const selectedQueue = [];
         const wrappers = []; // referência pra todos os elementos
 
-        this.renderLists(habitats, 'habitat', container, selectedQueue, wrappers, searchInput);
+        this.renderLists(habitats, 'habitats', container, selectedQueue, wrappers, searchInput);
 
 
 
     },
 
     renderLists: function (data, type, container, selectedQueue, wrappers, searchInput) {
+        const filterApplied = populeCatalog.getValuesUrl()[type];
         data.forEach((name, index) => {
             const id = `${type}-${index}`;
 
             const wrapper = document.createElement('div');
-            wrapper.classList.add('item-option');
+            if (filterApplied && filterApplied.includes(name)) {
+                wrapper.classList.add('item-option', 'selected');
+
+            } else {
+                wrapper.classList.add('item-option');
+
+            }
 
             const input = document.createElement('input');
             input.type = 'checkbox';
             input.name = type;
             input.id = id;
             input.value = name;
+            if (filterApplied && filterApplied.includes(name)) input.checked = true;
 
             const label = document.createElement('label');
             label.setAttribute('for', id);
@@ -242,7 +262,56 @@ const filters = {
         });
 
         this.refineFilters(searchInput, container, wrappers);
+
+        this.renderActiveFilters();
     },
+
+    renderActiveFilters: function () {
+        const container = document.querySelector('.content-applied');
+        const filtersContainer = container.querySelector('.active-filters');
+        filtersContainer.innerHTML = '';
+        const filters = populeCatalog.getValuesUrl(); // Ex: { types: [], regions: [] }
+
+        const isEmpty = Object.values(filters).every(arr => arr.length === 0);
+
+        if (isEmpty) {
+            container.style.display = 'none';
+            return;
+        }
+
+        container.style.display = 'block';
+
+        for (const type in filters) {
+            if (filters[type].length === 0) continue;
+
+            const groupWrapper = document.createElement('div');
+            groupWrapper.className = 'filter-group';
+
+            const title = document.createElement('h4');
+            title.className = 'filter-group-title';
+            title.textContent = type.charAt(0).toUpperCase() + type.slice(1) + ':';
+
+            groupWrapper.appendChild(title);
+
+            filters[type].forEach(value => {
+                const tag = document.createElement('div');
+                tag.className = 'active-filter';
+                tag.textContent = value;
+                tag.dataset.type = type;
+                tag.dataset.value = value;
+
+                tag.addEventListener('click', () => {
+                    populeCatalog.removeFilterFromUrl(type, value);
+                    populeCatalog.update();
+                });
+
+                groupWrapper.appendChild(tag);
+            });
+
+            filtersContainer.appendChild(groupWrapper);
+        }
+    },
+
     refineFilters: function (searchInput, container, wrappers) {
         // 🔍 Filtro ao digitar
         searchInput.addEventListener('input', () => {
@@ -283,7 +352,15 @@ const filters = {
             const url = `${window.location.pathname}?${params.toString()}`;
             window.location.href = url; // força reload — isso já reinicia o estado
         });
-    }
+    },
+
+    openMobileFilters: function () {
+        document.querySelector('.show-hidden-filters h3').addEventListener('click', () => {
+            document.getElementById('filterForm').classList.toggle('show');
+            document.getElementById('shadowManeira').classList.toggle('show');
+
+        });
+    },
 
 
 
@@ -294,31 +371,32 @@ const observer = new IntersectionObserver(async (entries) => {
 
     if (entry.isIntersecting && !isLoading && isInitialized) {
         isLoading = true;
+        document.getElementById('scroll-sentinel').classList.add('loading');
 
         const results = populeCatalog.cachedResults;
 
         if (!results || currentOffset >= results.length) {
+            document.getElementById('scroll-sentinel').classList.remove('loading');
+
             observer.disconnect(); // Para de observar se não há mais nada
+
             return;
         }
 
         const nextPage = results.slice(currentOffset, currentOffset + limit);
-        console.log(`[observer] Carregando de ${currentOffset} até ${currentOffset + limit}`);
 
         await populeCatalog.renderResults(nextPage);
         currentOffset += limit;
 
         isLoading = false;
-    } 
+        document.getElementById('scroll-sentinel').classList.remove('loading');
+    }
+
 }, {
     rootMargin: '200px',
 });
 
 observer.observe(document.getElementById('scroll-sentinel'));
-
-
-
-
 
 document.addEventListener('DOMContentLoaded', () => {
     filters.init();

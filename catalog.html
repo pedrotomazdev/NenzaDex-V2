@@ -19,16 +19,32 @@
 
 <body>
     <div id="include-header"></div>
-
+    <div id="shadowManeira"></div>
     <main class="site-main">
 
         <div class="container">
             <div class="content-catalog">
                 <div class="catalog-header">
                     <h2>Find in Nenzadex</h2>
+                    <div class="content-applied" style="display: none;">
+                        <span>Filters applied:</span>
+                        <div class="active-filters"></div>
+
+                    </div>
+                </div>
+                <div class="show-hidden-filters">
+                    <h3>
+                        Show filters
+                        <i>
+                            <img src="/assets/icons/filter-icon.svg" width="24" height="24" alt="Open filters">
+                        </i>
+                    </h3>
                 </div>
                 <div class="catalog-body">
                     <form class="filter" id="filterForm">
+                        <div class="close-filter">
+                            &times;
+                        </div>
                         <div class="content-filters">
                             <div class="item-filter" data-item="types">
                                 <div class="head-filter">
@@ -95,15 +111,30 @@
                         <div class="grid-pokemon">
                             <!-- Cards serão inseridos via JS aqui -->
                         </div>
+
+                        <div class="alert-error">
+
+                            <h3>No Pokémon match your search!</h3>
+
+                            <p><strong>Try these suggestions to find a Pokémon:</strong></p>
+                            <ul>
+                                <li>
+                                    <p>Reduce the number of search parameters.</p>
+                                </li>
+                                <li>
+                                    <p>Search for only one Pokémon type at a time.</p>
+                                </li>
+                            </ul>
+                        </div>
                         <div id="scroll-sentinel" class="d-flex justify-center align-center">
                             <img src="/assets/icons/load.svg" alt="Carregando..." width="150" height="150" />
                         </div>
                     </div>
 
                 </div>
-                <div class="catalog-footer">
+                <!-- <div class="catalog-footer">
                     <h2>footer</h2>
-                </div>
+                </div> -->
             </div>
         </div>
     </main>
