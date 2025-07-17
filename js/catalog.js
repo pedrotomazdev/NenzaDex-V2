@@ -193,6 +193,8 @@ const populeCatalog = {
         // Reconecta o observer
         const sentinel = document.getElementById('scroll-sentinel');
         if (sentinel) observer.observe(sentinel);
+
+        window.scrollTo({ top: 0, behavior: 'smooth' }); // ajusta o valor conforme o quanto quer descer
     },
 
     removeFilterFromUrl: function (type, value) {
@@ -238,7 +240,9 @@ const filters = {
     renderAbilities: async function () {
         const res = await fetch('https://pokeapi.co/api/v2/ability?limit=100000');
         const data = await res.json();
-        const abilities = data.results.map(a => a.name).sort();
+        const abilities = data.results
+            .map(a => a.name.replace(/-/g, ' '))
+            .sort();
 
         const container = document.getElementById('abilityRadioGroup');
         const searchInput = document.getElementById('abilitySearchInput');

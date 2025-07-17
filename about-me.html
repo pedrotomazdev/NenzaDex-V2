@@ -1,9 +1,8 @@
-<!DOCTYPE html>
 <html lang="pt-br">
 
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pedro Tomaz Rezende Fagundes - Currículo</title>
     <style>
         body {
@@ -16,6 +15,7 @@
 
         .curriculo {
             display: flex;
+            flex-wrap: wrap;
             max-width: 960px;
             margin: 40px auto;
             background-color: white;
@@ -24,7 +24,6 @@
             border-radius: 16px;
             border-top-left-radius: 0;
             overflow: hidden;
-
         }
 
         .lateral-esquerda {
@@ -43,7 +42,12 @@
         .lateral-esquerda a {
             color: #111;
             text-decoration: none;
-            word-break: break-all;
+            word-break: break-word;
+            transition: 0.2s;
+        }
+
+        .lateral-esquerda a:hover {
+            text-decoration: underline;
         }
 
         .foto-perfil {
@@ -55,26 +59,27 @@
             background-color: transparent;
             border-radius: 8px;
             margin-bottom: 20px;
+        }
 
-            img {
-                width: auto;
-                height: 100%;
-                filter: drop-shadow(1px 1px 2px rgba(0, 0, 0, .2));
-            }
+        .foto-perfil img {
+            width: auto;
+            height: 100%;
+            filter: drop-shadow(1px 1px 2px rgba(0, 0, 0, .2));
         }
 
         .conteudo {
             flex: 1;
-            padding: 40px;
+            padding: 5vw;
             box-sizing: border-box;
             background-color: #141414;
             color: #f1f1f1;
+            width: calc(100% - 280px);
         }
-
 
         h1 {
             margin-top: 0;
             font-size: 28px;
+            color: #d2f060;
         }
 
         h2 {
@@ -108,6 +113,20 @@
         ul li {
             margin-bottom: 6px;
         }
+
+        @media (max-width: 768px) {
+            .curriculo {
+                flex-direction: column;
+            }
+
+            .conteudo {
+                width: 100%;
+            }
+
+            .lateral-esquerda {
+                width: 100%;
+            }
+        }
     </style>
 </head>
 
@@ -119,7 +138,7 @@
             </div>
             <div class="dados-contato">
                 <h2>Endereço</h2>
-                <p>Rua Hildebrando Oliva, 197<br />Uberlândia - MG</p>
+                <p>Rua Hildebrando Oliva, 197<br>Uberlândia - MG</p>
 
                 <h2>E-mail</h2>
                 <p>pedrotomazdev@gmail.com</p>
@@ -145,15 +164,14 @@
             <h1>Pedro Tomaz Rezende Fagundes</h1>
 
             <h2>Objetivo</h2>
-            <p>Atuar como Desenvolvedor Web (Front-end, E-commerce, ou Full Stack leve), buscando novos desafios e
-                melhor valorização profissional em projetos significativos.</p>
+            <p>Desenvolvedor Web com foco em e-commerce, especializado em plataformas como Tray e Nuvemshop. Busco
+                aplicar minhas habilidades em projetos robustos e de alta performance.</p>
 
             <h2>Habilidades Técnicas</h2>
             <ul>
                 <li><strong>Plataformas:</strong> Nuvemshop, Tray, Shopify, WordPress</li>
-                <li><strong>Design & Ferramentas:</strong> Figma, Git (básico)</li>
-                <li><strong>Outros:</strong> Integração com APIs REST, design responsivo, otimização de performance
-                    e
+                <li><strong>Design &amp; Ferramentas:</strong> Figma, Git (básico)</li>
+                <li><strong>Outros:</strong> Integração com APIs REST, design responsivo, otimização de performance e
                     acessibilidade</li>
             </ul>
 
@@ -161,23 +179,12 @@
             <h3>Desenvolvedor Web<br><small>Agência R8 Marketing Digital - Uberlândia MG<br>Maio de 2019 – Atual (6
                     anos)</small></h3>
             <ul>
-                <li>Responsável por treinar e orientar novos desenvolvedores da equipe de e-commerce.</li>
-                <li>Gravação de vídeos tutoriais demonstrando os processos e boas práticas no desenvolvimento de
-                    lojas
-                    virtuais.</li>
-                <li>Acompanhamento prático de demandas reais, explicando passo a passo desde a estruturação de temas
-                    até
-                    a finalização de funcionalidades específicas.</li>
-                <li>Atuação como referência técnica da equipe de desenvolvedores.</li>
-                <li>Plataformas como Tray, Nuvemshop e uso leve de Shopify e WordPress.</li>
-                <li>Desenvolvimento completo de sites e e-commerces (front e back-end).</li>
-                <li>Especialista em personalização avançada nas plataformas Tray e Nuvemshop.</li>
-                <li>Implementação de recursos com APIs (provador virtual, compras rápidas, carrinho lateral etc).
-                </li>
-                <li>Criação de temas em Twig, ajustes de layout e correção de bugs.</li>
-                <li>Consumo de APIs REST, integração com gateways de pagamento, frente e ERP.</li>
-                <li>Desenvolvimento de funcionalidades sob demanda para mais de 200 projetos de e-commerce.</li>
-                <li>Mais de 50 lojas virtuais desenvolvidas do zero.</li>
+                <li>Referência técnica da equipe de e-commerce.</li>
+                <li>Criação de temas, correção de bugs e personalizações avançadas.</li>
+                <li>Mais de 200 projetos de e-commerce com funcionalidades sob demanda.</li>
+                <li>Mais de 50 lojas desenvolvidas do zero.</li>
+                <li>Integração com APIs REST, gateways, ERP e recursos customizados.</li>
+                <li>Treinamento e onboarding de novos desenvolvedores.</li>
             </ul>
 
             <h2>Habilidades</h2>
@@ -194,34 +201,24 @@
                 <li>Python</li>
             </ul>
 
-            <h2>Destaques</h2>
-            <ul>
-                <li>Desenvolvimento completo de sites e e-commerces (front e back-end).</li>
-                <li>Especialista em personalização avançada nas plataformas Tray e Nuvemshop.</li>
-                <li>Implementação de recursos com APIs (provador virtual, compras rápidas, carrinho lateral etc).
-                </li>
-                <li>Criação de temas em Twig, ajustes de layout e correção de bugs.</li>
-                <li>Consumo de APIs REST, integração com gateways de pagamento, frente e ERP.</li>
-                <li>Desenvolvimento de funcionalidades sob demanda para mais de 200 projetos de e-commerce.</li>
-                <li>Mais de 50 lojas virtuais desenvolvidas do zero.</li>
-                <li>Responsável por treinar e orientar novos desenvolvedores da equipe de e-commerce.</li>
-            </ul>
-
             <h2>Portfólio</h2>
             <ul>
-                <li>lojapretazilli.com.br</li>
-                <li>genitorlaser.com.br</li>
-                <li>puriflora.com.br</li>
-                <li>minimimos.com.br</li>
-                <li>amarebeachwear.com.br</li>
-                <li>vivuadesign.com.br</li>
-                <li>pensandolmds.com.br</li>
-                <li>sinpataco.com.br</li>
-                <li>laladuboi.com.br</li>
-                <li>pedrotomazdev.github.io</li>
+                <li><a href="https://lojapretazilli.com.br" target="_blank">lojapretazilli.com.br</a></li>
+                <li><a href="https://genitorlaser.com.br" target="_blank">genitorlaser.com.br</a></li>
+                <li><a href="https://puriflora.com.br" target="_blank">puriflora.com.br</a></li>
+                <li><a href="https://minimimos.com.br" target="_blank">minimimos.com.br</a></li>
+                <li><a href="https://amarebeachwear.com.br" target="_blank">amarebeachwear.com.br</a></li>
+                <li><a href="https://vivuadesign.com.br" target="_blank">vivuadesign.com.br</a></li>
+                <li><a href="https://pensandolmds.com.br" target="_blank">pensandolmds.com.br</a></li>
+                <li><a href="https://sinpataco.com.br" target="_blank">sinpataco.com.br</a></li>
+                <li><a href="https://laladuboi.com.br" target="_blank">laladuboi.com.br</a></li>
+                <li><a href="https://pedrotomazdev.github.io" target="_blank">pedrotomazdev.github.io</a></li>
             </ul>
         </section>
     </main>
+
+
+
 </body>
 
 </html>
