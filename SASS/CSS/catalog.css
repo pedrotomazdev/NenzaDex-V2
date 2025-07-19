@@ -627,6 +627,7 @@ html:root {
   --filter-hover: invert(1);
   --icon-audio: url(../../assets/icons/audio-dark-icon.svg);
   --shader: rgba(255, 255, 255, 0.5);
+  --shader-hover: rgba(0, 0, 0, 0.5);
 }
 html.dark-mode {
   --bg-color: #2a2a2a;
@@ -641,6 +642,7 @@ html.dark-mode {
   --filter-hover: invert(0);
   --icon-audio: url(../../assets/icons/audio-white-icon.svg);
   --shader: rgba(0, 0, 0, 0.5);
+  --shader-hover: rgba(255, 255, 255, 0.5);
 }
 
 body {
@@ -705,12 +707,26 @@ body::after {
   width: 55px;
   height: 55px;
 }
+@media (max-width: 768px) {
+  .team-poke .pokemon-team i {
+    width: 45px;
+    height: 45px;
+  }
+}
 .team-poke .pokemon-team i img.ball-icon {
   position: absolute;
   width: 25px;
   height: 25px;
   top: -4px;
   right: -4px;
+}
+@media (max-width: 768px) {
+  .team-poke .pokemon-team i img.ball-icon {
+    width: 20px;
+    height: 20px;
+    top: -3px;
+    right: -3px;
+  }
 }
 .team-poke .pokemon-team i img.pokemon-icon {
   width: 100%;
@@ -1122,6 +1138,9 @@ body.type-flying {
   cursor: pointer;
   -webkit-transition: all 0.2s ease;
   transition: all 0.2s ease;
+}
+.float-navigation nav ul.main .item-menu .content-item-menu:hover {
+  background: var(--shader-hover);
 }
 @media (max-width: 567px) {
   .float-navigation nav ul.main .item-menu .content-item-menu {

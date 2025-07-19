@@ -12,6 +12,8 @@ html {
         --filter-hover: invert(1);
         --icon-audio: url(../../assets/icons/audio-dark-icon.svg);
         --shader: rgba(255, 255, 255, 0.5);
+        --shader-hover: rgba(0, 0, 0, 0.5);
+
     }
 
     &.dark-mode {
@@ -27,6 +29,8 @@ html {
         --filter-hover: invert(0);
         --icon-audio: url(../../assets/icons/audio-white-icon.svg);
         --shader: rgba(0, 0, 0, 0.5);
+        --shader-hover: rgba(255, 255, 255, 0.5);
+
 
     }
 }
@@ -108,6 +112,11 @@ body {
             width: 55px;
             height: 55px;
 
+            @media(max-width: 768px) {
+                width: 45px;
+                height: 45px;
+            }
+
             img {
                 &.ball-icon {
                     position: absolute;
@@ -115,6 +124,13 @@ body {
                     height: 25px;
                     top: -4px;
                     right: -4px;
+
+                    @media(max-width: 768px) {
+                        width: 20px;
+                        height: 20px;
+                        top: -3px;
+                        right: -3px;
+                    }
                 }
 
                 &.pokemon-icon {

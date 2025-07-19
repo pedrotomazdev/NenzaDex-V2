@@ -94,6 +94,10 @@
                     cursor: pointer;
                     transition: all 0.2s ease;
 
+                    &:hover {
+                        background: var(--shader-hover);
+                    }
+
                     @media(max-width: 567px) {
                         width: 45px;
                         height: 45px;

@@ -4,75 +4,65 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="Nenzadex v2.0 - Pokédex moderna feita do zero por Pedro Tomaz" />
-    <title>Nenzadex v2</title>
 
-    <link rel="icon" href="/favicon.ico" type="image/svg+xml">
-    <!--<link rel="preload" href="SASS/CSS/main.css.map" as="style">-->
-    <link rel="stylesheet" href="SASS/CSS/main.css">
+    <title>NenzaDex v2 – The Modern Pokédex Alternative</title>
 
+    <meta name="description"
+        content="NenzaDex V2 is the ultimate modern Pokédex alternative. Filter Pokémon by type, region, abilities, colors, and more. A fan-made project by Pedro Tomaz." />
 
+    <link rel="icon" href="/favicon.ico" type="image/svg+xml" />
+    <link rel="stylesheet" href="SASS/CSS/main.css" />
+
+    <!-- Scripts -->
     <script type="module" src="js/api.js" defer></script>
     <script type="module" src="js/dom.js" defer></script>
     <script type="module" src="js/main.js" defer></script>
 
-
-    <!-- Descrição padrão do site -->
-    <meta name="description"
-        content="NenzaDex V2 é a concorrente moderna da Pokédex. Filtros por tipo, região, habilidades e mais. A Pokédex que a Pokédex não quer que você use." />
-
-    <!-- Open Graph (Facebook, LinkedIn, WhatsApp) -->
-    <meta property="og:title" content="NenzaDex V2 – A concorrente da Pokédex" />
+    <!-- Open Graph / Facebook -->
+    <meta property="og:title" content="NenzaDex V2 – The Modern Pokédex Alternative" />
     <meta property="og:description"
-        content="Filtros por tipo, região e habilidades. Moderna, independente, e feita para fãs de verdade." />
+        content="Browse and filter Pokémon by type, region, abilities, and more. A fully modern fan-made Pokédex." />
     <meta property="og:image" content="https://nenza-dex-v2.vercel.app/assets/images/banner_nenzadex.webp" />
     <meta property="og:url" content="https://nenza-dex-v2.vercel.app/" />
     <meta property="og:type" content="website" />
 
-    <!-- Facebook (opcional, mas remove o aviso) -->
+    <!-- Optional Facebook App ID -->
     <meta property="fb:app_id" content="1234567890" />
-    <!-- você pode colocar um ID real se tiver, ou remover se não tiver app -->
 
-    <!-- Twitter (X) -->
+    <!-- Twitter/X -->
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="NenzaDex V2 – A concorrente da Pokédex" />
-    <meta name="twitter:description"
-        content="Filtros por tipo, região e habilidades. Moderna, independente, e feita para fãs de verdade." />
+    <meta name="twitter:title" content="NenzaDex V2 – The Modern Pokédex Alternative" />
+    <meta name="twitter:description" content="Search Pokémon by type, region, and more. Built for fans, by fans." />
     <meta name="twitter:image" content="https://nenza-dex-v2.vercel.app/assets/images/banner_nenzadex.webp" />
 
-
-
+    <!-- Swiper CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
 </head>
 
 <body>
     <div id="include-header"></div>
 
     <div id="shadowManeira"></div>
-    <div class="popup-alert ">
+    <div class="popup-alert">
         <div class="content-message">
             <h3></h3>
             <p></p>
             <button class="success">OK!</button>
         </div>
     </div>
+
     <main class="site-main">
         <div class="team-poke">
-            <div class="content-list">
-
-            </div>
+            <div class="content-list"></div>
         </div>
+
         <section class="select-starter">
             <div class="container">
                 <div class="title-section">
-                    <h2 class=" text-center">
-                        Select your starter
-                    </h2>
+                    <h2 class="text-center">Choose Your Starter</h2>
                 </div>
                 <div class="list-starter">
-
-                    <div class="grid-pokemon">
-
-                    </div>
+                    <div class="grid-pokemon"></div>
                 </div>
             </div>
         </section>
@@ -80,26 +70,23 @@
         <section class="select-team">
             <div class="container">
                 <div class="title-section">
-                    <h2 class=" text-center">
-                        Now, select your team
-                    </h2>
-                    <p class="text-center">You team will stay with you for all jorneys in this site</p>
+                    <h2 class="text-center">Build Your Team</h2>
+                    <p class="text-center">Your team will accompany you throughout your journey on this site.</p>
+                </div>
+                <div class="content-search">
+                    <input type="text" class="input-search" id="teamSearchInput" placeholder="Search by name..." />
                 </div>
                 <div class="list-team">
-                    <input type="text" class="input-search" id="teamSearchInput"
-                        placeholder="Find by name or number..." />
-                    <div class="grid-pokemon">
-
-                    </div>
+                    <div class="grid-pokemon"></div>
                 </div>
             </div>
         </section>
+
         <section class="regions">
             <div class="container">
                 <div class="title-section">
-                    <h2 class=" text-center">
-                        Regions
-                    </h2>
+                    <h2 class="text-center">Explore the Regions</h2>
+                    <p class="text-center">Discover all regions and the Pokémon that inhabit them.</p>
                 </div>
                 <ul class="list-regions swiper d-flex flex-wrap gap-2 justify-center align-center">
                     <div class="swiper-wrapper">
@@ -205,15 +192,12 @@
                     </div>
                 </ul>
             </div>
-
         </section>
 
-        <section class="types">
+        <section class="types" style="display: none;">
             <div class="container">
                 <div class="title-section">
-                    <h2 class=" text-center">
-                        Types
-                    </h2>
+                    <h2 class="text-center">Filter by Type</h2>
                 </div>
                 <ul class="list-types">
                     <li>
@@ -314,48 +298,34 @@
         <section class="pokemon-of-day">
             <div class="container">
                 <div class="title-section">
-                    <h2 class=" text-center">
-                        Pokémon of the day
-                    </h2>
+                    <h2 class="text-center">Pokémon of the Day</h2>
                 </div>
                 <div class="content-all">
-                    <div class="grid-pokemon">
-                        <!-- Cards serão inseridos via JS aqui -->
-                    </div>
+                    <div class="grid-pokemon"></div>
                 </div>
             </div>
         </section>
+
         <section id="all_poke">
             <div class="container">
                 <div class="title-section">
-                    <h2 class=" text-center">
-                        Pokémon
-                    </h2>
+                    <h2 class="text-center">Explore all Pokémon</h2>
                 </div>
                 <div class="content-all">
-
-                    <div class="grid-pokemon">
-                        <!-- Cards serão inseridos via JS aqui -->
-                    </div>
+                    <div class="grid-pokemon"></div>
                     <div id="scroll-sentinel" class="d-flex justify-center align-center">
-                        <img src="/assets/icons/load.svg" alt="Carregando..." width="150" height="150" />
+                        <img src="/assets/icons/load.svg" alt="Loading..." width="150" height="150" />
                     </div>
                 </div>
             </div>
         </section>
     </main>
+
     <div id="include-footer"></div>
-
-    <script type="module" src="/js/include.js" defer></script>
-
-
-    <!-- Swiper CSS -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
 
     <!-- Swiper JS -->
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
-
-
+    <script type="module" src="/js/include.js" defer></script>
 </body>
 
 </html>
