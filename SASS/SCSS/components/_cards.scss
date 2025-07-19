@@ -1,5 +1,4 @@
 .pokemons-card {
-    margin: 0 4px;
     cursor: pointer;
     opacity: 0;
     transform: translateY(20px);
@@ -59,8 +58,8 @@
         }
 
         .poke-icon {
-            right: -16px;
-            top: -14px;
+            right: -4px;
+            top: 4px;
             z-index: 2;
             overflow: hidden;
 
@@ -227,6 +226,19 @@
                     &:after {
                         opacity: 0;
                     }
+                }
+            }
+        }
+    }
+
+
+    &.shiny {
+        .content-card {
+            .poke-img {
+                background-color: rgba(255, 255, 255, 0.2);
+
+                &::before {
+                    opacity: .5;
                 }
             }
         }

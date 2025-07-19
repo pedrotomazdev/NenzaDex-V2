@@ -10,7 +10,7 @@ html {
         --filter: invert(0);
         --filter-dark-image: invert(0) brightness(1);
         --filter-hover: invert(1);
-        --icon-audio : url(../../assets/icons/audio-dark-icon.svg);
+        --icon-audio: url(../../assets/icons/audio-dark-icon.svg);
         --shader: rgba(255, 255, 255, 0.5);
     }
 
@@ -25,7 +25,7 @@ html {
         --filter: invert(1);
         --filter-dark-image: invert(1) brightness(2);
         --filter-hover: invert(0);
-        --icon-audio : url(../../assets/icons/audio-white-icon.svg);
+        --icon-audio: url(../../assets/icons/audio-white-icon.svg);
         --shader: rgba(0, 0, 0, 0.5);
 
     }
@@ -82,6 +82,149 @@ body {
     // }
 }
 
+
+.team-poke {
+    position: fixed;
+    right: 0;
+    top: 10%;
+    background: var(--bg-glass);
+    border-radius: 6px;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(5px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-right: 0;
+
+    * {
+        // border: 1px solid red;
+    }
+
+    .pokemon-team {
+        border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+
+        i {
+            padding: 5px;
+            display: flex;
+            align-items: center;
+            position: relative;
+            width: 55px;
+            height: 55px;
+
+            img {
+                &.ball-icon {
+                    position: absolute;
+                    width: 25px;
+                    height: 25px;
+                    top: -4px;
+                    right: -4px;
+                }
+
+                &.pokemon-icon {
+                    width: 100%;
+                    height: 100%;
+                    object-fit: contain;
+                }
+            }
+        }
+    }
+
+}
+
+section {
+
+    .title-section {
+        h2 {
+            margin-bottom: 1rem;
+            color: #fff;
+            font-size: 2rem;
+            font-weight: 600;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+        }
+
+        p {
+            color: #fff;
+        }
+    }
+}
+
+#shadowManeira {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1000;
+    background-color: var(--bg-glass);
+    backdrop-filter: blur(5px);
+    display: none;
+
+    &.show {
+        display: block;
+    }
+}
+
+
+.popup-alert {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0.95);
+    opacity: 0;
+    z-index: 1001;
+    max-width: 100%;
+    width: fit-content;
+    padding: 10px 20px;
+    border-radius: 6px;
+    background-color: var(--bg-color);
+    backdrop-filter: blur(5px);
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    color: var(--text-color);
+    text-shadow: 1px 1px 2px #000;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    pointer-events: none; // Impede interação se estiver escondido
+
+    &.show {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1);
+        pointer-events: auto;
+    }
+
+    &.alert {
+        border: 2px solid yellow;
+    }
+
+    &.error {
+        border: 2px solid red;
+    }
+
+    &.success {
+        border: 2px solid yellowgreen;
+    }
+
+    h3,
+    p {
+        margin-top: 0;
+        color: #fff;
+    }
+
+    button {
+        margin-top: 1rem;
+        border-radius: 4px;
+        border: 1px solid rgba(0, 0, 0, 0.2);
+        color: #fff;
+        text-shadow: 1px 1px 2px #000;
+        font-weight: 600;
+        cursor: pointer;
+        font-size: .8rem;
+        padding: 5px 15px;
+
+        &.success {
+            background-color: yellowgreen;
+        }
+    }
+}
 
 @each $type, $color in $typeJustColors {
     body.type-#{$type} {

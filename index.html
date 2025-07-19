@@ -47,76 +47,124 @@
 <body>
     <div id="include-header"></div>
 
+    <div id="shadowManeira"></div>
+    <div class="popup-alert ">
+        <div class="content-message">
+            <h3></h3>
+            <p></p>
+            <button class="success">OK!</button>
+        </div>
+    </div>
     <main class="site-main">
+        <div class="team-poke">
+            <div class="content-list">
+
+            </div>
+        </div>
+        <section class="select-starter">
+            <div class="container">
+                <div class="title-section">
+                    <h2 class=" text-center">
+                        Select your starter
+                    </h2>
+                </div>
+                <div class="list-starter">
+
+                    <div class="grid-pokemon">
+
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="select-team">
+            <div class="container">
+                <div class="title-section">
+                    <h2 class=" text-center">
+                        Now, select your team
+                    </h2>
+                    <p class="text-center">You team will stay with you for all jorneys in this site</p>
+                </div>
+                <div class="list-team">
+                    <input type="text" class="input-search" id="teamSearchInput"
+                        placeholder="Find by name or number..." />
+                    <div class="grid-pokemon">
+
+                    </div>
+                </div>
+            </div>
+        </section>
         <section class="regions">
             <div class="container">
-                <h2 class="title-section text-center">
-                    Regions
-                </h2>
+                <div class="title-section">
+                    <h2 class=" text-center">
+                        Regions
+                    </h2>
+                </div>
                 <ul class="list-regions swiper d-flex flex-wrap gap-2 justify-center align-center">
                     <div class="swiper-wrapper">
                         <li class="swiper-slide">
-                            <button class="region-button" data-region="1" title="Kanto">
+                            <a class="region-button" href="/catalog?regions=1" title="Kanto">
                                 <div class="item-region d-flex justify-center align-center">
                                     <img src="assets/images/regions/kanto.webp" alt="Kanto">
                                 </div>
-                            </button>
+                            </a>
                         </li>
                         <li class="swiper-slide">
-                            <button class="region-button" data-region="2" title="Johto">
+                            <a class="region-button" href="/catalog?regions=2" title="Johto">
                                 <div class="item-region d-flex justify-center align-center">
                                     <img src="assets/images/regions/johto.webp" alt="Johto">
                                 </div>
-                            </button>
+                            </a>
                         </li>
                         <li class="swiper-slide">
-                            <button class="region-button" data-region="3" title="Hoenn">
+                            <a class="region-button" href="/catalog?regions=3" title="Hoenn">
                                 <div class="item-region d-flex justify-center align-center">
                                     <img src="assets/images/regions/hoenn.webp" alt="Hoenn">
                                 </div>
-                            </button>
+                            </a>
                         </li>
                         <li class="swiper-slide">
-                            <button class="region-button" data-region="4" title="Sinnoh">
+                            <a class="region-button" href="/catalog?regions=4" title="Sinnoh">
                                 <div class="item-region d-flex justify-center align-center">
                                     <img src="assets/images/regions/sinnoh.webp" alt="Sinnoh">
                                 </div>
-                            </button>
+                            </a>
                         </li>
                         <li class="swiper-slide">
-                            <button class="region-button" data-region="5" title="Unova">
+                            <a class="region-button" href="/catalog?regions=5" title="Unova">
                                 <div class="item-region d-flex justify-center align-center">
                                     <img src="assets/images/regions/unova.webp" alt="Unova">
                                 </div>
-                            </button>
+                            </a>
                         </li>
                         <li class="swiper-slide">
-                            <button class="region-button" data-region="6" title="Kalos">
+                            <a class="region-button" href="/catalog?regions=6" title="Kalos">
                                 <div class="item-region d-flex justify-center align-center">
                                     <img src="assets/images/regions/kalos.webp" alt="Kalos">
                                 </div>
-                            </button>
+                            </a>
                         </li>
                         <li class="swiper-slide">
-                            <button class="region-button" data-region="7" title="Alola">
+                            <a class="region-button" href="/catalog?regions=7" title="Alola">
                                 <div class="item-region d-flex justify-center align-center">
                                     <img src="assets/images/regions/alola.webp" alt="alola">
                                 </div>
-                            </button>
+                            </a>
                         </li>
                         <li class="swiper-slide">
-                            <button class="region-button" data-region="8" title="Galar">
+                            <a class="region-button" href="/catalog?regions=8" title="Galar">
                                 <div class="item-region d-flex justify-center align-center">
                                     <img src="assets/images/regions/galar.webp" alt="Galar">
                                 </div>
-                            </button>
+                            </a>
                         </li>
                         <li class="swiper-slide">
-                            <button class="region-button" data-region="9" title="Paldea">
+                            <a class="region-button" href="/catalog?regions=10" title="Paldea">
                                 <div class="item-region d-flex justify-center align-center">
                                     <img src="assets/images/regions/paldea.webp" alt="Paldea">
                                 </div>
-                            </button>
+                            </a>
                         </li>
                     </div>
 
@@ -162,9 +210,11 @@
 
         <section class="types">
             <div class="container">
-                <h2 class="title-section text-center">
-                    Types
-                </h2>
+                <div class="title-section">
+                    <h2 class=" text-center">
+                        Types
+                    </h2>
+                </div>
                 <ul class="list-types">
                     <li>
                         <button class="type-btn btn-fire" data-type="10" title="Fogo">
@@ -263,9 +313,11 @@
 
         <section class="pokemon-of-day">
             <div class="container">
-                <h2 class="title-section text-center">
-                    Pokémon of the day
-                </h2>
+                <div class="title-section">
+                    <h2 class=" text-center">
+                        Pokémon of the day
+                    </h2>
+                </div>
                 <div class="content-all">
                     <div class="grid-pokemon">
                         <!-- Cards serão inseridos via JS aqui -->
@@ -275,9 +327,11 @@
         </section>
         <section id="all_poke">
             <div class="container">
-                <h2 class="title-section text-center">
-                    Pokémon
-                </h2>
+                <div class="title-section">
+                    <h2 class=" text-center">
+                        Pokémon
+                    </h2>
+                </div>
                 <div class="content-all">
 
                     <div class="grid-pokemon">

@@ -1,11 +1,5 @@
-import { parsePokemonDataCard, getPokemonSprites, } from './utils/pokemon.js';
+import { parsePokemonDataCard, } from './utils/pokemon.js';
 import { fetchPokemon, getRegionsList, getTypesList } from './api.js';
-
-export function clearPokedex() {
-    document.querySelector('#all_poke .grid-pokemon').innerHTML = '';
-}
-
-
 
 export const cardElement = {
     createPokemonCard: function (pokemonRaw,) {
