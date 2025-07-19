@@ -17,11 +17,13 @@ async function includeHTML(selector, file) {
 (async function initSite() {
     await includeHTML('#include-header', '/partials/header.html');
     await includeHTML('#include-footer', '/partials/footer.html');
-
+        const container = document.querySelector('.team-poke .content-list');
+console.log(container)
     initThemeToggle();
     initMenuToggle();
     globalFunctions.initSearch();
     globalFunctions.initRandom();
+    globalFunctions.loadStoredTeam();
     initHeaderOnScroll();
     window.scrollTo({ top: 0, behavior: 'smooth' });
 })();

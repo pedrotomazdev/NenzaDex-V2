@@ -122,6 +122,30 @@ export const globalFunctions = {
         }
     },
 
+    loadStoredTeam: function () {
+        const container = document.querySelector('.team-poke .content-list');
+        const storedTeam = JSON.parse(localStorage.getItem('pokemonTeam')) || [];
+        
+        storedTeam.forEach(({ icon, id, name, ball }) => {
+            const card = document.createElement('div');
+            card.className = `pokemon-team`;
+            card.setAttribute('data-team', id);
+            const i = document.createElement('i');
+            const imagePoke = document.createElement('img');
+            imagePoke.className = 'pokemon-icon';
+            const imageBall = document.createElement('img');
+            imageBall.className = 'ball-icon';
+            imagePoke.src = icon;
+            imagePoke.alt = name;
+            imageBall.src = ball;
+            imageBall.alt = name;
+
+            i.appendChild(imagePoke);
+            i.appendChild(imageBall);
+            card.appendChild(i);
+            container.appendChild(card);
+        });
+    },
 
 
 

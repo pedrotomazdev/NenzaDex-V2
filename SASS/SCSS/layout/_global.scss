@@ -42,8 +42,13 @@ body {
     color: var(--text-color);
     position: relative;
     overflow-x: hidden;
+    /* Firefox */
+    scrollbar-width: none;
 
-
+    &::-webkit-scrollbar {
+        height: 0px;
+        width: 0px;
+    }
 
     &::before,
     &::after {

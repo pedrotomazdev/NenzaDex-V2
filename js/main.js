@@ -149,36 +149,6 @@ const pokedexCore = {
         localStorage.setItem('pokemonTeam', JSON.stringify(team));
     },
 
-    loadStoredTeam: function () {
-        const container = document.querySelector('.team-poke .content-list');
-        const storedTeam = JSON.parse(localStorage.getItem('pokemonTeam')) || [];
-
-        if (storedTeam.length === 0) {
-            this.generateStarterTeam();
-            return;
-        };
-
-        storedTeam.forEach(({ icon, id, name, ball }) => {
-            const card = document.createElement('div');
-            card.className = `pokemon-team`;
-            card.setAttribute('data-team', id);
-            const i = document.createElement('i');
-            const imagePoke = document.createElement('img');
-            imagePoke.className = 'pokemon-icon';
-            const imageBall = document.createElement('img');
-            imageBall.className = 'ball-icon';
-            imagePoke.src = icon;
-            imagePoke.alt = name;
-            imageBall.src = ball;
-            imageBall.alt = name;
-
-            i.appendChild(imagePoke);
-            i.appendChild(imageBall);
-            card.appendChild(i);
-            container.appendChild(card);
-        });
-    },
-
     appendToPokedex: function (cardElement, destination) {
         if (!destination) return;
         destination.appendChild(cardElement);
@@ -326,6 +296,12 @@ const pokedexCore = {
     },
 
     generateStarterTeam: async function () {
+        const storedTeam = JSON.parse(localStorage.getItem('pokemonTeam')) || [];
+
+        if (storedTeam.length !== 0) {
+            return;
+        };
+
         const startersByGeneration = {
             kanto: ['bulbasaur', 'charmander', 'squirtle'],
             johto: ['chikorita', 'cyndaquil', 'totodile'],
@@ -438,7 +414,7 @@ document.addEventListener('DOMContentLoaded', () => {
     pokedexCore.LoadPokemonOfDay();
     pokedexCore.loadInitialPokemons();
     pokedexCore.searchTeam();
-    pokedexCore.loadStoredTeam();
+    pokedexCore.generateStarterTeam();
 
     themeFunctions.scrollPosition();
     themeFunctions.slides();
