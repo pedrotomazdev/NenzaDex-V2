@@ -125,7 +125,7 @@ export const globalFunctions = {
     loadStoredTeam: function () {
         const container = document.querySelector('.team-poke .content-list');
         const storedTeam = JSON.parse(localStorage.getItem('pokemonTeam')) || [];
-        
+
         storedTeam.forEach(({ icon, id, name, ball }) => {
             const card = document.createElement('div');
             card.className = `pokemon-team`;
@@ -148,6 +148,27 @@ export const globalFunctions = {
     },
 
 
+    popupMessage: async function (title, subtitle, type) {
+        const shadow = document.getElementById('shadowManeira');
+        const popup = document.querySelector('.popup-alert');
+
+        shadow.classList.add('show');
+
+        popup.querySelector('h3').innerHTML = title;
+        popup.querySelector('p').innerHTML = subtitle;
+        popup.classList.add(type);
+        popup.classList.add('show');
+
+        setTimeout(() => {
+            popup.classList.remove('show');
+            shadow.classList.remove('show');
+        }, 5000);
+
+        popup.querySelector('button').addEventListener('click', () => {
+            popup.classList.remove('show');
+            shadow.classList.remove('show');
+        });
+    },
 
 
 }

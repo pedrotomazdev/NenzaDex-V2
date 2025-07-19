@@ -814,7 +814,6 @@ section .title-section p {
 .popup-alert h3,
 .popup-alert p {
   margin-top: 0;
-  color: #fff;
 }
 .popup-alert button {
   margin-top: 1rem;
@@ -1440,6 +1439,9 @@ footer p {
   transition: opacity 0.4s ease, transform 0.4s ease;
   transition: opacity 0.4s ease, transform 0.4s ease, -webkit-transform 0.4s ease;
   color: var(--text-color);
+  background-clip: padding-box;
+  -webkit-filter: drop-shadow(3px 4px 2px rgba(0, 0, 0, 0.2));
+          filter: drop-shadow(3px 4px 2px rgba(0, 0, 0, 0.2));
 }
 .pokemons-card.loading .poke-img {
   -webkit-filter: blur(2px);
@@ -1527,6 +1529,8 @@ footer p {
   position: relative;
   overflow: hidden;
   padding-bottom: 100%;
+  -webkit-box-shadow: inset 0 0 2px 2px rgba(0, 0, 0, 0.2);
+          box-shadow: inset 0 0 2px 2px rgba(0, 0, 0, 0.2);
 }
 .pokemons-card .content-card .poke-img::before {
   content: "";
@@ -1604,6 +1608,9 @@ footer p {
   border-color: transparent;
   margin: 3px;
   margin-bottom: 2px;
+  -webkit-box-shadow: inset 0 0 1px 2px rgba(0, 0, 0, 0.2);
+          box-shadow: inset 0 0 1px 2px rgba(0, 0, 0, 0.2);
+  background-clip: padding-box;
 }
 .pokemons-card .content-card .body-card .poke-id {
   font-size: 0.9rem;

@@ -1,3 +1,4 @@
+import { globalFunctions } from "./dom.js";
 
 
 
@@ -111,7 +112,7 @@ const pokedexCore = {
             const title = 'Your team is complete \u{2714}\u{FE0F}';
             const message = 'You can only have 6 Pokemons in your team. </br> Remove a pokemon from your team and try again.';
             const type = 'success'
-            themeFunctions.popupMessage(title, message, type);
+            globalFunctions.popupMessage(title, message, type);
             return;
         }
 
@@ -120,7 +121,7 @@ const pokedexCore = {
             const title = 'This Pokémon is already on your team';
             const message = "You can't " + name + " because it's already on your team.";
             const type = 'error'
-            themeFunctions.popupMessage(title, message, type);
+            globalFunctions.popupMessage(title, message, type);
             return;
         }
 
@@ -342,27 +343,6 @@ const pokedexCore = {
 }
 
 export const themeFunctions = {
-    popupMessage: function (title, subtitle, type) {
-        const shadow = document.getElementById('shadowManeira');
-        const popup = document.querySelector('.popup-alert');
-
-        shadow.classList.add('show');
-
-        popup.querySelector('h3').innerHTML = title;
-        popup.querySelector('p').innerHTML = subtitle;
-        popup.classList.add(type);
-        popup.classList.add('show');
-
-        setTimeout(() => {
-            popup.classList.remove('show');
-            shadow.classList.remove('show');
-        }, 5000);
-
-        popup.querySelector('button').addEventListener('click', () => {
-            popup.classList.remove('show');
-            shadow.classList.remove('show');
-        });
-    },
 
     slides: function () {
         const regionSwiper = new Swiper('.list-regions', {
