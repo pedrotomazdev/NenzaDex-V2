@@ -49,7 +49,7 @@
         height: 100%;
         z-index: -1;
         background-color: var(--bg-glass);
-
+        backdrop-filter: blur(12px) saturate(160%);
     }
 
     .pokemon-change {
@@ -307,7 +307,8 @@
 
 
 
-        @each $type, $color in $typeJustColors {
+        @each $type,
+        $color in $typeJustColors {
             &.type-#{$type} {
                 .swiper-slide-thumb-active {
                     background: linear-gradient(0deg, $color);
@@ -529,7 +530,8 @@
 
             }
 
-            @each $type, $color in $mainColorTypes {
+            @each $type,
+            $color in $mainColorTypes {
                 .poke-type-item.#{$type} {
                     background-color: $color;
                 }
@@ -739,7 +741,8 @@
         }
     }
 
-    @each $type, $color in $mainColorTypes {
+    @each $type,
+    $color in $mainColorTypes {
         &.type-#{$type} {
 
             .selections {

@@ -1,5 +1,6 @@
 import {
-    globalFunctions
+    globalFunctions,
+    cardElement,
 } from "./dom.js";
 
 
@@ -25,77 +26,6 @@ function isShiny(probability = 1 / 10) {
 
 const pokedexCore = {
 
-    createPokemonCard: function (pokemon, isShiny, typeContent, starter) {
-        let card;
-        if (typeContent === 'div') {
-            card = document.createElement('div');
-            card.setAttribute('data-id', pokemon.id);
-            if (starter) {
-                card.setAttribute('data-starter', 'true');
-            }
-
-            card.addEventListener('click', (e) => {
-                e.preventDefault();
-
-                if (card.dataset.starter) {
-                    document.querySelector('.select-starter').classList.remove('show');
-                };
-
-                const sprite = isShiny ?
-                    pokemon.sprites.animated_shiny || pokemon.sprites.animated || pokemon.sprites.icon_shiny :
-                    pokemon.sprites.animated || pokemon.sprites.icon;
-
-                globalFunctions.addPokemonTeam(sprite, pokemon.id, pokemon.name, pokemon.sprites.ball_icon);
-            });
-        } else {
-            card = document.createElement('a');
-            card.setAttribute('href', `/pokemon?id=${pokemon.id}`);
-        }
-        card.className = `pokemons-card ${isShiny ? 'shiny' : ''} ${pokemon.types[0]}`;
-        card.style.order = pokemon.id;
-        const PokeNumber = pokemon.id.toString().padStart(3, '0');
-
-        card.innerHTML = `
-            <div class="content-card p-relative">
-                <div class="poke-type d-flex p-absolute">
-                    <i class="energy d-flex justify-center align-center icon-${pokemon.types[0]}">
-                    <img src="/assets/icons/${pokemon.types[0]}-icon.webp" alt="${pokemon.types[0]}">
-                    </i>
-                    ${pokemon.types[1] ? `
-                    <i class="energy d-flex justify-center align-center icon-${pokemon.types[1]}">
-                    <img src="/assets/icons/${pokemon.types[1]}-icon.webp" alt="${pokemon.types[1]}">
-                    </i>` : ''}
-                </div>
-                <div class="poke-icon d-flex justify-center align-center p-absolute">
-                    ${pokemon.sprites.icon !== null ? `
-                    <img src="${pokemon.sprites.icon}" width="68" height="56"  onerror="this.style.display='none'"  class="p-absolute" alt="${pokemon.name}">
-                    `: ''}
-                </div>
-                <div class="poke-img d-flex justify-center align-center ${pokemon.types[0]}">
-                    <div class="content-pokemon-image">
-                    ${isShiny ?
-                `<img width="200" height="200" src="${pokemon.sprites.oficial_shiny !== null ? pokemon.sprites.oficial_shiny : '../assets/icons/pokeball-icon.webp'}" class="primaria" alt="${pokemon.name}">`
-                :
-                `<img width="200" height="200" src="${pokemon.sprites.oficial !== null ? pokemon.sprites.oficial : '../assets/icons/pokeball-icon.webp'}" class="primaria" alt="${pokemon.name}">`
-            }
-                    </div>
-                </div>
-                <div class="body-card">
-                    <div class="poke-id"><span># ${PokeNumber}</span></div>
-                    <div class="poke-name"><span>${pokemon.name}</span></div>
-                </div>
-            </div>
-        `;
-
-        return card;
-    },
-
-
-    appendToPokedex: function (cardElement, destination) {
-        if (!destination) return;
-        destination.appendChild(cardElement);
-    },
-
     // carrega os primeiros pokemon
     loadInitialPokemons: async function () {
         const limit = initialLimit;
@@ -116,9 +46,9 @@ const pokedexCore = {
 
             paginated.forEach((data, i) => {
                 if (data) {
-                    const card = this.createPokemonCard(data);
+                    const card = cardElement.createPokemonCard(data);
                     const destination = document.querySelector('#all_poke .grid-pokemon');
-                    this.appendToPokedex(card, destination);
+                    cardElement.appendToPokedex(card, destination);
                     requestAnimationFrame(() => {
                         setTimeout(() => {
                             card.classList.add('show');
@@ -166,9 +96,9 @@ const pokedexCore = {
         const data = await globalFunctions.loadFullPokedex();
         const filtered = data.filter(pokemon => pokemonlist.includes(pokemon.id));
         for (const pokemon of filtered) {
-            const card = this.createPokemonCard(pokemon);
+            const card = cardElement.createPokemonCard(pokemon);
             const destination = document.querySelector('.pokemon-of-day .grid-pokemon');
-            this.appendToPokedex(card, destination);
+            cardElement.appendToPokedex(card, destination);
             requestAnimationFrame(() => {
                 setTimeout(() => {
                     card.classList.add('show');
@@ -201,8 +131,8 @@ const pokedexCore = {
                 const matches = fullPokedex.filter(p => p.name.toLowerCase().startsWith(search)).slice(0, 10);
 
                 matches.forEach(pokemon => {
-                    const card = this.createPokemonCard(pokemon, isShiny(), 'div', '');
-                    this.appendToPokedex(card, destination);
+                    const card = cardElement.createPokemonCard(pokemon, isShiny(), 'div', '');
+                    cardElement.appendToPokedex(card, destination);
                     requestAnimationFrame(() => {
                         setTimeout(() => {
                             card.classList.add('show');
@@ -217,8 +147,8 @@ const pokedexCore = {
                 const paginated = pokemons.slice(0, 10);
                 paginated.forEach((data, i) => {
                     if (data) {
-                        const card = pokedexCore.createPokemonCard(data, isShiny(), 'div', '');
-                        pokedexCore.appendToPokedex(card, destination);
+                        const card = cardElement.createPokemonCard(data, isShiny(), 'div', '');
+                        cardElement.appendToPokedex(card, destination);
                         requestAnimationFrame(() => {
                             setTimeout(() => {
                                 card.classList.add('show');
@@ -271,8 +201,8 @@ const pokedexCore = {
 
 
         starterObjects.forEach(pokemon => {
-            const card = this.createPokemonCard(pokemon, isShiny(), 'div', 'starter');
-            this.appendToPokedex(card, destination);
+            const card = cardElement.createPokemonCard(pokemon, isShiny(), 'div', 'starter');
+            cardElement.appendToPokedex(card, destination);
             requestAnimationFrame(() => {
                 setTimeout(() => {
                     card.classList.add('show');

@@ -88,7 +88,7 @@ export function deleteStoredTeam(poke) {
 }
 
 export function initContextMenuEvents() {
-    const contextMenu = document.getElementById("context-menu");
+    const contextMenu = document.getElementById("context-menu-team");
 
     contextMenu.querySelector(".close-this").addEventListener("click", () => {
         contextMenu.style.display = "none";
@@ -126,7 +126,7 @@ export function attachContextMenu(card) {
         e.preventDefault();
         console.log("Click no card", card);
 
-        const contextMenu = document.getElementById("context-menu");
+        const contextMenu = document.getElementById("context-menu-team");
         const rect = card.getBoundingClientRect();
         const menuWidth = 160;
         const menuHeight = 140;
