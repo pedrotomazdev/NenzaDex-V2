@@ -1827,6 +1827,7 @@ footer p {
 .pokemons-card.shiny .content-card .poke-img::before {
   background-image: url(../../assets/images/background/bg-animated-card.webp);
   background-color: transparent;
+  opacity: 0.5;
 }
 .pokemons-card.shiny .content-card .poke-img .content-pokemon-image:after {
   display: none;
