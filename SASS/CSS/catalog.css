@@ -1370,10 +1370,10 @@ body.type-flying {
   border: none;
   border-radius: 8px;
   font-size: 0.875rem;
-  background: var(--border-color);
+  background: var(--bg-color);
   outline: none;
   width: 100%;
-  color: var(--bg-color);
+  color: var(--text-color);
 }
 .float-navigation nav ul.main .item-menu .sub-item .content-sub-item .search-form button {
   background: transparent;

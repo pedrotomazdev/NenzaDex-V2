@@ -1,6 +1,5 @@
 import {
     globalFunctions,
-    cardElement,
 } from "./dom.js";
 
 
@@ -10,10 +9,6 @@ import {
 let initialOffset = 0;
 let initialLimit = 10;
 let isLoadingInitial = false;
-
-let findinitialOffset = 0;
-let findinitialLimit = 10;
-let findisLoadingInitial = false;
 
 
 //função pra determinar se um pokemon é shiny
@@ -46,9 +41,9 @@ const pokedexCore = {
 
             paginated.forEach((data, i) => {
                 if (data) {
-                    const card = cardElement.createPokemonCard(data);
+                    const card = globalFunctions.cards.createPokemonCard(data);
                     const destination = document.querySelector('#all_poke .grid-pokemon');
-                    cardElement.appendToPokedex(card, destination);
+                   globalFunctions.cards.appendToPokedex(card, destination);
                     requestAnimationFrame(() => {
                         setTimeout(() => {
                             card.classList.add('show');
@@ -96,9 +91,9 @@ const pokedexCore = {
         const data = await globalFunctions.loadFullPokedex();
         const filtered = data.filter(pokemon => pokemonlist.includes(pokemon.id));
         for (const pokemon of filtered) {
-            const card = cardElement.createPokemonCard(pokemon);
+            const card = globalFunctions.cards.createPokemonCard(pokemon);
             const destination = document.querySelector('.pokemon-of-day .grid-pokemon');
-            cardElement.appendToPokedex(card, destination);
+           globalFunctions.cards.appendToPokedex(card, destination);
             requestAnimationFrame(() => {
                 setTimeout(() => {
                     card.classList.add('show');
@@ -131,8 +126,8 @@ const pokedexCore = {
                 const matches = fullPokedex.filter(p => p.name.toLowerCase().startsWith(search)).slice(0, 10);
 
                 matches.forEach(pokemon => {
-                    const card = cardElement.createPokemonCard(pokemon, isShiny(), 'div', '');
-                    cardElement.appendToPokedex(card, destination);
+                    const card = globalFunctions.cards.createPokemonCard(pokemon, isShiny(), 'div', '');
+                   globalFunctions.cards.appendToPokedex(card, destination);
                     requestAnimationFrame(() => {
                         setTimeout(() => {
                             card.classList.add('show');
@@ -147,8 +142,8 @@ const pokedexCore = {
                 const paginated = pokemons.slice(0, 10);
                 paginated.forEach((data, i) => {
                     if (data) {
-                        const card = cardElement.createPokemonCard(data, isShiny(), 'div', '');
-                        cardElement.appendToPokedex(card, destination);
+                        const card = globalFunctions.cards.createPokemonCard(data, isShiny(), 'div', '');
+                       globalFunctions.cards.appendToPokedex(card, destination);
                         requestAnimationFrame(() => {
                             setTimeout(() => {
                                 card.classList.add('show');
@@ -201,8 +196,8 @@ const pokedexCore = {
 
 
         starterObjects.forEach(pokemon => {
-            const card = cardElement.createPokemonCard(pokemon, isShiny(), 'div', 'starter');
-            cardElement.appendToPokedex(card, destination);
+            const card = globalFunctions.cards.createPokemonCard(pokemon, isShiny(), 'div', 'starter');
+           globalFunctions.cards.appendToPokedex(card, destination);
             requestAnimationFrame(() => {
                 setTimeout(() => {
                     card.classList.add('show');
