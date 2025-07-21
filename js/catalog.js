@@ -80,9 +80,7 @@ const populeCatalog = {
         }
 
         if (colors.length > 0) {
-            console.log(colors);
             results = results.filter(p => colors.includes(p.species.color));
-            console.log(results);
         }
 
 
@@ -210,7 +208,6 @@ const populeCatalog = {
 
     removeFilterFromUrl: function (type, value) {
 
-        console.log(type, value);
         const url = new URL(window.location);
         const params = url.searchParams;
 
@@ -227,7 +224,6 @@ const populeCatalog = {
         window.history.replaceState({}, '', `${window.location.pathname}?${params}`);
 
         const newUrl = `${window.location.pathname}?${params.toString()}`;
-        console.log(newUrl)
         // Atualiza a URL no navegador sem recarregar
         history.replaceState(null, '', newUrl);
         // Atualiza os filtros visuais
@@ -322,7 +318,6 @@ const filters = {
         const res = await fetch('https://pokeapi.co/api/v2/pokemon-color?limit=100000');
         const data = await res.json();
         const colors = data.results.map(a => a.name).sort();
-        console.log(colors);
         const container = document.getElementById('colorsRadioGroup');
         const searchInput = document.getElementById('colorsSearchInput');
         container.innerHTML = '';

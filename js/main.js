@@ -1,4 +1,6 @@
-import { globalFunctions } from "./dom.js";
+import {
+    globalFunctions
+} from "./dom.js";
 
 
 
@@ -12,31 +14,18 @@ let findinitialOffset = 0;
 let findinitialLimit = 10;
 let findisLoadingInitial = false;
 
-// carrega o full pokedex uma vez somente para 
-// poupar rede e deixar a aplicação mais rápida
-let cachedPokedex = null;
-async function loadFullPokedex() {
-    if (cachedPokedex) return cachedPokedex;
-
-    const res = await fetch('../full-nenzadex.json');
-    cachedPokedex = await res.json();
-    return cachedPokedex;
-}
 
 //função pra determinar se um pokemon é shiny
 function isShiny(probability = 1 / 10) {
     //4096
-    console.log()
     const randomnumber = Math.random()
     const result = randomnumber < probability;
-    console.log(result)
     return result;
 }
 
 const pokedexCore = {
 
     createPokemonCard: function (pokemon, isShiny, typeContent, starter) {
-        console.log('typeContent: ', typeContent)
         let card;
         if (typeContent === 'div') {
             card = document.createElement('div');
@@ -52,11 +41,11 @@ const pokedexCore = {
                     document.querySelector('.select-starter').classList.remove('show');
                 };
 
-                const sprite = isShiny
-                    ? pokemon.sprites.animated_shiny || pokemon.sprites.animated || pokemon.sprites.icon_shiny
-                    : pokemon.sprites.animated || pokemon.sprites.icon;
+                const sprite = isShiny ?
+                    pokemon.sprites.animated_shiny || pokemon.sprites.animated || pokemon.sprites.icon_shiny :
+                    pokemon.sprites.animated || pokemon.sprites.icon;
 
-                this.addPokemonTeam(sprite, pokemon.id, pokemon.name, pokemon.sprites.ball_icon);
+                globalFunctions.addPokemonTeam(sprite, pokemon.id, pokemon.name, pokemon.sprites.ball_icon);
             });
         } else {
             card = document.createElement('a');
@@ -101,54 +90,6 @@ const pokedexCore = {
         return card;
     },
 
-    addPokemonTeam: function (icon, id, name, ball) {
-        const container = document.querySelector('.team-poke .content-list');
-
-        // Recupera o time atual do localStorage ou inicializa um array vazio
-        const team = JSON.parse(localStorage.getItem('pokemonTeam')) || [];
-
-        // Verifica se já tem 6
-        if (team.length >= 6) {
-            const title = 'Your team is complete \u{2714}\u{FE0F}';
-            const message = 'You can only have 6 Pokemons in your team. </br> Remove a pokemon from your team and try again.';
-            const type = 'success'
-            globalFunctions.popupMessage(title, message, type);
-            return;
-        }
-
-        // Verifica se já existe esse pokémon no time
-        if (team.find(p => p.id === id)) {
-            const title = 'This Pokémon is already on your team';
-            const message = "You can't " + name + " because it's already on your team.";
-            const type = 'error'
-            globalFunctions.popupMessage(title, message, type);
-            return;
-        }
-
-        // Adiciona à UI
-        const card = document.createElement('div');
-        card.className = `pokemon-team`;
-        card.setAttribute('data-team', id);
-
-        const i = document.createElement('i');
-        const imagePoke = document.createElement('img');
-        imagePoke.className = 'pokemon-icon';
-        const imageBall = document.createElement('img');
-        imageBall.className = 'ball-icon';
-        imagePoke.src = icon;
-        imagePoke.alt = name;
-        imageBall.src = ball;
-        imageBall.alt = name;
-
-        i.appendChild(imagePoke);
-        i.appendChild(imageBall);
-        card.appendChild(i);
-        container.appendChild(card);
-
-        // Atualiza o time no localStorage
-        team.push({ icon, id, name, ball });
-        localStorage.setItem('pokemonTeam', JSON.stringify(team));
-    },
 
     appendToPokedex: function (cardElement, destination) {
         if (!destination) return;
@@ -161,7 +102,7 @@ const pokedexCore = {
         const offset = initialOffset;
 
         try {
-            const fullPokedex = await loadFullPokedex();
+            const fullPokedex = await globalFunctions.loadFullPokedex();
             const paginated = fullPokedex.slice(offset, offset + limit);
 
             if (paginated.length === 0) {
@@ -222,7 +163,7 @@ const pokedexCore = {
         }
 
         const pokemonlist = Array.from(numeros);
-        const data = await loadFullPokedex();
+        const data = await globalFunctions.loadFullPokedex();
         const filtered = data.filter(pokemon => pokemonlist.includes(pokemon.id));
         for (const pokemon of filtered) {
             const card = this.createPokemonCard(pokemon);
@@ -240,7 +181,7 @@ const pokedexCore = {
         const searchInput = document.getElementById('teamSearchInput');
 
         try {
-            const fullPokedex = await loadFullPokedex();
+            const fullPokedex = await globalFunctions.loadFullPokedex();
             const destination = document.querySelector('.list-team .grid-pokemon');
 
             // Escuta o input
@@ -274,7 +215,6 @@ const pokedexCore = {
 
             function populateTeam(pokemons) {
                 const paginated = pokemons.slice(0, 10);
-                console.log(paginated);
                 paginated.forEach((data, i) => {
                     if (data) {
                         const card = pokedexCore.createPokemonCard(data, isShiny(), 'div', '');
@@ -319,7 +259,7 @@ const pokedexCore = {
         const destination = container.querySelector('.list-starter .grid-pokemon');
         container.classList.add('show');
 
-        const fullPokedex = await loadFullPokedex();
+        const fullPokedex = await globalFunctions.loadFullPokedex();
 
         const generations = Object.keys(startersByGeneration);
         const randomGen = generations[Math.floor(Math.random() * generations.length)];
@@ -399,4 +339,3 @@ document.addEventListener('DOMContentLoaded', () => {
     themeFunctions.scrollPosition();
     themeFunctions.slides();
 });
-
