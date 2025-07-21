@@ -1814,6 +1814,8 @@ footer p {
   }
   .pokemons-card .content-card .poke-img::before {
     opacity: 0.5;
+    background-image: none;
+    background-color: rgba(0, 0, 0, 0.4);
   }
   .pokemons-card .content-card .poke-img .content-pokemon-image:after {
     opacity: 0;
@@ -1823,7 +1825,11 @@ footer p {
   background-color: rgba(255, 255, 255, 0.2);
 }
 .pokemons-card.shiny .content-card .poke-img::before {
-  opacity: 0.5;
+  background-image: url(../../assets/images/background/bg-animated-card.webp);
+  background-color: transparent;
+}
+.pokemons-card.shiny .content-card .poke-img .content-pokemon-image:after {
+  display: none;
 }
 
 .pokemons-card.grass .content-card {

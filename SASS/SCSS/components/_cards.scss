@@ -98,7 +98,7 @@
             position: relative;
             overflow: hidden;
             padding-bottom: 100%;
-            box-shadow: inset 0px 1px 3px 2px  rgba(0,0,0,0.6);
+            box-shadow: inset 0px 1px 3px 2px rgba(0, 0, 0, 0.6);
 
             &::before {
                 content: '';
@@ -170,7 +170,7 @@
             margin: 3px;
             margin-bottom: 2px;
             background-clip: padding-box;
-            box-shadow: inset 0px 1px 3px 2px  rgba(0,0,0,0.2);
+            box-shadow: inset 0px 1px 3px 2px rgba(0, 0, 0, 0.2);
 
             .poke-id {
                 font-size: 0.9rem;
@@ -224,6 +224,8 @@
 
                 &::before {
                     opacity: .5;
+                    background-image: none;
+                    background-color: rgba(0, 0, 0, 0.4);
                 }
 
                 .content-pokemon-image {
@@ -243,7 +245,15 @@
                 background-color: rgba(255, 255, 255, 0.2);
 
                 &::before {
-                    opacity: .5;
+                    background-image: url(../../assets/images/background/bg-animated-card.webp);
+                    background-color: transparent;
+                }
+
+                .content-pokemon-image {
+
+                    &:after {
+                        display: none;
+                    }
                 }
             }
         }
@@ -251,7 +261,8 @@
 
 }
 
-@each $type, $color in $typeColors {
+@each $type,
+$color in $typeColors {
     .pokemons-card.#{$type} {
         .content-card {
             background: $color;
