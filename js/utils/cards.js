@@ -1,6 +1,12 @@
+import {
+    addPokemonTeam
+} from "./team.js";
+
 export function createPokemonCard(pokemon, isShiny, typeContent, starter) {
     let card;
     if (typeContent === 'div') {
+
+
         card = document.createElement('div');
         card.setAttribute('data-id', pokemon.id);
         if (starter) {
@@ -14,12 +20,10 @@ export function createPokemonCard(pokemon, isShiny, typeContent, starter) {
                 document.querySelector('.select-starter').classList.remove('show');
             };
 
-            const sprite = isShiny ?
-                pokemon.sprites.animated_shiny || pokemon.sprites.animated || pokemon.sprites.icon_shiny :
-                pokemon.sprites.animated || pokemon.sprites.icon;
-
-            globalFunctions.addPokemonTeam(sprite, pokemon.id, pokemon.name, pokemon.sprites.ball_icon);
         });
+
+        attachContextMenu(card);
+
     } else {
         card = document.createElement('a');
         card.setAttribute('href', `/pokemon?id=${pokemon.id}`);
@@ -27,6 +31,15 @@ export function createPokemonCard(pokemon, isShiny, typeContent, starter) {
     card.className = `pokemons-card ${isShiny ? 'shiny' : ''} ${pokemon.types[0]}`;
     card.style.order = pokemon.id;
     const PokeNumber = pokemon.id.toString().padStart(3, '0');
+    const sprite = isShiny ?
+        pokemon.sprites.animated_shiny || pokemon.sprites.animated || pokemon.sprites.icon_shiny :
+        pokemon.sprites.animated || pokemon.sprites.icon;
+
+
+    card.setAttribute('data-icon', sprite);
+    card.setAttribute('data-id', Number(pokemon.id));
+    card.setAttribute('data-name', pokemon.name);
+    card.setAttribute('data-ball', pokemon.sprites.ball_icon);
 
     card.innerHTML = `
             <div class="content-card p-relative">
@@ -65,4 +78,66 @@ export function createPokemonCard(pokemon, isShiny, typeContent, starter) {
 export function appendToPokedex(cardElement, destination) {
     if (!destination) return;
     destination.appendChild(cardElement);
+}
+
+
+
+export function initContextMenuEventsCards() {
+    const contextMenu = document.getElementById("context-menu-pokemon");
+    contextMenu.querySelector(".close-this").addEventListener("click", () => {
+        contextMenu.style.display = "none";
+    });
+
+    contextMenu.querySelectorAll("[data-action]").forEach(btn => {
+        btn.addEventListener("click", () => {
+            const action = btn.dataset.action;
+            const card = contextMenu.currentCard;
+
+            if (!action || !card) return;
+            const icon = card.dataset.icon;
+            const id = Number(card.dataset.id);
+            const name = card.dataset.name;
+            const ball = card.dataset.ball;
+
+            switch (action) {
+                case "profile":
+                    window.location.href = `pokemon?id=${card.dataset.id}`;
+                    break;
+                case "add":
+                    addPokemonTeam(icon, id, name, ball);
+                    break;
+                case "favorite":
+                    card.classList.toggle("favorito");
+                    break;
+            }
+
+            contextMenu.style.display = "none";
+        });
+    });
+}
+
+
+export function attachContextMenu(card) {
+    card.addEventListener("click", e => {
+        e.preventDefault();
+
+        const contextMenu = document.getElementById("context-menu-pokemon");
+        const rect = card.getBoundingClientRect();
+        const menuWidth = 160;
+        const menuHeight = 140;
+
+        let posX = rect.left - menuWidth - 45;
+        let posY = rect.top;
+
+        if (posX < 0) posX = rect.right + 10;
+        if (posY + menuHeight > window.innerHeight) {
+            posY = window.innerHeight - menuHeight - 10;
+        }
+
+        contextMenu.style.top = `${posY}px`;
+        contextMenu.style.left = `${posX}px`;
+        contextMenu.style.display = "block";
+
+        contextMenu.currentCard = card;
+    });
 }

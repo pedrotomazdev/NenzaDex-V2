@@ -1,10 +1,18 @@
-import { popupMessage } from "../dom.js";
+import {
+    popupMessage
+} from "../dom.js";
+
 
 export function loadStoredTeam() {
     const container = document.querySelector('.team-poke .content-list');
     const storedTeam = JSON.parse(localStorage.getItem('pokemonTeam')) || [];
 
-    storedTeam.forEach(({ icon, id, name, ball }) => {
+    storedTeam.forEach(({
+        icon,
+        id,
+        name,
+        ball
+    }) => {
         const card = document.createElement('div');
         card.className = `pokemon-team`;
         card.setAttribute('data-team', id);
@@ -75,7 +83,12 @@ export function addPokemonTeam(icon, id, name, ball) {
     container.appendChild(card);
 
     // Atualiza o time no localStorage
-    team.push({ icon, id, name, ball });
+    team.push({
+        icon,
+        id,
+        name,
+        ball
+    });
     localStorage.setItem('pokemonTeam', JSON.stringify(team));
     attachContextMenu(card)
 }
@@ -120,6 +133,7 @@ export function initContextMenuEvents() {
         });
     });
 }
+
 
 export function attachContextMenu(card) {
     card.addEventListener("click", e => {

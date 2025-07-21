@@ -28,7 +28,7 @@ async function includeHTML(selector, file) {
 
     globalFunctions.initHeaderOnScroll();
     globalFunctions.initContextMenuEvents();
-
+    globalFunctions.cards.initContextMenuEventsCards();
     window.scrollTo({ top: 0, behavior: 'smooth' });
 })();
 
