@@ -116,20 +116,23 @@ export function initContextMenuEventsCards() {
     });
 }
 
-
 export function attachContextMenu(card) {
     card.addEventListener("click", e => {
         e.preventDefault();
 
         const contextMenu = document.getElementById("context-menu-pokemon");
-        const rect = card.getBoundingClientRect();
         const menuWidth = 160;
         const menuHeight = 140;
 
-        let posX = rect.left - menuWidth - 45;
-        let posY = rect.top;
+        // Pega a posição do mouse no momento do clique
+        let posX = e.clientX;
+        let posY = e.clientY;
 
-        if (posX < 0) posX = rect.right + 10;
+        // Ajusta se estiver muito perto da borda direita/inferior
+        if (posX + menuWidth > window.innerWidth) {
+            posX = window.innerWidth - menuWidth - 10;
+        }
+
         if (posY + menuHeight > window.innerHeight) {
             posY = window.innerHeight - menuHeight - 10;
         }

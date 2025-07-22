@@ -163,47 +163,72 @@ export async function getForms(formsChain) {
 
 
 
-export async function getTypeEffectiveness(types) {
-    const typeDataList = await Promise.all(
-        types.map(async type => {
-            const res = await fetch(`https://pokeapi.co/api/v2/type/${type}`);
-            const data = await res.json();
-            return data.damage_relations;
-        })
-    );
+export async function getTypeAnalysis(types) {
+    const res = await fetch('../data/types.json');
+    const allTypes = await res.json();
 
-    const damageMap = {};
+    const typeDataList = types.map(type => {
+        const entry = allTypes.find(t => t.name === type);
+        return entry?.damage_relations;
+    });
+
+    const defMap = {}; // Recebe dano de
+    const offMap = {}; // Causa dano a
 
     typeDataList.forEach(rel => {
+        // DEFENSIVO
         rel.double_damage_from.forEach(t => {
-            damageMap[t.name] = (damageMap[t.name] ?? 1) * 2;
+            defMap[t.name] = (defMap[t.name] ?? 1) * 2;
         });
         rel.half_damage_from.forEach(t => {
-            damageMap[t.name] = (damageMap[t.name] ?? 1) * 0.5;
+            defMap[t.name] = (defMap[t.name] ?? 1) * 0.5;
         });
         rel.no_damage_from.forEach(t => {
-            damageMap[t.name] = 0;
+            defMap[t.name] = 0;
+        });
+
+        // OFENSIVO
+        rel.double_damage_to.forEach(t => {
+            offMap[t.name] = (offMap[t.name] ?? 1) * 2;
+        });
+        rel.half_damage_to.forEach(t => {
+            offMap[t.name] = (offMap[t.name] ?? 1) * 0.5;
+        });
+        rel.no_damage_to.forEach(t => {
+            offMap[t.name] = 0;
         });
     });
 
+    // DEFENSIVO
     const weaknesses = {};
     const resistant = {};
     const immunity = {};
+    for (const [type, mult] of Object.entries(defMap)) {
+        if (mult === 0) immunity[type] = true;
+        else if (mult > 1) weaknesses[type] = mult;
+        else if (mult < 1) resistant[type] = mult;
+    }
 
-    for (const [type, mult] of Object.entries(damageMap)) {
-        if (mult === 0) {
-            immunity[type] = true;
-        } else if (mult > 1) {
-            weaknesses[type] = mult;
-        } else if (mult < 1) {
-            resistant[type] = mult;
-        }
+    // OFENSIVO
+    const strongAgainst = {};
+    const weakAgainst = {};
+    const noEffect = {};
+    for (const [type, mult] of Object.entries(offMap)) {
+        if (mult === 0) noEffect[type] = true;
+        else if (mult > 1) strongAgainst[type] = mult;
+        else if (mult < 1) weakAgainst[type] = mult;
     }
 
     return {
-        weaknesses,
-        resistant,
-        immunity
+        defense: {
+            weaknesses,
+            resistant,
+            immunity
+        },
+        offense: {
+            strongAgainst,
+            weakAgainst,
+            noEffect
+        }
     };
 }
-

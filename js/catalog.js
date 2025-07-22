@@ -55,7 +55,7 @@ const populeCatalog = {
 
         // Se não carregou ainda, busca o JSON
         if (!fullPokedex.length) {
-            const res = await fetch('../full-nenzadex.json');
+            const res = await fetch('../data/full-nenzadex.json');
             fullPokedex = await res.json();
         }
 

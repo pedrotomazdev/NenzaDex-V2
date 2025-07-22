@@ -55,7 +55,7 @@
                 <div class="title-section">
                     <h2 class="text-center">Choose Your Starter</h2>
                 </div>
-                <div class="list-starter">
+                <div class="list-starter bg-glass">
                     <div class="grid-pokemon"></div>
                 </div>
             </div>
@@ -70,7 +70,7 @@
                 <div class="content-search">
                     <input type="text" class="input-search" id="teamSearchInput" placeholder="Search by name..." />
                 </div>
-                <div class="list-team">
+                <div class="list-team bg-glass p-relative">
                     <div class="grid-pokemon"></div>
                 </div>
             </div>
@@ -82,109 +82,115 @@
                     <h2 class="text-center">Explore the Regions</h2>
                     <p class="text-center">Discover all regions and the Pokémon that inhabit them.</p>
                 </div>
-                <ul class="list-regions swiper d-flex flex-wrap gap-2 justify-center align-center">
-                    <div class="swiper-wrapper">
-                        <li class="swiper-slide">
-                            <a class="region-button" href="/catalog?regions=1" title="Kanto">
-                                <div class="item-region d-flex justify-center align-center">
-                                    <img src="assets/images/regions/kanto.webp" alt="Kanto">
-                                </div>
-                            </a>
-                        </li>
-                        <li class="swiper-slide">
-                            <a class="region-button" href="/catalog?regions=2" title="Johto">
-                                <div class="item-region d-flex justify-center align-center">
-                                    <img src="assets/images/regions/johto.webp" alt="Johto">
-                                </div>
-                            </a>
-                        </li>
-                        <li class="swiper-slide">
-                            <a class="region-button" href="/catalog?regions=3" title="Hoenn">
-                                <div class="item-region d-flex justify-center align-center">
-                                    <img src="assets/images/regions/hoenn.webp" alt="Hoenn">
-                                </div>
-                            </a>
-                        </li>
-                        <li class="swiper-slide">
-                            <a class="region-button" href="/catalog?regions=4" title="Sinnoh">
-                                <div class="item-region d-flex justify-center align-center">
-                                    <img src="assets/images/regions/sinnoh.webp" alt="Sinnoh">
-                                </div>
-                            </a>
-                        </li>
-                        <li class="swiper-slide">
-                            <a class="region-button" href="/catalog?regions=5" title="Unova">
-                                <div class="item-region d-flex justify-center align-center">
-                                    <img src="assets/images/regions/unova.webp" alt="Unova">
-                                </div>
-                            </a>
-                        </li>
-                        <li class="swiper-slide">
-                            <a class="region-button" href="/catalog?regions=6" title="Kalos">
-                                <div class="item-region d-flex justify-center align-center">
-                                    <img src="assets/images/regions/kalos.webp" alt="Kalos">
-                                </div>
-                            </a>
-                        </li>
-                        <li class="swiper-slide">
-                            <a class="region-button" href="/catalog?regions=7" title="Alola">
-                                <div class="item-region d-flex justify-center align-center">
-                                    <img src="assets/images/regions/alola.webp" alt="alola">
-                                </div>
-                            </a>
-                        </li>
-                        <li class="swiper-slide">
-                            <a class="region-button" href="/catalog?regions=8" title="Galar">
-                                <div class="item-region d-flex justify-center align-center">
-                                    <img src="assets/images/regions/galar.webp" alt="Galar">
-                                </div>
-                            </a>
-                        </li>
-                        <li class="swiper-slide">
-                            <a class="region-button" href="/catalog?regions=10" title="Paldea">
-                                <div class="item-region d-flex justify-center align-center">
-                                    <img src="assets/images/regions/paldea.webp" alt="Paldea">
-                                </div>
-                            </a>
-                        </li>
-                    </div>
+                <div class="content-regions bg-glass p-relative">
+                    <ul class="list-regions swiper d-flex flex-wrap gap-2 justify-center align-center">
+                        <div class="swiper-wrapper">
+                            <li class="swiper-slide">
+                                <a class="region-button" href="/catalog?regions=1" title="Kanto">
+                                    <div class="item-region d-flex justify-center align-center">
+                                        <img src="assets/images/regions/kanto.webp" alt="Kanto">
+                                    </div>
+                                </a>
+                            </li>
+                            <li class="swiper-slide">
+                                <a class="region-button" href="/catalog?regions=2" title="Johto">
+                                    <div class="item-region d-flex justify-center align-center">
+                                        <img src="assets/images/regions/johto.webp" alt="Johto">
+                                    </div>
+                                </a>
+                            </li>
+                            <li class="swiper-slide">
+                                <a class="region-button" href="/catalog?regions=3" title="Hoenn">
+                                    <div class="item-region d-flex justify-center align-center">
+                                        <img src="assets/images/regions/hoenn.webp" alt="Hoenn">
+                                    </div>
+                                </a>
+                            </li>
+                            <li class="swiper-slide">
+                                <a class="region-button" href="/catalog?regions=4" title="Sinnoh">
+                                    <div class="item-region d-flex justify-center align-center">
+                                        <img src="assets/images/regions/sinnoh.webp" alt="Sinnoh">
+                                    </div>
+                                </a>
+                            </li>
+                            <li class="swiper-slide">
+                                <a class="region-button" href="/catalog?regions=5" title="Unova">
+                                    <div class="item-region d-flex justify-center align-center">
+                                        <img src="assets/images/regions/unova.webp" alt="Unova">
+                                    </div>
+                                </a>
+                            </li>
+                            <li class="swiper-slide">
+                                <a class="region-button" href="/catalog?regions=6" title="Kalos">
+                                    <div class="item-region d-flex justify-center align-center">
+                                        <img src="assets/images/regions/kalos.webp" alt="Kalos">
+                                    </div>
+                                </a>
+                            </li>
+                            <li class="swiper-slide">
+                                <a class="region-button" href="/catalog?regions=7" title="Alola">
+                                    <div class="item-region d-flex justify-center align-center">
+                                        <img src="assets/images/regions/alola.webp" alt="alola">
+                                    </div>
+                                </a>
+                            </li>
+                            <li class="swiper-slide">
+                                <a class="region-button" href="/catalog?regions=8" title="Galar">
+                                    <div class="item-region d-flex justify-center align-center">
+                                        <img src="assets/images/regions/galar.webp" alt="Galar">
+                                    </div>
+                                </a>
+                            </li>
+                            <li class="swiper-slide">
+                                <a class="region-button" href="/catalog?regions=10" title="Paldea">
+                                    <div class="item-region d-flex justify-center align-center">
+                                        <img src="assets/images/regions/paldea.webp" alt="Paldea">
+                                    </div>
+                                </a>
+                            </li>
+                        </div>
 
-                    <div class="swiper-button-prev">
+                        <div class="swiper-button-prev">
 
-                        <svg xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink"
-                            width="20" height="20" x="0" y="0" viewBox="0 0 512 512"
-                            style="enable-background:new 0 0 512 512" xml:space="preserve" class="">
-                            <g
-                                transform="matrix(6.123233995736766e-17,-1,1,6.123233995736766e-17,-0.000028563605155795813,511.99925036536297)">
-                                <linearGradient id="a" x1="256" x2="256" y1="512" y2="0" gradientUnits="userSpaceOnUse">
-                                    <stop stop-opacity="1" stop-color="#00b59c" offset="0.0019305019305019305">
-                                    </stop>
-                                    <stop stop-opacity="1" stop-color="#a900d6" offset="1"></stop>
-                                </linearGradient>
-                                <path fill="url(#a)"
-                                    d="M126.63 176.718c6.469 5.175 15.91 4.125 21.083-2.343L256 39.012l108.287 135.363c5.191 6.489 14.632 7.502 21.083 2.343 6.469-5.175 7.519-14.615 2.343-21.083l-120-150.005a14.998 14.998 0 0 0-23.426 0l-120 150.005c-5.176 6.469-4.126 15.908 2.343 21.083zm141.083 25.911a15 15 0 0 0-23.426 0l-120 150A14.999 14.999 0 0 0 136 377h45v120c0 8.284 6.716 15 15 15h120c8.284 0 15-6.716 15-15V377h45a15.002 15.002 0 0 0 11.713-24.371zM316 347c-8.284 0-15 6.716-15 15v120h-90V362c0-8.284-6.716-15-15-15h-28.791L256 236.012 344.791 347zm-48.287-241.42a14.998 14.998 0 0 0-23.426 0l-120 150.003c-5.176 6.469-4.126 15.908 2.343 21.083s15.91 4.125 21.083-2.343L256 138.962l108.287 135.361c5.191 6.489 14.632 7.502 21.083 2.343 6.469-5.175 7.519-14.615 2.343-21.083z"
-                                    opacity="1" data-original="url(#a)" class=""></path>
-                            </g>
-                        </svg>
-                    </div>
-                    <div class="swiper-button-next">
-                        <svg xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink"
-                            width="20" height="20" x="0" y="0" viewBox="0 0 512 512"
-                            style="enable-background:new 0 0 512 512" xml:space="preserve" class="">
-                            <g
-                                transform="matrix(6.123233995736766e-17,1,-1,6.123233995736766e-17,511.99925036536297,0.000028563605127374103)">
-                                <linearGradient id="a" x1="256" x2="256" y1="512" y2="0" gradientUnits="userSpaceOnUse">
-                                    <stop stop-opacity="1" stop-color="#00b59c" offset="0.0019305019305019305">
-                                    </stop>
-                                    <stop stop-opacity="1" stop-color="#a900d6" offset="1"></stop>
-                                </linearGradient>
-                                <path fill="url(#a)"
-                                    d="M126.63 176.718c6.469 5.175 15.91 4.125 21.083-2.343L256 39.012l108.287 135.363c5.191 6.489 14.632 7.502 21.083 2.343 6.469-5.175 7.519-14.615 2.343-21.083l-120-150.005a14.998 14.998 0 0 0-23.426 0l-120 150.005c-5.176 6.469-4.126 15.908 2.343 21.083zm141.083 25.911a15 15 0 0 0-23.426 0l-120 150A14.999 14.999 0 0 0 136 377h45v120c0 8.284 6.716 15 15 15h120c8.284 0 15-6.716 15-15V377h45a15.002 15.002 0 0 0 11.713-24.371zM316 347c-8.284 0-15 6.716-15 15v120h-90V362c0-8.284-6.716-15-15-15h-28.791L256 236.012 344.791 347zm-48.287-241.42a14.998 14.998 0 0 0-23.426 0l-120 150.003c-5.176 6.469-4.126 15.908 2.343 21.083s15.91 4.125 21.083-2.343L256 138.962l108.287 135.361c5.191 6.489 14.632 7.502 21.083 2.343 6.469-5.175 7.519-14.615 2.343-21.083z"
-                                    opacity="1" data-original="url(#a)" class=""></path>
-                            </g>
-                        </svg>
-                    </div>
-                </ul>
+                            <svg xmlns="http://www.w3.org/2000/svg" version="1.1"
+                                xmlns:xlink="http://www.w3.org/1999/xlink" width="20" height="20" x="0" y="0"
+                                viewBox="0 0 512 512" style="enable-background:new 0 0 512 512" xml:space="preserve"
+                                class="">
+                                <g
+                                    transform="matrix(6.123233995736766e-17,-1,1,6.123233995736766e-17,-0.000028563605155795813,511.99925036536297)">
+                                    <linearGradient id="a" x1="256" x2="256" y1="512" y2="0"
+                                        gradientUnits="userSpaceOnUse">
+                                        <stop stop-opacity="1" stop-color="#00b59c" offset="0.0019305019305019305">
+                                        </stop>
+                                        <stop stop-opacity="1" stop-color="#a900d6" offset="1"></stop>
+                                    </linearGradient>
+                                    <path fill="url(#a)"
+                                        d="M126.63 176.718c6.469 5.175 15.91 4.125 21.083-2.343L256 39.012l108.287 135.363c5.191 6.489 14.632 7.502 21.083 2.343 6.469-5.175 7.519-14.615 2.343-21.083l-120-150.005a14.998 14.998 0 0 0-23.426 0l-120 150.005c-5.176 6.469-4.126 15.908 2.343 21.083zm141.083 25.911a15 15 0 0 0-23.426 0l-120 150A14.999 14.999 0 0 0 136 377h45v120c0 8.284 6.716 15 15 15h120c8.284 0 15-6.716 15-15V377h45a15.002 15.002 0 0 0 11.713-24.371zM316 347c-8.284 0-15 6.716-15 15v120h-90V362c0-8.284-6.716-15-15-15h-28.791L256 236.012 344.791 347zm-48.287-241.42a14.998 14.998 0 0 0-23.426 0l-120 150.003c-5.176 6.469-4.126 15.908 2.343 21.083s15.91 4.125 21.083-2.343L256 138.962l108.287 135.361c5.191 6.489 14.632 7.502 21.083 2.343 6.469-5.175 7.519-14.615 2.343-21.083z"
+                                        opacity="1" data-original="url(#a)" class=""></path>
+                                </g>
+                            </svg>
+                        </div>
+                        <div class="swiper-button-next">
+                            <svg xmlns="http://www.w3.org/2000/svg" version="1.1"
+                                xmlns:xlink="http://www.w3.org/1999/xlink" width="20" height="20" x="0" y="0"
+                                viewBox="0 0 512 512" style="enable-background:new 0 0 512 512" xml:space="preserve"
+                                class="">
+                                <g
+                                    transform="matrix(6.123233995736766e-17,1,-1,6.123233995736766e-17,511.99925036536297,0.000028563605127374103)">
+                                    <linearGradient id="a" x1="256" x2="256" y1="512" y2="0"
+                                        gradientUnits="userSpaceOnUse">
+                                        <stop stop-opacity="1" stop-color="#00b59c" offset="0.0019305019305019305">
+                                        </stop>
+                                        <stop stop-opacity="1" stop-color="#a900d6" offset="1"></stop>
+                                    </linearGradient>
+                                    <path fill="url(#a)"
+                                        d="M126.63 176.718c6.469 5.175 15.91 4.125 21.083-2.343L256 39.012l108.287 135.363c5.191 6.489 14.632 7.502 21.083 2.343 6.469-5.175 7.519-14.615 2.343-21.083l-120-150.005a14.998 14.998 0 0 0-23.426 0l-120 150.005c-5.176 6.469-4.126 15.908 2.343 21.083zm141.083 25.911a15 15 0 0 0-23.426 0l-120 150A14.999 14.999 0 0 0 136 377h45v120c0 8.284 6.716 15 15 15h120c8.284 0 15-6.716 15-15V377h45a15.002 15.002 0 0 0 11.713-24.371zM316 347c-8.284 0-15 6.716-15 15v120h-90V362c0-8.284-6.716-15-15-15h-28.791L256 236.012 344.791 347zm-48.287-241.42a14.998 14.998 0 0 0-23.426 0l-120 150.003c-5.176 6.469-4.126 15.908 2.343 21.083s15.91 4.125 21.083-2.343L256 138.962l108.287 135.361c5.191 6.489 14.632 7.502 21.083 2.343 6.469-5.175 7.519-14.615 2.343-21.083z"
+                                        opacity="1" data-original="url(#a)" class=""></path>
+                                </g>
+                            </svg>
+                        </div>
+                    </ul>
+                </div>
             </div>
         </section>
 
@@ -295,7 +301,7 @@
                     <h2 class="text-center">Pokémon of the Day</h2>
                     <p class="text-center">See the features Pokémons of the day.</p>
                 </div>
-                <div class="content-all">
+                <div class="content-all bg-glass">
                     <div class="grid-pokemon"></div>
                 </div>
             </div>
@@ -306,7 +312,7 @@
                 <div class="title-section">
                     <h2 class="text-center">Explore all Pokémon</h2>
                 </div>
-                <div class="content-all">
+                <div class="content-all bg-glass">
                     <div class="grid-pokemon"></div>
                     <div id="scroll-sentinel" class="d-flex justify-center align-center">
                         <img src="/assets/icons/load.svg" alt="Loading..." width="150" height="150" />

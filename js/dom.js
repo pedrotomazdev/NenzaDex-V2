@@ -136,7 +136,7 @@ export const globalFunctions = {
     loadFullPokedex: async function () {
         if (cachedPokedex) return cachedPokedex;
 
-        const res = await fetch('../full-nenzadex.json');
+        const res = await fetch('../data/full-nenzadex.json');
         cachedPokedex = await res.json();
         return cachedPokedex;
     }

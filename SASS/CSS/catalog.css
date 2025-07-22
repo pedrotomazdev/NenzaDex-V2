@@ -652,8 +652,6 @@ body {
   color: var(--text-color);
   position: relative;
   overflow-x: hidden;
-  /* Firefox */
-  scrollbar-width: none !important;
 }
 body::-webkit-scrollbar {
   height: 0px !important;
@@ -939,6 +937,23 @@ section .title-section p {
 .context-menu ul li:hover i img {
   -webkit-filter: var(--filter-hover);
           filter: var(--filter-hover);
+}
+
+.bg-glass:before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 6px;
+  -webkit-backdrop-filter: blur(12px) saturate(160%);
+          backdrop-filter: blur(12px) saturate(160%);
+  background-color: var(--bg-glass);
+  -webkit-box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
+          box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  z-index: 0;
 }
 
 body.type-grass {
@@ -1946,8 +1961,6 @@ footer p {
 .content-catalog .catalog-header::before {
   content: "";
   border-radius: 6px;
-  -webkit-box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-          box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
   border: 1px solid rgba(255, 255, 255, 0.3);
   -webkit-box-shadow: 4px 6px 10px rgba(0, 0, 0, 0.4);
           box-shadow: 4px 6px 10px rgba(0, 0, 0, 0.4);
