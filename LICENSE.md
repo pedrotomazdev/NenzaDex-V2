@@ -14,7 +14,7 @@ copies or substantial portions of the Software.
 📌 The following attribution must be clearly visible in the footer of any website,
 application, or service using this project or its derivatives:
 
-"Projeto baseado em NenzaDex V2, desenvolvido por Pedro Tomaz Rezende Fagundes – https://github.com/seuusuario"
+"Projeto baseado em NenzaDex V2, desenvolvido por Pedro Tomaz Rezende Fagundes – https://github.com/pedrotomazdev"
 
 🚫 It is strictly prohibited to redistribute this project or substantial portions of it
 without proper credit to the original author.
