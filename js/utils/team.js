@@ -13,29 +13,31 @@ export function loadStoredTeam() {
         name,
         ball
     }) => {
-        const card = document.createElement('div');
-        card.className = `pokemon-team`;
-        card.setAttribute('data-team', id);
-        const i = document.createElement('i');
-        const imagePoke = document.createElement('img');
-        imagePoke.className = 'pokemon-icon';
-        const imageBall = document.createElement('img');
-        imageBall.className = 'ball-icon';
-        imagePoke.src = icon;
-        imagePoke.alt = name;
-        imageBall.src = ball;
-        imageBall.alt = name;
-
-        i.appendChild(imagePoke);
-        i.appendChild(imageBall);
-        card.appendChild(i);
-        container.appendChild(card);
-
+        const card = createPokemonFriend(icon, id, name, ball, container);
         attachContextMenu(card);
 
-
-
     });
+}
+
+function createPokemonFriend(icon, id, name, ball, container) {
+    // Adiciona à UI
+    const card = document.createElement('div');
+    card.className = `pokemon-team`;
+    card.setAttribute('data-team', id);
+    const i = document.createElement('i');
+    const imagePoke = document.createElement('img');
+    imagePoke.className = 'pokemon-icon';
+    const imageBall = document.createElement('img');
+    imageBall.className = 'ball-icon';
+    imagePoke.src = icon;
+    imagePoke.alt = name;
+    imageBall.src = ball;
+    imageBall.alt = name;
+    i.appendChild(imagePoke);
+    i.appendChild(imageBall);
+    card.appendChild(i);
+    container.appendChild(card);
+    return card;
 }
 
 export function addPokemonTeam(icon, id, name, ball) {
@@ -61,26 +63,8 @@ export function addPokemonTeam(icon, id, name, ball) {
         popupMessage(title, message, type);
         return;
     }
-
-    // Adiciona à UI
-    const card = document.createElement('div');
-    card.className = `pokemon-team`;
-    card.setAttribute('data-team', id);
-
-    const i = document.createElement('i');
-    const imagePoke = document.createElement('img');
-    imagePoke.className = 'pokemon-icon';
-    const imageBall = document.createElement('img');
-    imageBall.className = 'ball-icon';
-    imagePoke.src = icon;
-    imagePoke.alt = name;
-    imageBall.src = ball;
-    imageBall.alt = name;
-
-    i.appendChild(imagePoke);
-    i.appendChild(imageBall);
-    card.appendChild(i);
-    container.appendChild(card);
+    
+    const card = createPokemonFriend(icon, id, name, ball, container);
 
     // Atualiza o time no localStorage
     team.push({

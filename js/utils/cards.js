@@ -2,6 +2,21 @@ import {
     addPokemonTeam
 } from "./team.js";
 
+function testImage(url) {
+    return new Promise((resolve) => {
+        const img = new Image();
+        img.onload = () => resolve({
+            url,
+            ok: true
+        });
+        img.onerror = () => resolve({
+            url,
+            ok: false
+        });
+        img.src = url;
+    });
+};
+
 export function createPokemonCard(pokemon, isShiny, typeContent, starter) {
     let card;
     if (typeContent === 'div') {
@@ -36,7 +51,15 @@ export function createPokemonCard(pokemon, isShiny, typeContent, starter) {
         pokemon.sprites.animated || pokemon.sprites.icon;
 
 
-    card.setAttribute('data-icon', sprite);
+    testImage(sprite).then(result => {
+        if (result.ok) {
+            card.setAttribute('data-icon', sprite);
+        } else {
+            card.setAttribute('data-icon', pokemon.sprites.icon);
+
+        }
+    });
+
     card.setAttribute('data-id', Number(pokemon.id));
     card.setAttribute('data-name', pokemon.name);
     card.setAttribute('data-ball', pokemon.sprites.ball_icon);
@@ -87,6 +110,7 @@ export function initContextMenuEventsCards() {
     contextMenu.querySelector(".close-this").addEventListener("click", () => {
         contextMenu.style.display = "none";
     });
+
 
     contextMenu.querySelectorAll("[data-action]").forEach(btn => {
         btn.addEventListener("click", () => {

@@ -46,119 +46,123 @@
 
         <div class="container">
             <div class="content-catalog">
-                <div class="catalog-header">
-                    <h2>Find in Nenzadex</h2>
-                    <div class="content-applied" style="display: none;">
-                        <span>Filters applied:</span>
-                        <div class="active-filters"></div>
+                <div class="catalog-header bg-glass">
+                    <div class="header-content p-relative">
+                        <h2>Find in Nenzadex</h2>
+                        <div class="content-applied" style="display: none;">
+                            <span>Filters applied:</span>
+                            <div class="active-filters"></div>
 
+                        </div>
                     </div>
-                </div>
-                <div class="show-hidden-filters">
-                    <h3>
-                        Show all filters
-                        <i>
+                    <div class="show-hidden-filters">
+                        <h3>
+                            Show all filters
+                            <i>
+                                <img src="/assets/icons/filter-icon.svg" width="24" height="24" alt="Open filters">
+                            </i>
+                        </h3>
+                    </div>
+                    <div class="show-hidden-filters-float">
+                        <i id="openFilters">
                             <img src="/assets/icons/filter-icon.svg" width="24" height="24" alt="Open filters">
                         </i>
-                    </h3>
-                </div>
-                <div class="show-hidden-filters-float">
-                    <i id="openFilters">
-                        <img src="/assets/icons/filter-icon.svg" width="24" height="24" alt="Open filters">
-                    </i>
-                    <i id="backToTop">
-                        <img src="/assets/icons/arrow-top-icon.svg" width="24" height="24" alt="Back to top">
-                    </i>
+                        <i id="backToTop">
+                            <img src="/assets/icons/arrow-top-icon.svg" width="24" height="24" alt="Back to top">
+                        </i>
+                    </div>
                 </div>
                 <div class="catalog-body">
-                    <form class="filter" id="filterForm">
-                        <div class="close-filter">
-                            &times;
+                    <form class="filter bg-glass" id="filterForm">
+                        <div class="contennt-form p-relative">
+                            <div class="close-filter">
+                                &times;
+                            </div>
+                            <div class="content-filters">
+                                <div class="item-filter" data-item="types">
+                                    <div class="head-filter">
+                                        <div class="title-filter">
+                                            <span>Types</span>
+                                        </div>
+                                        <input type="text" class="filter-input" id="typesSearchInput"
+                                            placeholder="Find by types..." />
+                                    </div>
+                                    <div class="content-list">
+
+                                    </div>
+                                </div>
+                                <div class="item-filter" data-item="regions">
+                                    <div class="head-filter">
+                                        <div class="title-filter">
+                                            <span>Regions</span>
+                                        </div>
+                                        <input type="text" class="filter-input" id="regionsSearchInput"
+                                            placeholder="Find by regions..." />
+                                    </div>
+                                    <div class="content-list">
+
+                                    </div>
+                                </div>
+
+                                <div class="item-filter" data-item="colors">
+                                    <div class="head-filter">
+                                        <div class="title-filter">
+                                            <span>Colors</span>
+                                        </div>
+                                        <input type="text" class="filter-input" id="colorsSearchInput"
+                                            placeholder="Find by colors..." />
+                                    </div>
+
+                                    <div id="colorsRadioGroup" class="habitat-select content-list">
+                                        <!-- radios serão injetados aqui -->
+                                    </div>
+                                </div>
+
+                                <div class="item-filter" data-item="habitats">
+                                    <div class="head-filter">
+                                        <div class="title-filter">
+                                            <span>Habitats</span>
+                                        </div>
+                                        <input type="text" class="filter-input" id="habitatSearchInput"
+                                            placeholder="Find by habitats..." />
+                                    </div>
+
+                                    <div id="habitatRadioGroup" class="habitat-select content-list">
+                                        <!-- radios serão injetados aqui -->
+                                    </div>
+                                </div>
+
+                                <div class="item-filter" data-item="abilities">
+                                    <div class="head-filter">
+                                        <div class="title-filter">
+                                            <span>Abilities</span>
+                                        </div>
+                                        <input type="text" id="abilitySearchInput" class="filter-input"
+                                            placeholder="Find by ability..." />
+                                    </div>
+
+                                    <div id="abilityRadioGroup" class="ability-select content-list">
+                                        <!-- radios serão injetados aqui -->
+                                    </div>
+                                </div>
+
+
+                            </div>
+
+                            <button type="submit">
+                                <span>Go!</span>
+                                <i>
+                                    <img src="../assets/icons/pokeball-icon.webp" width="30" height="30" alt="Go!">
+                                </i>
+                            </button>
                         </div>
-                        <div class="content-filters">
-                            <div class="item-filter" data-item="types">
-                                <div class="head-filter">
-                                    <div class="title-filter">
-                                        <span>Types</span>
-                                    </div>
-                                    <input type="text" class="filter-input" id="typesSearchInput"
-                                        placeholder="Find by types..." />
-                                </div>
-                                <div class="content-list">
-
-                                </div>
-                            </div>
-                            <div class="item-filter" data-item="regions">
-                                <div class="head-filter">
-                                    <div class="title-filter">
-                                        <span>Regions</span>
-                                    </div>
-                                    <input type="text" class="filter-input" id="regionsSearchInput"
-                                        placeholder="Find by regions..." />
-                                </div>
-                                <div class="content-list">
-
-                                </div>
-                            </div>
-
-                            <div class="item-filter" data-item="colors">
-                                <div class="head-filter">
-                                    <div class="title-filter">
-                                        <span>Colors</span>
-                                    </div>
-                                    <input type="text" class="filter-input" id="colorsSearchInput"
-                                        placeholder="Find by colors..." />
-                                </div>
-
-                                <div id="colorsRadioGroup" class="habitat-select content-list">
-                                    <!-- radios serão injetados aqui -->
-                                </div>
-                            </div>
-
-                            <div class="item-filter" data-item="habitats">
-                                <div class="head-filter">
-                                    <div class="title-filter">
-                                        <span>Habitats</span>
-                                    </div>
-                                    <input type="text" class="filter-input" id="habitatSearchInput"
-                                        placeholder="Find by habitats..." />
-                                </div>
-
-                                <div id="habitatRadioGroup" class="habitat-select content-list">
-                                    <!-- radios serão injetados aqui -->
-                                </div>
-                            </div>
-
-                            <div class="item-filter" data-item="abilities">
-                                <div class="head-filter">
-                                    <div class="title-filter">
-                                        <span>Abilities</span>
-                                    </div>
-                                    <input type="text" id="abilitySearchInput" class="filter-input"
-                                        placeholder="Find by ability..." />
-                                </div>
-
-                                <div id="abilityRadioGroup" class="ability-select content-list">
-                                    <!-- radios serão injetados aqui -->
-                                </div>
-                            </div>
-
-
-                        </div>
-
-                        <button type="submit">
-                            <span>Go!</span>
-                            <i>
-                                <img src="../assets/icons/pokeball-icon.webp" width="30" height="30" alt="Go!">
-                            </i>
-                        </button>
                     </form>
-                    <div class="content-grid">
+                    <div class="content-grid bg-glass">
                         <div class="grid-pokemon">
                             <!-- Cards serão inseridos via JS aqui -->
                         </div>
 
-                        <div class="alert-error">
+                        <div class="alert-error p-relative">
 
                             <h3>No Pokémon match your search!</h3>
 

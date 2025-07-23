@@ -1,7 +1,6 @@
 // Cores elaboradas para os tipos de Pokémon
 // Baseado em gradientes e cores sólidas
-$typeColors: (
-    "grass": linear-gradient(to right, #56ab2f, #a8e063),
+$typeColors: ("grass": linear-gradient(to right, #56ab2f, #a8e063),
     "fire": linear-gradient(to left, #ff4e50, #f9d423),
     "water": linear-gradient(to right, #2193b0, #6dd5ed),
     "bug": linear-gradient(to left, #a8e063, #56ab2f),
@@ -19,11 +18,9 @@ $typeColors: (
     "fairy": linear-gradient(to left, #ff9a9e, #fad0c4),
     "dark": linear-gradient(to right, #0e0f0f, #3e464b),
     "flying": linear-gradient(to left, #89f7fe, #66a6ff),
-    "shiny" : linear-gradient(135deg, #fff8c6 0%, #f2c94c 20%, #d4af37 40%, #f2c94c 60%, #b8860b 80%, #fff8c6 100%)
-);
+    "shiny" : linear-gradient(135deg, #fff8c6 0%, #f2c94c 20%, #d4af37 40%, #f2c94c 60%, #b8860b 80%, #fff8c6 100%));
 
-$typeJustColors: (
-    "grass": (#56ab2f, #a8e063, #56ab2f),
+$typeJustColors: ("grass": (#56ab2f, #a8e063, #56ab2f),
     "fire": (#ff4e50, #f9d423, #ff4e50),
     "water": (#2193b0, #6dd5ed, #2193b0),
     "bug": (#a8e063, #56ab2f, #a8e063),
@@ -40,13 +37,11 @@ $typeJustColors: (
     "dragon": (#20002c, #5c6bc0, #20002c),
     "fairy": (#ff9a9e, #fad0c4, #ff9a9e),
     "dark": (#0e0f0f, #3e464b, #0e0f0f),
-    "flying": (#89f7fe, #66a6ff, #89f7fe)
-);
+    "flying": (#89f7fe, #66a6ff, #89f7fe));
 
 // Cores sólidas para os tipos de Pokémon
 // Essas cores são usadas para destacar os tipos de Pokémon em elementos como botões e cards
-$mainColorTypes: (
-    "grass": #7ec850,
+$mainColorTypes: ("grass": #7ec850,
     "fire": #ff7043,
     "water": #42a5f5,
     "bug": #a2bf4c,
@@ -68,24 +63,32 @@ $mainColorTypes: (
     "unknown": #2a2a2a,
 );
 
+$regions: (1: "kanto",
+    2: "johto",
+    3: "hoenn",
+    4: "sinnoh",
+    5: "unova",
+    6: "kalos",
+    7: "alola",
+    8: "galar",
+    9: "hisui",
+    10: "paldea"
+);
 // Fontes principais usadas no site
-$mainFont: 'Exo 2', sans-serif;
+$mainFont: 'Exo 2',
+sans-serif;
 
 // ===== BREAKPOINTS =====
-$breakpoints: (
-    "sm": 576px,
+$breakpoints: ("sm": 576px,
     "md": 768px,
     "lg": 1024px,
-    "xl": 1200px
-);
+    "xl": 1200px);
 
 
 // SPACING
-$space-values: (
-    0: 0rem,
+$space-values: (0: 0rem,
     1: 0.5rem,
     2: 1rem,
     3: 1.5rem,
     4: 2rem,
-    5: 3rem
-);
+    5: 3rem);

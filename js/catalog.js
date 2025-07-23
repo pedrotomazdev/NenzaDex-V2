@@ -4,6 +4,10 @@ import {
     getTypesList,
 } from "./api.js";
 
+import {
+    globalFunctions
+} from "./dom.js";
+
 let currentOffset = 0;
 let isLoading = false;
 const limit = 20;
@@ -47,11 +51,19 @@ const populeCatalog = {
         const abilities = params.getAll('abilities');
         const colors = params.getAll('colors');
 
-        return { types, regions, habitats, abilities, colors };
+        return {
+            types,
+            regions,
+            habitats,
+            abilities,
+            colors
+        };
     },
 
     getPokemonsFiltered: async function (filters, offset, limit) {
-        const { types = [], regions = [], habitats = [], abilities = [], colors = [] } = filters;
+        const {
+            types = [], regions = [], habitats = [], abilities = [], colors = []
+        } = filters;
 
         // Se não carregou ainda, busca o JSON
         if (!fullPokedex.length) {
@@ -101,7 +113,7 @@ const populeCatalog = {
         }
 
         for (const data of pokemons) {
-            const card = this.createPokemonCard(data);
+            const card = globalFunctions.cards.createPokemonCard(data, false, 'div', '');
             this.appendToPokedex(card, destination);
             requestAnimationFrame(() => {
                 setTimeout(() => {
@@ -110,46 +122,7 @@ const populeCatalog = {
             });
         }
     },
-    createPokemonCard: function (pokemonRaw) {
-        const pokemon = pokemonRaw;
 
-
-        const card = document.createElement('a');
-        card.className = `pokemons-card ${pokemon.types[0]} pb-3`;
-        card.setAttribute('href', `/pokemon?id=${pokemonRaw.id}`);
-        card.style.order = pokemonRaw.id;
-        const PokeNumber = pokemon.id.toString().padStart(3, '0');
-
-        card.innerHTML = `
-            <div class="content-card p-relative">
-                <div class="poke-type d-flex p-absolute">
-                    <i class="energy d-flex justify-center align-center icon-${pokemon.types[0]}">
-                    <img src="/assets/icons/${pokemon.types[0]}-icon.webp" alt="${pokemon.types[0]}">
-                    </i>
-                    ${pokemon.types[1] ? `
-                    <i class="energy d-flex justify-center align-center icon-${pokemon.types[1]}">
-                    <img src="/assets/icons/${pokemon.types[1]}-icon.webp" alt="${pokemon.types[1]}">
-                    </i>` : ''}
-                </div>
-                <div class="poke-icon d-flex justify-center align-center p-absolute">
-                    ${pokemon.sprites.icon !== null ? `
-                    <img src="${pokemon.sprites.icon}" width="68" height="56"  onerror="this.style.display='none'"  class="p-absolute" alt="${pokemon.name}">
-                    `: ''}
-                </div>
-                <div class="poke-img d-flex justify-center align-center ${pokemon.types[0]}">
-                    <div class="content-pokemon-image">
-                        <img width="200" height="200" src="${pokemon.sprites.oficial !== null ? pokemon.sprites.oficial : '../assets/icons/pokeball-icon.webp'}" class="primaria" alt="${pokemon.name}">
-                    </div>
-                </div>
-                <div class="body-card">
-                    <div class="poke-id"><span># ${PokeNumber}</span></div>
-                    <div class="poke-name"><span>${pokemon.name}</span></div>
-                </div>
-            </div>
-        `;
-
-        return card;
-    },
 
     appendToPokedex: function (cardElement, destination) {
         if (!destination) return;
@@ -203,7 +176,10 @@ const populeCatalog = {
         const sentinel = document.getElementById('scroll-sentinel');
         if (sentinel) observer.observe(sentinel);
 
-        window.scrollTo({ top: 0, behavior: 'smooth' }); // ajusta o valor conforme o quanto quer descer
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        }); // ajusta o valor conforme o quanto quer descer
     },
 
     removeFilterFromUrl: function (type, value) {
@@ -265,10 +241,12 @@ const filters = {
     },
 
     renderTypes: async function () {
-        const types = await getTypesList();
+        const data = await fetch('../data/types.json');
+        const types = await data.json();
+
         if (!types) return console.warn('Nenhuma região encontrada');
 
-        const typesList = types.results.map(a => a.name).sort();
+        const typesList = types.map(a => a.name).sort();
         const container = document.querySelector('[ data-item="types"] .content-list');
         const searchInput = document.getElementById('typesSearchInput');
         container.innerHTML = '';
@@ -366,7 +344,7 @@ const filters = {
                 label.appendChild(iconWrapper);
             }
 
-            if(type === 'colors') {
+            if (type === 'colors') {
                 label.className = name;
             }
 
@@ -378,6 +356,7 @@ const filters = {
                 const iconWrapper = document.createElement('i');
                 iconWrapper.appendChild(img);
                 label.appendChild(iconWrapper);
+                label.className = id;
             }
 
             input.addEventListener('change', () => {
@@ -396,7 +375,10 @@ const filters = {
             wrapper.appendChild(input);
             wrapper.appendChild(label);
             container.appendChild(wrapper);
-            wrappers.push({ wrapper, name });
+            wrappers.push({
+                wrapper,
+                name
+            });
         });
 
         this.refineFilters(searchInput, container, wrappers);
@@ -460,7 +442,10 @@ const filters = {
             const selected = [];
             const unselected = [];
 
-            wrappers.forEach(({ wrapper, name }) => {
+            wrappers.forEach(({
+                wrapper,
+                name
+            }) => {
                 const input = wrapper.querySelector('input[type="checkbox"]');
 
                 if (input.checked) {
@@ -520,7 +505,10 @@ const filters = {
 
         // botao flutuante que volta para o topo
         document.getElementById('backToTop').addEventListener('click', () => {
-            window.scrollTo({ top: 0, behavior: 'smooth' });
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
         });
 
         // fecha o filtro flutuante
@@ -588,4 +576,3 @@ document.addEventListener('DOMContentLoaded', () => {
     filters.init();
     populeCatalog.init();
 });
-

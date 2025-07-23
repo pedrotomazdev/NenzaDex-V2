@@ -942,11 +942,13 @@ section .title-section p {
 .bg-glass:before {
   content: "";
   position: absolute;
-  top: 0;
-  left: 0;
+  top: 50%;
+  left: 50%;
   width: 100%;
   height: 100%;
   border-radius: 6px;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
   -webkit-backdrop-filter: blur(12px) saturate(160%);
           backdrop-filter: blur(12px) saturate(160%);
   background-color: var(--bg-glass);
@@ -1958,20 +1960,6 @@ footer p {
   padding: 5px;
   margin-bottom: 10px;
 }
-.content-catalog .catalog-header::before {
-  content: "";
-  border-radius: 6px;
-  border: 1px solid rgba(255, 255, 255, 0.3);
-  -webkit-box-shadow: 4px 6px 10px rgba(0, 0, 0, 0.4);
-          box-shadow: 4px 6px 10px rgba(0, 0, 0, 0.4);
-  position: absolute;
-  top: -1px;
-  left: -1px;
-  width: 100%;
-  height: 100%;
-  z-index: -1;
-  background-color: var(--bg-glass);
-}
 .content-catalog .catalog-header h2 {
   text-align: center;
   font-size: 2.5rem;
@@ -2167,23 +2155,6 @@ footer p {
   position: relative;
   padding: 5px;
 }
-.content-catalog .catalog-body .filter::before,
-.content-catalog .catalog-body .content-grid::before {
-  content: "";
-  border-radius: 6px;
-  -webkit-box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-          box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-  border: 1px solid rgba(255, 255, 255, 0.3);
-  -webkit-box-shadow: 4px 6px 10px rgba(0, 0, 0, 0.4);
-          box-shadow: 4px 6px 10px rgba(0, 0, 0, 0.4);
-  position: absolute;
-  top: -1px;
-  left: -1px;
-  width: 100%;
-  height: 100%;
-  z-index: -1;
-  background-color: var(--bg-glass);
-}
 .content-catalog .catalog-body .filter {
   width: 300px;
   padding: 5px;
@@ -2219,11 +2190,17 @@ footer p {
     width: 400px;
     max-width: 100%;
     height: 100%;
-    display: none;
     overflow-y: auto;
     overflow-x: hidden;
     padding: 20px 5px;
     padding-right: 20px;
+    -webkit-transition: opacity 0.3s ease, -webkit-transform 0.3s ease;
+    transition: opacity 0.3s ease, -webkit-transform 0.3s ease;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+    transition: transform 0.3s ease, opacity 0.3s ease, -webkit-transform 0.3s ease;
+    -webkit-transform: translateX(-100%);
+            transform: translateX(-100%);
+    opacity: 0;
   }
   .content-catalog .catalog-body .filter::-webkit-scrollbar-track {
     background: var(--bg-color);
@@ -2237,7 +2214,9 @@ footer p {
     width: 5px;
   }
   .content-catalog .catalog-body .filter.show {
-    display: block;
+    -webkit-transform: translateX(0);
+            transform: translateX(0);
+    opacity: 1;
   }
   .content-catalog .catalog-body .filter .close-filter {
     display: -webkit-box;
@@ -2428,6 +2407,106 @@ footer p {
   background-color: #2a2a2a;
   color: #fff;
 }
+.content-catalog .catalog-body .filter .content-list .item-option label.regions-1 {
+  background-image: url(../../assets/images/regions/kanto.webp);
+  background-position: center -24%;
+  background-size: 100% auto;
+  font-size: 0;
+  height: 55px;
+}
+.content-catalog .catalog-body .filter .content-list .item-option label.regions-1 i {
+  display: none;
+}
+.content-catalog .catalog-body .filter .content-list .item-option label.regions-2 {
+  background-image: url(../../assets/images/regions/johto.webp);
+  background-position: center -24%;
+  background-size: 100% auto;
+  font-size: 0;
+  height: 55px;
+}
+.content-catalog .catalog-body .filter .content-list .item-option label.regions-2 i {
+  display: none;
+}
+.content-catalog .catalog-body .filter .content-list .item-option label.regions-3 {
+  background-image: url(../../assets/images/regions/hoenn.webp);
+  background-position: center -24%;
+  background-size: 100% auto;
+  font-size: 0;
+  height: 55px;
+}
+.content-catalog .catalog-body .filter .content-list .item-option label.regions-3 i {
+  display: none;
+}
+.content-catalog .catalog-body .filter .content-list .item-option label.regions-4 {
+  background-image: url(../../assets/images/regions/sinnoh.webp);
+  background-position: center -24%;
+  background-size: 100% auto;
+  font-size: 0;
+  height: 55px;
+}
+.content-catalog .catalog-body .filter .content-list .item-option label.regions-4 i {
+  display: none;
+}
+.content-catalog .catalog-body .filter .content-list .item-option label.regions-5 {
+  background-image: url(../../assets/images/regions/unova.webp);
+  background-position: center -24%;
+  background-size: 100% auto;
+  font-size: 0;
+  height: 55px;
+}
+.content-catalog .catalog-body .filter .content-list .item-option label.regions-5 i {
+  display: none;
+}
+.content-catalog .catalog-body .filter .content-list .item-option label.regions-6 {
+  background-image: url(../../assets/images/regions/kalos.webp);
+  background-position: center -24%;
+  background-size: 100% auto;
+  font-size: 0;
+  height: 55px;
+}
+.content-catalog .catalog-body .filter .content-list .item-option label.regions-6 i {
+  display: none;
+}
+.content-catalog .catalog-body .filter .content-list .item-option label.regions-7 {
+  background-image: url(../../assets/images/regions/alola.webp);
+  background-position: center -24%;
+  background-size: 100% auto;
+  font-size: 0;
+  height: 55px;
+}
+.content-catalog .catalog-body .filter .content-list .item-option label.regions-7 i {
+  display: none;
+}
+.content-catalog .catalog-body .filter .content-list .item-option label.regions-8 {
+  background-image: url(../../assets/images/regions/galar.webp);
+  background-position: center -24%;
+  background-size: 100% auto;
+  font-size: 0;
+  height: 55px;
+}
+.content-catalog .catalog-body .filter .content-list .item-option label.regions-8 i {
+  display: none;
+}
+.content-catalog .catalog-body .filter .content-list .item-option label.regions-9 {
+  background-image: url(../../assets/images/regions/hisui.webp);
+  background-position: center -24%;
+  background-size: 100% auto;
+  font-size: 0;
+  height: 55px;
+}
+.content-catalog .catalog-body .filter .content-list .item-option label.regions-9 i {
+  display: none;
+}
+.content-catalog .catalog-body .filter .content-list .item-option label.regions-10 {
+  background-image: url(../../assets/images/regions/paldea.webp);
+  background-position: center -24%;
+  background-size: 100% auto;
+  font-size: 0;
+  height: 55px;
+}
+.content-catalog .catalog-body .filter .content-list .item-option label.regions-10 i {
+  display: none;
+}
 .content-catalog .catalog-body .filter .content-list .item-option label.black {
   background-color: #2a2a2a;
   color: #fff;
@@ -2513,6 +2592,12 @@ footer p {
   -webkit-transform: translateY(-50%);
           transform: translateY(-50%);
 }
+@media (max-width: 1024px) {
+  .content-catalog .catalog-body .filter .item-filter[data-item=regions] .content-list {
+    -ms-grid-columns: (1fr)[2];
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
 .content-catalog .catalog-body .filter button[type=submit] {
   background-color: var(--bg-color);
   color: var(--text-color);
@@ -2533,7 +2618,7 @@ footer p {
   border-radius: 6px;
   cursor: pointer;
   position: sticky;
-  bottom: 0px;
+  bottom: 10px;
   -webkit-transition: all 0.2s ease;
   transition: all 0.2s ease;
 }
