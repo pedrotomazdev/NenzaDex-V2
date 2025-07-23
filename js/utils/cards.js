@@ -1,3 +1,12 @@
+/*
+ * Projeto: NenzaDex V2
+ * Autor: Pedro Tomaz Rezende Fagundes
+ * GitHub: https://github.com/pedrotomazdev
+ *
+ * ⚠️ Uso permitido APENAS com atribuição.
+ * Proibido remover créditos ou redistribuir como se fosse autor original.
+ */
+
 import {
     addPokemonTeam
 } from "./team.js";

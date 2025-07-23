@@ -1,3 +1,12 @@
+/*
+ * Projeto: NenzaDex V2
+ * Autor: Pedro Tomaz Rezende Fagundes
+ * GitHub: https://github.com/pedrotomazdev
+ *
+ * ⚠️ Uso permitido APENAS com atribuição.
+ * Proibido remover créditos ou redistribuir como se fosse autor original.
+ */
+
 const http = require('http');
 const fs = require('fs');
 const path = require('path');
@@ -35,12 +44,16 @@ http.createServer((req, res) => {
     const filePath = path.join(publicDir, pathname);
     fs.readFile(filePath, (err, content) => {
         if (err) {
-            res.writeHead(404, { 'Content-Type': 'text/plain' });
+            res.writeHead(404, {
+                'Content-Type': 'text/plain'
+            });
             res.end('Arquivo não encontrado');
             return;
         }
 
-        res.writeHead(200, { 'Content-Type': getContentType(path.extname(filePath)) });
+        res.writeHead(200, {
+            'Content-Type': getContentType(path.extname(filePath))
+        });
         res.end(content);
     });
 }).listen(PORT, () => {
