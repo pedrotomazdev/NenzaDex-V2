@@ -2,7 +2,7 @@ import {
     addPokemonTeam
 } from "./team.js";
 
-function testImage(url) {
+export function testImage(url) {
     return new Promise((resolve) => {
         const img = new Image();
         img.onload = () => resolve({

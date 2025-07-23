@@ -30,42 +30,43 @@ const populePage = {
 
         document.querySelector('.id').textContent = `N° ${pokemon.id}`;
 
-        possibleSprites.forEach(sprite => {
-            // Slide para galeria principal
-            const mainEl = document.createElement('div');
-            mainEl.className = 'swiper-slide';
-            const mainImg = document.createElement('img');
-            mainImg.src = sprite;
-            mainImg.alt = pokemon.name;
-            mainEl.appendChild(mainImg);
-            mainSprites.append(mainEl);
+        const loadImagePromises = possibleSprites.map(sprite => {
+            return globalFunctions.cards.testImage(sprite).then(result => {
+                if (result.ok) {
+                    // Galeria principal
+                    const mainEl = document.createElement('div');
+                    mainEl.className = 'swiper-slide';
+                    const mainImg = document.createElement('img');
+                    mainImg.src = sprite;
+                    mainImg.alt = pokemon.name;
+                    mainEl.appendChild(mainImg);
+                    mainSprites.append(mainEl);
 
-            // Slide para os thumbs
-            const thumbEl = document.createElement('div');
-            thumbEl.className = 'swiper-slide';
-            const thumbImg = document.createElement('img');
-            thumbImg.src = sprite;
-            thumbImg.alt = pokemon.name;
-            thumbEl.appendChild(thumbImg);
-            spritesContainer.append(thumbEl);
+                    // Thumbs
+                    const thumbEl = document.createElement('div');
+                    thumbEl.className = 'swiper-slide';
+                    const thumbImg = document.createElement('img');
+                    thumbImg.src = sprite;
+                    thumbImg.alt = pokemon.name;
+                    thumbEl.appendChild(thumbImg);
+                    spritesContainer.append(thumbEl);
+                }
+            });
         });
 
-        setTimeout(() => {
+        Promise.all(loadImagePromises).then(() => {
             const thumbs = new Swiper(".pokemon-thumbs", {
                 spaceBetween: 7,
                 slidesPerView: 3,
                 freeMode: true,
                 watchSlidesProgress: true,
-
-
                 breakpoints: {
                     576: {
                         slidesPerView: 5
                     }
                 }
-
-
             });
+
             const mainImage = new Swiper(".images-pokemon .main-image", {
                 spaceBetween: 10,
                 navigation: {
@@ -76,7 +77,8 @@ const populePage = {
                     swiper: thumbs,
                 },
             });
-        }, 0)
+        });
+
 
     },
 
