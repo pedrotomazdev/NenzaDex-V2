@@ -170,50 +170,50 @@ const pokedexCore = {
         }
     },
 
-    generateStarterTeam: async function () {
-        const storedTeam = JSON.parse(localStorage.getItem('pokemonTeam')) || [];
+    // generateStarterTeam: async function () {
+    //     const storedTeam = JSON.parse(localStorage.getItem('pokemonTeam')) || [];
 
-        if (storedTeam.length !== 0) {
-            return;
-        };
+    //     if (storedTeam.length !== 0) {
+    //         return;
+    //     };
 
-        const startersByGeneration = {
-            kanto: ['bulbasaur', 'charmander', 'squirtle'],
-            johto: ['chikorita', 'cyndaquil', 'totodile'],
-            hoenn: ['treecko', 'torchic', 'mudkip'],
-            sinnoh: ['turtwig', 'chimchar', 'piplup'],
-            unova: ['snivy', 'tepig', 'oshawott'],
-            kalos: ['chespin', 'fennekin', 'froakie'],
-            alola: ['rowlet', 'litten', 'popplio'],
-            galar: ['grookey', 'scorbunny', 'sobble'],
-            paldea: ['sprigatito', 'fuecoco', 'quaxly'],
-        };
+    //     const startersByGeneration = {
+    //         kanto: ['bulbasaur', 'charmander', 'squirtle'],
+    //         johto: ['chikorita', 'cyndaquil', 'totodile'],
+    //         hoenn: ['treecko', 'torchic', 'mudkip'],
+    //         sinnoh: ['turtwig', 'chimchar', 'piplup'],
+    //         unova: ['snivy', 'tepig', 'oshawott'],
+    //         kalos: ['chespin', 'fennekin', 'froakie'],
+    //         alola: ['rowlet', 'litten', 'popplio'],
+    //         galar: ['grookey', 'scorbunny', 'sobble'],
+    //         paldea: ['sprigatito', 'fuecoco', 'quaxly'],
+    //     };
 
-        const container = document.querySelector('.select-starter');
-        const destination = container.querySelector('.list-starter .grid-pokemon');
-        container.classList.add('show');
+    //     const container = document.querySelector('.select-starter');
+    //     const destination = container.querySelector('.list-starter .grid-pokemon');
+    //     container.classList.add('show');
 
-        const fullPokedex = await globalFunctions.loadFullPokedex();
+    //     const fullPokedex = await globalFunctions.loadFullPokedex();
 
-        const generations = Object.keys(startersByGeneration);
-        const randomGen = generations[Math.floor(Math.random() * generations.length)];
-        const startersNames = startersByGeneration[randomGen];
+    //     const generations = Object.keys(startersByGeneration);
+    //     const randomGen = generations[Math.floor(Math.random() * generations.length)];
+    //     const startersNames = startersByGeneration[randomGen];
 
-        const starterObjects = fullPokedex.filter(p =>
-            startersNames.includes(p.name.toLowerCase())
-        );
+    //     const starterObjects = fullPokedex.filter(p =>
+    //         startersNames.includes(p.name.toLowerCase())
+    //     );
 
 
-        starterObjects.forEach(pokemon => {
-            const card = globalFunctions.cards.createPokemonCard(pokemon, isShiny(), 'div', 'starter');
-           globalFunctions.cards.appendToPokedex(card, destination);
-            requestAnimationFrame(() => {
-                setTimeout(() => {
-                    card.classList.add('show');
-                });
-            });
-        });
-    }
+    //     starterObjects.forEach(pokemon => {
+    //         const card = globalFunctions.cards.createPokemonCard(pokemon, isShiny(), 'div', 'starter');
+    //        globalFunctions.cards.appendToPokedex(card, destination);
+    //         requestAnimationFrame(() => {
+    //             setTimeout(() => {
+    //                 card.classList.add('show');
+    //             });
+    //         });
+    //     });
+    // }
 }
 
 export const themeFunctions = {
@@ -268,7 +268,7 @@ document.addEventListener('DOMContentLoaded', () => {
     pokedexCore.LoadPokemonOfDay();
     pokedexCore.loadInitialPokemons();
     pokedexCore.searchTeam();
-    pokedexCore.generateStarterTeam();
+    // pokedexCore.generateStarterTeam();
 
     themeFunctions.scrollPosition();
     themeFunctions.slides();
